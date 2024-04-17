@@ -1,6 +1,9 @@
 package types
 
-import "time"
+import (
+	"github.com/zgwit/iot-master/v4/db"
+	"time"
+)
 
 func init() {
 	db.Register(new(NuwaComponent), new(NuwaComponentVersion))

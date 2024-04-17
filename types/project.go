@@ -1,6 +1,7 @@
 package types
 
 import (
+	"github.com/zgwit/iot-master/v4/db"
 	"time"
 )
 

@@ -1,10 +1,33 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/iot-master-contrib/nuwa/types"
+	"github.com/zgwit/iot-master/v4/api"
 	"github.com/zgwit/iot-master/v4/web/curd"
 )
+
+func init() {
+
+	api.Register("POST", "/count", curd.ApiCount[types.NuwaComponent]())
+
+	api.Register("POST", "/search", curd.ApiSearch[types.NuwaComponent]())
+
+	api.Register("GET", "/list", curd.ApiList[types.NuwaComponent]())
+
+	api.Register("POST", "/create", curd.ApiCreateHook[types.NuwaComponent](curd.GenerateID[types.NuwaComponent](), nil))
+
+	api.Register("GET", "/:id", curd.ParseParamStringId, curd.ApiGet[types.NuwaComponent]())
+
+	api.Register("POST", "/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.NuwaComponent](nil, nil,
+		"id", "name", "icon", "type", "category"))
+
+	api.Register("GET", "/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.NuwaComponent]())
+
+	//api.Register("GET","/export", curd.ApiExport("hmi_component", "hmi_component"))
+	//
+	//api.Register("POST","/import", curd.ApiImport("hmi_component"))
+
+}
 
 // @Summary 查询组件数量
 // @Schemes
@@ -24,7 +47,7 @@ func noopComponentCount() {}
 // @Param search body ParamSearch true "查询参数"
 // @Accept json
 // @Produce json
-// @Success 200 {object} ReplyList[types.HmiComponent] 返回组件信息
+// @Success 200 {object} ReplyList[types.NuwaComponent] 返回组件信息
 // @Router /component/search [post]
 func noopComponentSearch() {}
 
@@ -35,7 +58,7 @@ func noopComponentSearch() {}
 // @Param search query ParamList true "查询参数"
 // @Accept json
 // @Produce json
-// @Success 200 {object} ReplyList[types.HmiComponent] 返回组件信息
+// @Success 200 {object} ReplyList[types.NuwaComponent] 返回组件信息
 // @Router /component/list [get]
 func noopComponentList() {}
 
@@ -43,12 +66,12 @@ func noopComponentList() {}
 // @Schemes
 // @Description 创建组件
 // @Tags component
-// @Param search body types.HmiComponent true "组件信息"
+// @Param search body types.NuwaComponent true "组件信息"
 // @Accept json
 // @Produce json
-// @Success 200 {object} ReplyData[types.HmiComponent] 返回组件信息
+// @Success 200 {object} ReplyData[types.NuwaComponent] 返回组件信息
 // @Router /component/create [post]
-func noopHmiComponentCreate() {}
+func noopNuwaComponentCreate() {}
 
 // @Summary 获取组件
 // @Schemes
@@ -57,7 +80,7 @@ func noopHmiComponentCreate() {}
 // @Param id path int true "组件ID"
 // @Accept json
 // @Produce json
-// @Success 200 {object} ReplyData[types.HmiComponent] 返回组件信息
+// @Success 200 {object} ReplyData[types.NuwaComponent] 返回组件信息
 // @Router /component/{id} [get]
 func noopComponentGet() {}
 
@@ -66,10 +89,10 @@ func noopComponentGet() {}
 // @Description 修改组件
 // @Tags component
 // @Param id path int true "组件ID"
-// @Param component body types.HmiComponent true "组件信息"
+// @Param component body types.NuwaComponent true "组件信息"
 // @Accept json
 // @Produce json
-// @Success 200 {object} ReplyData[types.HmiComponent] 返回组件信息
+// @Success 200 {object} ReplyData[types.NuwaComponent] 返回组件信息
 // @Router /component/{id} [post]
 func noopComponentUpdate() {}
 
@@ -80,9 +103,9 @@ func noopComponentUpdate() {}
 // @Param id path int true "组件ID"
 // @Accept json
 // @Produce json
-// @Success 200 {object} ReplyData[types.HmiComponent] 返回组件信息
+// @Success 200 {object} ReplyData[types.NuwaComponent] 返回组件信息
 // @Router /component/{id}/delete [get]
-func noopHmiComponentDelete() {}
+func noopNuwaComponentDelete() {}
 
 // @Summary 导出组件
 // @Schemes
@@ -91,7 +114,7 @@ func noopHmiComponentDelete() {}
 // @Accept json
 // @Produce octet-stream
 // @Router /component/export [get]
-func noopHmiComponentExport() {}
+func noopNuwaComponentExport() {}
 
 // @Summary 导入组件
 // @Schemes
@@ -102,27 +125,4 @@ func noopHmiComponentExport() {}
 // @Produce json
 // @Success 200 {object} ReplyData[int64] 返回组件数量
 // @Router /component/import [post]
-func noopHmiComponentImport() {}
-
-func componentRouter(app *gin.RouterGroup) {
-
-	app.POST("/count", curd.ApiCount[types.HmiComponent]())
-
-	app.POST("/search", curd.ApiSearch[types.HmiComponent]("id", "name", "icon", "type", "collection", "version", "updated", "created"))
-
-	app.GET("/list", curd.ApiList[types.HmiComponent]("id", "name", "icon", "type", "collection", "version", "updated", "created"))
-
-	app.POST("/create", curd.ApiCreateHook[types.HmiComponent](curd.GenerateRandomId[types.HmiComponent](12), nil))
-
-	app.GET("/:id", curd.ParseParamStringId, curd.ApiGet[types.HmiComponent]())
-
-	app.POST("/:id", curd.ParseParamStringId, curd.ApiUpdateHook[types.HmiComponent](nil, nil,
-		"id", "name", "icon", "type", "meta", "properties", "collection"))
-
-	app.GET("/:id/delete", curd.ParseParamStringId, curd.ApiDelete[types.HmiComponent]())
-
-	app.GET("/export", curd.ApiExport("hmi_component", "hmi_component"))
-
-	app.POST("/import", curd.ApiImport("hmi_component"))
-
-}
+func noopNuwaComponentImport() {}
