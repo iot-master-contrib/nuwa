@@ -1,0 +1,28 @@
+:host {
+    //width: 241px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    border-left: 1px solid #a8a8a8;
+    //background: #f1f3f4;
+    user-select: none;
+}
+
+table {
+    width: 100%;
+    td{
+        //border: 1px solid grey;
+        //border-collapse: collapse;
+        //border-spacing: 0;
+    }
+
+    tr {
+        //display: flex;
+        //justify-content: space-between;
+
+        td:first-child {
+            min-width: 80px;
+        }
+    }
+}

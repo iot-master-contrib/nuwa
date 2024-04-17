@@ -1,0 +1,71 @@
+<app-collapse title="页面管理">
+    <span more nz-icon nzType="plus" nzTheme="outline" title="添加页面" (click)="pages.handleEdit();$event.stopPropagation()"></span>
+    <app-pages [graph]="graph" [project]="project" (onPageChange)="onPageChange.emit($event)" #pages>
+    </app-pages>
+</app-collapse>
+
+<app-collapse title="控件属性" *ngIf="selected.length && cmp">
+    <form [formGroup]="formPosition" (change)="onPositionChange($event)" *ngIf="cell.isNode();">
+        <table>
+            <tr>
+                <td>X</td>
+                <td><input nz-input nzSize="small" type="number" formControlName="x"></td>
+            </tr>
+            <tr>
+                <td>Y</td>
+                <td><input nz-input nzSize="small" type="number" formControlName="y"></td>
+            </tr>
+        </table>
+    </form>
+
+    <form [formGroup]="formSize" (change)="onSizeChange($event)" *ngIf="cell.isNode();">
+        <table>
+            <tr>
+                <td>宽度</td>
+                <td><input nz-input nzSize="small" type="number" formControlName="width"></td>
+            </tr>
+            <tr>
+                <td>高度</td>
+                <td><input nz-input nzSize="small" type="number" formControlName="height"></td>
+            </tr>
+        </table>
+    </form>
+
+    <form [formGroup]="formLinePosition" (change)="onLinePositionChange($event)" *ngIf="cell.isEdge();">
+        <table>
+            <tr formGroupName="source">
+                <td>起点</td>
+                <td>X:<input nz-input nzSize="small" type="number" formControlName="x" style="width:60px"></td>
+                <td>Y:<input nz-input nzSize="small" type="number" formControlName="y" style="width:60px"></td>
+            </tr>
+            <tr formGroupName="target">
+                <td>终点</td>
+                <td>X:<input nz-input nzSize="small" type="number" formControlName="x" style="width:60px"></td>
+                <td>Y:<input nz-input nzSize="small" type="number" formControlName="y" style="width:60px"></td>
+            </tr>
+        </table>
+    </form>
+
+    <app-chart-form *ngIf="cell.shape.startsWith('chart-')" [echartsInstance]="echartsInstance"></app-chart-form>
+
+    <table>
+        <tr *ngFor="let p of cmp.properties">
+            <td>
+                {{p.name}}
+            </td>
+            <td>
+                <app-property-input [property]="p" [cell]="cell"></app-property-input>
+            </td>
+        </tr>
+    </table>
+
+</app-collapse>
+
+
+<app-collapse title="数据绑定" *ngIf="selected.length == 1 && cmp?.bindings?.length">
+    <app-binding [cell]="cell" [component]="cmp"></app-binding>
+</app-collapse>
+
+<app-collapse title="事件响应" *ngIf="selected.length == 1 && cmp">
+    <app-listener [cell]="cell" [component]="cmp"></app-listener>
+</app-collapse>
