@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iot-master-contrib/scada/types"
+	"github.com/iot-master-contrib/nuwa/types"
 	"github.com/zgwit/iot-master/v4/web/curd"
 )
 

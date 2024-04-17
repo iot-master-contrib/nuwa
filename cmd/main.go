@@ -1,16 +1,12 @@
 package main
 
 import (
-	"github.com/iot-master-contrib/scada"
 	"github.com/zgwit/iot-master/v4/db"
 	"github.com/zgwit/iot-master/v4/log"
-	"github.com/zgwit/iot-master/v4/pkg/build"
 	"github.com/zgwit/iot-master/v4/web"
 )
 
 func main() {
-	build.Print()
-
 	err := log.Open()
 	if err != nil {
 		log.Fatal(err)

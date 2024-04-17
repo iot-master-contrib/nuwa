@@ -3,38 +3,14 @@ package scada
 import (
 	"embed"
 	"encoding/json"
-	"github.com/iot-master-contrib/scada/api"
-	_ "github.com/iot-master-contrib/scada/docs"
-	"github.com/iot-master-contrib/scada/types"
-	"github.com/zgwit/iot-master/v4/db"
+	"github.com/iot-master-contrib/nuwa/api"
+	_ "github.com/iot-master-contrib/nuwa/docs"
 	"github.com/zgwit/iot-master/v4/mqtt"
 	"github.com/zgwit/iot-master/v4/web"
 	"net/http"
 )
 
-func App() *model.App {
-	return &model.App{
-		Id:   "scada",
-		Name: "Web组态",
-		Entries: []*model.AppEntry{{
-			Path: "app/scada/admin/project",
-			Name: "所有工程",
-		}, {
-			Path: "app/scada/admin/path",
-			Name: "图片组件",
-		}, {
-			Path: "app/scada/admin/path",
-			Name: "路径组件",
-		}, {
-			Path: "app/scada/admin/component",
-			Name: "高级组件",
-		}},
-		Type:    "tcp",
-		Address: "http://localhost" + web.GetOptions().Addr,
-	}
-}
-
-//go:embed all:app/scada
+// go:embed all:app/scada
 var wwwFiles embed.FS
 
 // @title 组态接口文档
@@ -43,16 +19,6 @@ var wwwFiles embed.FS
 // @BasePath /app/scada/api/
 // @query.collection.format multi
 func main() {
-}
-
-func Sync() error {
-	return db.Engine.Sync2(
-		new(types.HmiProject),
-		new(types.HmiComponent),
-		new(types.HmiHtml),
-		new(types.HmiPath),
-		new(types.HmiImage),
-	)
 }
 
 func Route(app *web.Engine) {
