@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { HmiPage } from "../../../hmi/hmi";
-import { RequestService } from "../../request.service";
-import { NzMessageService } from "ng-zorro-antd/message";
+import { RequestService } from "iot-master-smart";
 
 @Component({
     selector: 'app-binding-setting',

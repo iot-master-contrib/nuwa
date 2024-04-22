@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "github.com/iot-master-contrib/nuwa"
 	"github.com/zgwit/iot-master/v4/boot"
 	"github.com/zgwit/iot-master/v4/log"
 )

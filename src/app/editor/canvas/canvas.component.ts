@@ -259,7 +259,7 @@ export class CanvasComponent {
                     nzTitle: "配置图表",
                     nzMaskClosable: false,//点击蒙版不允许关闭
                     nzContent: SetChartComponent,
-                    nzComponentParams: {
+                    nzData: {
                         component,
                     },
                     nzFooter: null,

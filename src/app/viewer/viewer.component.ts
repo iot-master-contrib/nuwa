@@ -2,7 +2,7 @@ import {Component, ElementRef, HostListener, OnDestroy, OnInit} from '@angular/c
 import {HmiPage, HmiProject} from '../../hmi/hmi';
 import {Cell, Graph} from "@antv/x6";
 import {Title} from "@angular/platform-browser";
-import {RequestService} from "../request.service";
+import {RequestService} from "iot-master-smart";
 import {ComponentService} from "../component.service";
 import {ActivatedRoute} from "@angular/router";
 import {NzNotificationService} from "ng-zorro-antd/notification";
@@ -10,8 +10,6 @@ import {MqttService} from "ngx-mqtt";
 import {Subscription} from "rxjs";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {WindowComponent} from "./window/window.component";
-import {functions} from "lodash-es";
-import {AuthComponent} from "./auth/auth.component";
 
 
 //import "fengari-web"
@@ -48,7 +46,7 @@ export class ViewerComponent implements OnDestroy {
         window: (url: string, width = 400, height = 300, title = '窗口') => {
             this.ms.create({
                 nzContent: WindowComponent,
-                nzComponentParams: {url, width, height, title},
+                nzData: {url, width, height, title},
                 nzWidth: width + 48,
                 nzFooter: null,
             })
@@ -68,13 +66,13 @@ export class ViewerComponent implements OnDestroy {
             })
         },
         auth: (cb: () => {}) => {
-            this.ms.create({
-                nzContent: AuthComponent,
-                nzTitle: "请输入登录密码",
-                nzFooter: null
-            }).afterClose.subscribe(res => {
-                if (res == 'ok') cb()
-            })
+            // this.ms.create({
+            //     nzContent: AuthComponent,
+            //     nzTitle: "请输入登录密码",
+            //     nzFooter: null
+            // }).afterClose.subscribe(res => {
+            //     if (res == 'ok') cb()
+            // })
         }
 
     }

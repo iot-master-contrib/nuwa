@@ -34,7 +34,7 @@ export class PagesComponent {
         const modal: NzModalRef = this.modal.create({
             nzTitle: isNew ? '新增页面' : '编辑页面',
             nzContent: PageSettingComponent,
-            nzComponentParams: {
+            nzData: {
                 row: isNew ? { name: '', content: {} } : this.project.pages[i]
             },
             nzViewContainerRef: this.viewContainerRef,

@@ -10,6 +10,7 @@ func init() {
 		Domain:     []string{"admin"},
 		Privileges: nil,
 		Items: []*menu.Item{
+			{Name: "创建", Url: "/$nuwa/edit", Type: "web"},
 			{Name: "工程", Url: "/$nuwa/project", Type: "web"},
 			{Name: "组件库", Url: "/$nuwa/component", Type: "web"},
 		},

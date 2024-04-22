@@ -4,7 +4,7 @@ go env -w GOPROXY=https://goproxy.cn,direct
 go env -w GOPRIVATE=*.gitlab.com,*.gitee.com
 go env -w GOSUMDB=off
 
-app="scada"
+app="nuwa"
 version="1.0.0"
 
 npm run build
@@ -22,7 +22,7 @@ ldflags="-X '${pkg}.Version=$version' \
 export GOARCH=amd64
 
 export GOOS=windows
-go build -ldflags "$ldflags" -o scada.exe cmd/main.go
+go build -ldflags "$ldflags" -o nuwa.exe cmd/main.go
 
 export GOOS=linux
-go build -ldflags "$ldflags" -o scada cmd/main.go
+go build -ldflags "$ldflags" -o nuwa cmd/main.go

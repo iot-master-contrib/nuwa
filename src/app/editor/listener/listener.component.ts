@@ -23,7 +23,7 @@ export class ListenerComponent {
         this.ms.create({
             nzTitle: `编辑${e.label}事件脚本`,
             nzContent: ListenerSettingComponent,
-            nzComponentParams: {
+            nzData: {
                 content: this.cell.data.listeners[e.name] || ''
             },
             nzOnOk: ({ content }) => {

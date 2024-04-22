@@ -70,7 +70,7 @@ export class PropertyInputComponent {
         this.ms.create({
             nzTitle: `选择图片`,
             nzContent: AttachSelectComponent,
-            nzComponentParams: {},
+            nzData: {},
             nzFooter: null
         })
     }

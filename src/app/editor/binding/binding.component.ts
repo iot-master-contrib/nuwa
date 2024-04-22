@@ -21,7 +21,7 @@ export class BindingComponent {
         this.ms.create({
             nzTitle: `编辑 ${e.label} 数据绑定`,
             nzContent: BindingSettingComponent,
-            nzComponentParams: {
+            nzData: {
                 content: this.cell.data.bindings[e.name] || {}
             },
             nzOnOk: ({ group }) => {

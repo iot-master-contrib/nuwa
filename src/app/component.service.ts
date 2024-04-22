@@ -1,5 +1,4 @@
 import { Injectable, Injector } from '@angular/core';
-import { RequestService } from "./request.service";
 import { HmiCollection, HmiComponent } from "../hmi/hmi";
 import { BaseComponents, ChartComponent } from "../hmi/components";
 import { IndustryComponents } from "../hmi/industry/components";
@@ -22,6 +21,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { GeometryComponents } from "../hmi/geometry/components";
+import {RequestService} from "iot-master-smart";
 @Injectable({
     providedIn: 'root'
 })
@@ -55,7 +55,7 @@ export class ComponentService {
         this.PutComponent(BaseGroup)
         //this.PutComponent(BaseGroup)
 
-        this.load()
+        //this.load()
     }
 
     load() {
