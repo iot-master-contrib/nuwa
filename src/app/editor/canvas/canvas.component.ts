@@ -16,6 +16,7 @@ import { HmiComponent, HmiDraw, HmiPage } from "../../../hmi/hmi";
 import { ComponentService } from "../../component.service";
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SetChartComponent } from '../set-chart/set-chart.component';
+import {Scroller} from "@antv/x6-plugin-scroller";
 
 
 @Component({
@@ -43,11 +44,13 @@ export class CanvasComponent {
             container: element.nativeElement,
             background: {
                 //color: graphBgc.color, // 设置画布背景颜色
+                //color: "#F20FF0"
             },
             grid: {
                 size: 10,      // 网格大小 10px
                 visible: JSON.parse(localStorage.getItem("show_grid") || 'true'), // 渲染网格背景
-                type: "mesh",
+                //type: "mesh",
+                type: "fixedDot"
             },
             connecting: { //连线交互
                 snap: false,//是否自动吸附
@@ -76,19 +79,6 @@ export class CanvasComponent {
                 },
 
             },
-            highlighting: {
-                // 当连接桩可以被链接时，在连接桩外围渲染一个 2px 宽的红色矩形框
-                magnetAvailable: {
-                    name: 'stroke',
-                    args: {
-                        padding: 4,
-                        attrs: {
-                            strokeWidth: 2,
-                            stroke: 'rgba(223,234,255)',
-                        },
-                    },
-                },
-            },
         });
 
         //补充插件
@@ -97,6 +87,7 @@ export class CanvasComponent {
         this.graph.use(new Snapline({ enabled: true }))
         this.graph.use(new Clipboard({ enabled: true }))
         this.graph.use(new History({ enabled: true }));
+
         this.graph.use(new Selection({//选中
             enabled: true,
             multiple: true,
@@ -106,7 +97,16 @@ export class CanvasComponent {
             strict: true,
             showNodeSelectionBox: true
         }));
+
         this.graph.use(new Export());
+
+        // this.graph.use(new Scroller({
+        //     enabled: true,
+        //     pannable: true,
+        //     pageVisible: true,
+        //     pageBreak: true,
+        //     autoResize: false,
+        // }))
 
         this.dnd = new Dnd({ target: this.graph });
 

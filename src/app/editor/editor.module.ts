@@ -29,7 +29,9 @@ import {
     UpOutline,
     DownOutline,
     GroupOutline,
-    UngroupOutline
+    UngroupOutline, DownloadOutline, UploadOutline,
+    TableOutline, ProfileOutline,
+    CaretRightOutline,
 } from '@ant-design/icons-angular/icons';
 
 import { NzButtonModule } from "ng-zorro-antd/button";
@@ -71,6 +73,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { FirstStepComponent } from './set-chart/first-step/first-step.component';
 import { SecondStepComponent } from './set-chart/second-step/second-step.component';
 import { ChartFormComponent } from './chart-form/chart-form.component';
+import {NzSliderModule} from "ng-zorro-antd/slider";
 @NgModule({
     declarations: [
         EditorComponent,
@@ -106,7 +109,9 @@ import { ChartFormComponent } from './chart-form/chart-form.component';
             AlignCenterOutline, AlignRightOutline, VerticalAlignTopOutline,
             VerticalAlignMiddleOutline, VerticalAlignBottomOutline,
             VerticalLeftOutline, VerticalRightOutline,
-            UpOutline, DownOutline, GroupOutline, UngroupOutline
+            UpOutline, DownOutline, GroupOutline, UngroupOutline,
+            DownloadOutline, UploadOutline, TableOutline, ProfileOutline,
+            CaretRightOutline,
         ]),
         NzDividerModule,
         NzButtonModule,
@@ -128,7 +133,8 @@ import { ChartFormComponent } from './chart-form/chart-form.component';
         NzRadioModule,
         NzStepsModule,
         NzTableModule,
-        NzSpinModule
+        NzSpinModule,
+        NzSliderModule,
     ],
     providers: [
         { provide: NzMessageService, },

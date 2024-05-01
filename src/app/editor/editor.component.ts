@@ -16,6 +16,7 @@ export class EditorComponent implements OnInit {
     id: any = ''
 
     project: HmiProject = projectTemplate()
+
     index = 0;
 
     scale = 1;
