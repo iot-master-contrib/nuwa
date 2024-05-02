@@ -22,7 +22,7 @@ type Font struct {
 }
 
 func fontList(ctx *gin.Context) {
-	root := filepath.Join(viper.GetString("data"), "fonts")
+	root := filepath.Join(viper.GetString("data"), "font")
 
 	cs, err := scanManifest[Font](root)
 	if err != nil {
@@ -37,7 +37,7 @@ func fontDetail(ctx *gin.Context) {
 	var c Font
 
 	//第一步，解析文件夹
-	dir := filepath.Join(viper.GetString("data"), "fonts", ctx.Param("id"))
+	dir := filepath.Join(viper.GetString("data"), "font", ctx.Param("id"))
 	name := filepath.Join(dir, "manifest.json")
 	err := parseJson(name, &c)
 	if err == nil {

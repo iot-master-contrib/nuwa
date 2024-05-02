@@ -57,7 +57,7 @@ type Component struct {
 }
 
 func componentList(ctx *gin.Context) {
-	root := filepath.Join(viper.GetString("data"), "components")
+	root := filepath.Join(viper.GetString("data"), "component")
 
 	cs, err := scanManifest[Component](root)
 	if err != nil {
@@ -72,7 +72,7 @@ func componentDetail(ctx *gin.Context) {
 	var c Component
 
 	//第一步，解析文件夹
-	dir := filepath.Join(viper.GetString("data"), "components", ctx.Param("id"))
+	dir := filepath.Join(viper.GetString("data"), "component", ctx.Param("id"))
 	name := filepath.Join(dir, "manifest.json")
 	err := parseJson(name, &c)
 	if err == nil {
