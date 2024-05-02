@@ -50,10 +50,14 @@ func fontDetail(ctx *gin.Context) {
 		return
 	}
 
-	//第一步，解析压缩包
+	//第二步，解析压缩包
 	zp := dir + ".zip"
 	z, err := zip.OpenReader(zp)
 	if err != nil {
+		if os.IsNotExist(err) {
+			curd.Fail(ctx, "找不到字体")
+			return
+		}
 		curd.Error(ctx, err)
 		return
 	}
