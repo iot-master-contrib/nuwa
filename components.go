@@ -6,22 +6,29 @@ import (
 	"io/fs"
 	"net/http"
 	"path/filepath"
+	"strings"
 )
 
-type zf struct {
+type componentFile struct {
 	fs.File
+	component *zip.ReadCloser
 }
 
-func (f *zf) Seek(offset int64, whence int) (int64, error) {
+func (f *componentFile) Seek(offset int64, whence int) (int64, error) {
 	return 0, nil
 }
 
-func (f *zf) Readdir(count int) ([]fs.FileInfo, error) {
+func (f *componentFile) Readdir(count int) ([]fs.FileInfo, error) {
 	return nil, nil
 }
 
-func (f *zf) Write([]byte) (int, error) {
+func (f *componentFile) Write([]byte) (int, error) {
 	return 0, nil
+}
+
+func (f *componentFile) Close() error {
+	_ = f.component.Close()
+	return f.File.Close()
 }
 
 type zips struct {
@@ -31,22 +38,24 @@ type zips struct {
 func (zs *zips) Open(name string) (http.File, error) {
 	dir, file := filepath.Split(name)
 
+	dir = strings.TrimSuffix(dir, "/")
+	dir = strings.TrimSuffix(dir, "\\")
+
 	//每个组件都是一个压缩包
-	zp := dir + ".zip"
+	zp := filepath.Join(zs.root, dir+".zip")
 	z, err := zip.OpenReader(zp)
 	if err != nil {
 		return nil, err
 	}
-	defer z.Close()
 
 	//打开压缩包内的文件
 	f, err := z.Open(file)
 	if err != nil {
+		_ = z.Close()
 		return nil, err
 	}
-	defer f.Close()
 
-	return &zf{File: f}, nil
+	return &componentFile{File: f, component: z}, nil
 }
 
 func StaticComponents(relativePath string, root string) {
