@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"github.com/zgwit/iot-master/v4/api"
+	"github.com/zgwit/iot-master/v4/types"
 	"github.com/zgwit/iot-master/v4/web/curd"
 	"os"
 	"path/filepath"
@@ -23,49 +24,42 @@ func init() {
 
 }
 
-func scanComponents(root string) ([]*Component, error) {
-	entries, err := os.ReadDir(root)
-	if err != nil {
-		return nil, err
-	}
+type Binding struct {
+	Name    string `json:"name,omitempty"`    //变量
+	Label   string `json:"label,omitempty"`   //显示名称
+	Default any    `json:"default,omitempty"` //默认
+}
 
-	var components []*Component
-	for _, entry := range entries {
-		f := filepath.Join(root, entry.Name())
+type Event struct {
+	Name  string `json:"name,omitempty"`  //变量
+	Label string `json:"label,omitempty"` //显示名称
+}
 
-		if entry.IsDir() {
-			cs, err := scanComponents(f)
-			if err != nil {
-				return nil, err
-			}
-			components = append(components, cs...)
-			continue
-		}
+type Component struct {
+	Id         string `json:"id"`
+	Icon       string `json:"icon,omitempty"`       //图标
+	Name       string `json:"name,omitempty"`       //名称
+	Collection string `json:"collection,omitempty"` //分类
+	Version    string `json:"version,omitempty"`    //版本
 
-		if filepath.Ext(entry.Name()) == ".zip" {
-			z, err := zip.OpenReader(f)
-			if err != nil {
-				return nil, err
-			}
-			defer z.Close()
+	//控件属性
+	Properties []types.FormItem `json:"properties,omitempty"`
 
-			var component Component
-			err = parseJsonFromZip(z, "manifest.json", &component)
-			if err != nil {
-				//TODO 此处不应该退出
-				return nil, err
-			}
+	//数据绑定
+	Bindings []Binding         `json:"bindings,omitempty"`
+	Hooks    map[string]string `json:"hooks,omitempty"`
 
-			components = append(components, &component)
-		}
-	}
-	return components, nil
+	//控件事件
+	Events []Event `json:"events,omitempty"`
+
+	//事件监听
+	Listeners map[string]string `json:"listeners,omitempty"`
 }
 
 func componentList(ctx *gin.Context) {
 	root := filepath.Join(viper.GetString("data"), "components")
 
-	cs, err := scanComponents(root)
+	cs, err := scanManifest[Component](root)
 	if err != nil {
 		curd.Error(ctx, err)
 		return
@@ -75,12 +69,51 @@ func componentList(ctx *gin.Context) {
 }
 
 func componentDetail(ctx *gin.Context) {
-	component, err := loadComponent(ctx.Param("id"))
+	var c Component
+
+	//第一步，解析文件夹
+	dir := filepath.Join(viper.GetString("data"), "components", ctx.Param("id"))
+	name := filepath.Join(dir, "manifest.json")
+	err := parseJson(name, &c)
+	if err == nil {
+		//解析附加内容
+		_ = parseJson(filepath.Join(dir, "properties.json"), &c.Properties)
+		_ = parseJson(filepath.Join(dir, "bindings.json"), &c.Bindings)
+		_ = parseJson(filepath.Join(dir, "hooks.json"), &c.Hooks)
+		_ = parseJson(filepath.Join(dir, "events.json"), &c.Events)
+		_ = parseJson(filepath.Join(dir, "listeners.json"), &c.Listeners)
+		curd.OK(ctx, &c)
+		return
+	}
+
+	if !os.IsNotExist(err) {
+		curd.Error(ctx, err)
+		return
+	}
+
+	//第一步，解析压缩包
+	zp := dir + ".zip"
+	z, err := zip.OpenReader(zp)
 	if err != nil {
 		curd.Error(ctx, err)
 		return
 	}
-	curd.OK(ctx, component)
+	defer z.Close()
+
+	err = parseJsonFromZip(z, "manifest.json", &c)
+	if err != nil {
+		curd.Error(ctx, err)
+		return
+	}
+
+	//解析附加内容
+	_ = parseJsonFromZip(z, "properties.json", &c.Properties)
+	_ = parseJsonFromZip(z, "bindings.json", &c.Bindings)
+	_ = parseJsonFromZip(z, "hooks.json", &c.Hooks)
+	_ = parseJsonFromZip(z, "events.json", &c.Events)
+	_ = parseJsonFromZip(z, "listeners.json", &c.Listeners)
+
+	curd.OK(ctx, &c)
 }
 
 func collectionList(ctx *gin.Context) {
