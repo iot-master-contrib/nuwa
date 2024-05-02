@@ -63,13 +63,12 @@ export class SideBarComponent {
     @HostListener("window:mousemove", ["$event"])
     onMouseMove($event: MouseEvent) {
         if (!this.splitting) return;
-        if (this._right)
-            this.Width = this._width - $event.screenX + this.lastX;
-        else
-            this.Width = this._width + $event.screenX - this.lastX;
+        let dx = $event.screenX - this.lastX;
+        let w = (this._right) ? this._width - dx : this._width + dx
+        if (w > 50)
+            this.Width = w
         this.lastX = $event.screenX
     }
-
 
     @HostListener("window:mouseup", ["$event"])
     onMouseUp($event: MouseEvent) {
