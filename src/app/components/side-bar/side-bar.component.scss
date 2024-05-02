@@ -9,6 +9,7 @@
     user-select: none;
 
     .item{
+        background-color: #5c6065;
         border: 1px solid #d0d0d0;
         margin: 2px 1px;
         padding: 5px 2px;
@@ -27,4 +28,10 @@
 
 .content {
     flex: 1;
+}
+
+.split{
+    width: 8px;
+    background-color: #c9c9c9;
+    cursor: col-resize;
 }
