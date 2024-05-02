@@ -2,6 +2,7 @@ package nuwa
 
 import (
 	"embed"
+	_ "github.com/iot-master-contrib/nuwa/api"
 	"github.com/spf13/viper"
 	"github.com/zgwit/iot-master/v4/boot"
 	"github.com/zgwit/iot-master/v4/web"
