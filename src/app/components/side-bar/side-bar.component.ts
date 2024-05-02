@@ -1,4 +1,4 @@
-import {Component, ContentChildren, QueryList, ViewChildren} from '@angular/core';
+import {Component, ContentChildren, HostBinding, Input, QueryList, ViewChildren} from '@angular/core';
 import {SideBarItemComponent} from "../side-bar-item/side-bar-item.component";
 import {CommonModule} from "@angular/common";
 
@@ -13,5 +13,11 @@ import {CommonModule} from "@angular/common";
 })
 export class SideBarComponent {
     @ContentChildren(SideBarItemComponent, {descendants: true}) components!: QueryList<SideBarItemComponent>
+
+    @HostBinding("style.flex-direction") direction = "row";
+
+    @Input() set position(p: string) {
+        this.direction = p == "right" ? "row-reverse" : "row";
+    }
 
 }
