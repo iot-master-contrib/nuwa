@@ -1,4 +1,13 @@
-import {Component, ContentChildren, HostBinding, HostListener, Input, QueryList, ViewChildren} from '@angular/core';
+import {
+    Component,
+    ContentChildren,
+    HostBinding,
+    HostListener,
+    Input,
+    OnInit,
+    QueryList,
+    ViewChildren
+} from '@angular/core';
 import {SideBarItemComponent} from "../side-bar-item/side-bar-item.component";
 import {CommonModule} from "@angular/common";
 
@@ -11,44 +20,38 @@ import {CommonModule} from "@angular/common";
     templateUrl: './side-bar.component.html',
     styleUrl: './side-bar.component.scss'
 })
-export class SideBarComponent {
+export class SideBarComponent{
     @ContentChildren(SideBarItemComponent, {descendants: true}) components!: QueryList<SideBarItemComponent>
+
+    @HostBinding("style.width") styleWidth = "200px";
+    @HostBinding("style.flex-direction") styleFlexDirection = "row";
 
     //右对齐
     _right = false;
 
-    @Input() set Right(p: boolean) {
+    @Input() set right(p: boolean) {
         this._right = p
-        this.direction = p ? "row-reverse" : "row";
+        this.styleFlexDirection = p ? "row-reverse" : "row";
     }
 
-    @HostBinding("style.flex-direction") direction = "row";
 
     //宽度
     _width = 200
 
-    @Input() set Width(w: number) {
+    @Input() set width(w: number) {
         this._width = w
-        this.width = w + "px"
+        this.styleWidth = w + "px"
     }
 
-    @HostBinding("style.width") width = "200px";
-
-
-    last = -1;
+    index = 0;
 
     onClick(i: number) {
-        console.log("side bar on click", i)
-        if (this.last > -1) {
-            // @ts-ignore
-            this.components.get(this.last).Activated = false
-        }
-        if (this.last == i) {
-            this.last = -1
+        if (this.index == i) {
+            this.index = -1
+            this.styleWidth = "auto"
         } else {
-            // @ts-ignore
-            this.components.get(i).Activated = true
-            this.last = i
+            this.index = i
+            this.width = this._width
         }
     }
 
@@ -66,7 +69,7 @@ export class SideBarComponent {
         let dx = $event.screenX - this.lastX;
         let w = (this._right) ? this._width - dx : this._width + dx
         if (w > 50)
-            this.Width = w
+            this.width = w
         this.lastX = $event.screenX
     }
 

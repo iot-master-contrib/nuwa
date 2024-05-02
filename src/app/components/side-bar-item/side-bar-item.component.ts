@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {CommonModule} from "@angular/common";
+import {SideBarComponent} from "../side-bar/side-bar.component";
 
 @Component({
     selector: 'app-side-bar-item',
@@ -12,6 +13,11 @@ import {CommonModule} from "@angular/common";
 })
 export class SideBarItemComponent {
     @Input() Title = 'tab'
-    @Input() Activated = false
 
+    constructor(public parent: SideBarComponent) {
+    }
+
+    active(): boolean {
+        return this === this.parent.components.get(this.parent.index)
+    }
 }
