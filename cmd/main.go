@@ -2,15 +2,17 @@ package main
 
 import (
 	_ "github.com/iot-master-contrib/nuwa"
-	"github.com/zgwit/iot-master/v4/boot"
+	master "github.com/zgwit/iot-master/v4"
 	"github.com/zgwit/iot-master/v4/log"
+	"github.com/zgwit/iot-master/v4/web"
 )
 
 func main() {
-	err := boot.Startup()
+	err := master.Startup()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	select {}
+	err = web.Serve()
+	log.Fatal(err)
 }
