@@ -27,7 +27,7 @@ func Startup() error {
 	//组件库
 	//StaticComponents("/components", filepath.Join(viper.GetString("data"), "components"))
 	root := filepath.Join(viper.GetString("data"), "components")
-	web.Engine.StaticFS("/components", &zips{root: root})
+	web.Engine.StaticFS("/components", &components{root: root})
 	return nil
 }
 

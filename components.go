@@ -31,18 +31,18 @@ func (f *componentFile) Close() error {
 	return f.File.Close()
 }
 
-type zips struct {
+type components struct {
 	root string
 }
 
-func (zs *zips) Open(name string) (http.File, error) {
+func (cs *components) Open(name string) (http.File, error) {
 	dir, file := filepath.Split(name)
 
 	dir = strings.TrimSuffix(dir, "/")
 	dir = strings.TrimSuffix(dir, "\\")
 
 	//每个组件都是一个压缩包
-	zp := filepath.Join(zs.root, dir+".zip")
+	zp := filepath.Join(cs.root, dir+".zip")
 	z, err := zip.OpenReader(zp)
 	if err != nil {
 		return nil, err
@@ -59,5 +59,5 @@ func (zs *zips) Open(name string) (http.File, error) {
 }
 
 func StaticComponents(relativePath string, root string) {
-	web.Engine.StaticFS(relativePath, &zips{root: root})
+	web.Engine.StaticFS(relativePath, &components{root: root})
 }
