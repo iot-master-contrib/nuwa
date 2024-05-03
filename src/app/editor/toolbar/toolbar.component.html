@@ -105,10 +105,6 @@
     <nz-option nzLabel="500%" [nzValue]="5"></nz-option>
 </nz-select>
 
-<nz-slider style="width: 40px" [ngModel]="scale" (ngModelChange)="handleScale($event)" [ngModelOptions]="{standalone: true}"
-           [nzMin]="0.1" [nzMax]="5" [nzStep]="0.05"
-></nz-slider>
-
 <nz-divider nzType="vertical"></nz-divider>
 <a nz-button (click)="about()">
     <i nz-icon nzType="question-circle" title="关于"></i>

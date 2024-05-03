@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EditorRoutingModule } from './editor-routing.module';
 import { EditorComponent } from "./editor.component";
 import { LibraryComponent } from './library/library.component';
-import { CanvasComponent } from './canvas/canvas.component';
+import { RendererComponent } from './renderer/renderer.component';
 import { PropertyComponent } from './property/property.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NzIconModule } from "ng-zorro-antd/icon";
@@ -74,11 +74,21 @@ import { FirstStepComponent } from './set-chart/first-step/first-step.component'
 import { SecondStepComponent } from './set-chart/second-step/second-step.component';
 import { ChartFormComponent } from './chart-form/chart-form.component';
 import {NzSliderModule} from "ng-zorro-antd/slider";
+import {SideBarComponent} from "./side-bar/side-bar.component";
+import {SideBarItemComponent} from "./side-bar-item/side-bar-item.component";
+import {WidgetsComponent} from "./widgets/widgets.component";
+import {ComponentsComponent} from "./components/components.component";
+import {GalleriesComponent} from "./galleries/galleries.component";
+import {LayersComponent} from "./layers/layers.component";
+import {SourcesComponent} from "./sources/sources.component";
+import {EventsComponent} from "./events/events.component";
+import {AnimationsComponent} from "./animations/animations.component";
+import {PropertiesComponent} from "./properties/properties.component";
 @NgModule({
     declarations: [
         EditorComponent,
         LibraryComponent,
-        CanvasComponent,
+        RendererComponent,
         PropertyComponent,
         PropertyInputComponent,
         ToolbarComponent,
@@ -96,7 +106,9 @@ import {NzSliderModule} from "ng-zorro-antd/slider";
         SetChartComponent,
         FirstStepComponent,
         SecondStepComponent,
-        ChartFormComponent
+        ChartFormComponent,
+        SideBarComponent,
+        SideBarItemComponent,
     ],
     imports: [
         CommonModule,
@@ -135,6 +147,14 @@ import {NzSliderModule} from "ng-zorro-antd/slider";
         NzTableModule,
         NzSpinModule,
         NzSliderModule,
+        WidgetsComponent,
+        ComponentsComponent,
+        GalleriesComponent,
+        LayersComponent,
+        SourcesComponent,
+        EventsComponent,
+        AnimationsComponent,
+        PropertiesComponent,
     ],
     providers: [
         { provide: NzMessageService, },

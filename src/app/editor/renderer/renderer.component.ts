@@ -20,11 +20,11 @@ import {Scroller} from "@antv/x6-plugin-scroller";
 
 
 @Component({
-    selector: 'app-canvas',
-    templateUrl: './canvas.component.html',
-    styleUrls: ['./canvas.component.scss'],
+    selector: 'app-renderer',
+    templateUrl: './renderer.component.html',
+    styleUrls: ['./renderer.component.scss'],
 })
-export class CanvasComponent {
+export class RendererComponent {
     public graph: Graph;
 
     dnd: Dnd;
