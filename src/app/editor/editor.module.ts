@@ -85,6 +85,7 @@ import {EventsComponent} from "./events/events.component";
 import {AnimationsComponent} from "./animations/animations.component";
 import {PropertiesComponent} from "./properties/properties.component";
 import {PageComponent} from "./page/page.component";
+import {ScriptsComponent} from "./scripts/scripts.component";
 @NgModule({
     declarations: [
         EditorComponent,
@@ -157,6 +158,7 @@ import {PageComponent} from "./page/page.component";
         AnimationsComponent,
         PropertiesComponent,
         PageComponent,
+        ScriptsComponent,
     ],
     providers: [
         { provide: NzMessageService, },
