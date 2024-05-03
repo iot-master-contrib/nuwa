@@ -1,5 +1,6 @@
 import {Cell, Edge, Node} from "@antv/x6";
 import {SmartField} from "iot-master-smart";
+import {TemplateRef, Type} from "@angular/core";
 
 export declare interface NuwaProject {
     id: string
@@ -35,9 +36,9 @@ export declare interface NuwaComponent {
 
     name: string
 
-    icon?: string
+    icon: string
 
-    type: "line" | "shape" | "html" | "svg" | "chart"
+    type: "line" | "shape" | "svg" | "html" | "chart" | "angular"
 
     internal?: boolean
 
@@ -46,7 +47,7 @@ export declare interface NuwaComponent {
     meta?: Node.Metadata | Edge.Metadata
 
     //Angular组件
-    //content?: any //Component
+    content: TemplateRef<any> | Type<any>
 
     //html组件
     effects?: string[]
