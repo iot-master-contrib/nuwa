@@ -4,12 +4,9 @@ import {
     HostBinding,
     HostListener,
     Input,
-    OnInit,
     QueryList,
-    ViewChildren
 } from '@angular/core';
 import {SideBarItemComponent} from "../side-bar-item/side-bar-item.component";
-import {CommonModule} from "@angular/common";
 
 @Component({
     selector: 'app-side-bar',

@@ -22,6 +22,7 @@ func init() {
 }
 
 type Gallery struct {
+	Id     string   `json:"id"`
 	Name   string   `json:"name,omitempty"`
 	Images []string `json:"images,omitempty"`
 }

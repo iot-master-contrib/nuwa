@@ -1,1 +1,9 @@
-<p>galleries works!</p>
+<nz-collapse>
+    <nz-collapse-panel *ngFor="let w of galleries" [nzHeader]="w.name">
+        <div class="component" *ngFor="let c of w.images">
+            <div class="icon">
+                <img [src]="'/gallery/'+w.id+'/'+c"/>
+            </div>
+        </div>
+    </nz-collapse-panel>
+</nz-collapse>

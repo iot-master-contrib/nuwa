@@ -14,5 +14,5 @@ import {NuwaWidgets} from "../../../nuwa/widgets/widgets";
   styleUrl: './widgets.component.scss'
 })
 export class WidgetsComponent {
-    widgets = NuwaWidgets
+    widgets =  NuwaWidgets
 }
