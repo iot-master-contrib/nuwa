@@ -3,7 +3,7 @@ import {NuwaComponent} from "../../nuwa";
 export const BaseImage: NuwaComponent = {
     name: '图片',
     id: 'image',
-    icon: "/assets/widgets/image.svg",
+    icon: "assets/widgets/image.svg",
     type: "shape", internal: true,
     extends: {inherit: 'image'},
     meta: {

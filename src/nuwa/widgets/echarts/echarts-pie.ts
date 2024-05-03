@@ -11,7 +11,7 @@ class EchartsPieComponent {
 
 export const EchartsPie: NuwaComponent = {
     name: '饼图', id: 'echarts-pie',
-    icon: "/assets/widgets/echarts-pie.svg",
+    icon: "assets/widgets/echarts-pie.svg",
     type: "angular", internal: true,
     meta: {width: 100, height: 40},
     content: EchartsPieComponent,

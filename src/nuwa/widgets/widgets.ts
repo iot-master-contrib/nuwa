@@ -12,18 +12,26 @@ import {EchartsBar} from "./echarts/echarts-bar";
 import {EchartsGauge} from "./echarts/echarts-gauge";
 import {EchartsLine} from "./echarts/echarts-line";
 import {EchartsPie} from "./echarts/echarts-pie";
+import {ControlInput} from "./control/input";
+import {ControlSwitch} from "./control/switch";
+import {ControlProgress} from "./control/progress";
+import {ControlSelect} from "./control/select";
+import {ControlSlider} from "./control/slider";
 
 export const NuwaWidgets: NuwaCollection[] = [
     {
         name: "基础组件",
         components: [
-            BaseLine, BaseText, BaseRect, BaseCircle, BaseEllipse, BaseImage,
+            BaseLine, BaseText, BaseRect,
+            BaseCircle, BaseEllipse, BaseImage,
         ]
     },
     {
         name: "交互控件",
         components: [
-            ControlButton, ControlNumber,
+            ControlButton, ControlNumber, ControlInput,
+            ControlSwitch, ControlProgress, ControlSelect,
+            ControlSlider
         ]
     },
     {

@@ -1,1 +1,10 @@
-<p>widgets works!</p>
+<nz-collapse>
+    <nz-collapse-panel *ngFor="let w of widgets" [nzHeader]="w.name">
+            <div class="component" *ngFor="let c of w.components">
+                <div class="icon">
+                    <img [src]="c.icon"/>
+                </div>
+                <div class="name">{{c.name}}</div>
+            </div>
+    </nz-collapse-panel>
+</nz-collapse>
