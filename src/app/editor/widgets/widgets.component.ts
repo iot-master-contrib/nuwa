@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NuwaWidgets} from "../../../nuwa/widgets/widgets";
 
 @Component({
   selector: 'app-widgets',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './widgets.component.scss'
 })
 export class WidgetsComponent {
-
+    widgets = NuwaWidgets
 }

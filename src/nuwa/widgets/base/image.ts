@@ -1,6 +1,6 @@
-import {HmiComponent} from "../../../hmi/hmi";
+import {NuwaComponent} from "../../nuwa";
 
-export const BaseImage: HmiComponent = {
+export const BaseImage: NuwaComponent = {
     name: '图片',
     id: 'image',
     icon: "/assets/widgets/image.svg",
@@ -11,6 +11,6 @@ export const BaseImage: HmiComponent = {
         imageUrl: "/assets/widgets/image.svg",
     },
     properties: [
-        {name: "图片", path: "attrs/image/xlink:href", type: "image"},
+        {label: "图片", key: "attrs/image/xlink:href", type: "image"},
     ]
 }

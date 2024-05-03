@@ -2,7 +2,7 @@
 import {NuwaComponent} from "../../nuwa";
 import {StrokeProperties, TextProperties} from "../properties";
 
-export const BaseNumber: NuwaComponent = {
+export const ControlNumber: NuwaComponent = {
     name: '数值', id: 'number',
     icon: "/assets/widgets/number.svg",
     type: "shape",

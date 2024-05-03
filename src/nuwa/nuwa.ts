@@ -47,7 +47,7 @@ export declare interface NuwaComponent {
     meta?: Node.Metadata | Edge.Metadata
 
     //Angular组件
-    content: TemplateRef<any> | Type<any>
+    content?: TemplateRef<any> | Type<any>
 
     //html组件
     effects?: string[]
