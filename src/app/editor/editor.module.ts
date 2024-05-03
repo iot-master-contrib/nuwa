@@ -74,8 +74,7 @@ import { FirstStepComponent } from './set-chart/first-step/first-step.component'
 import { SecondStepComponent } from './set-chart/second-step/second-step.component';
 import { ChartFormComponent } from './chart-form/chart-form.component';
 import {NzSliderModule} from "ng-zorro-antd/slider";
-import {SideBarComponent} from "./side-bar/side-bar.component";
-import {SideBarItemComponent} from "./side-bar-item/side-bar-item.component";
+import {SideBarComponent, SideBarItemDirective} from "./side-bar/side-bar.component";
 import {WidgetsComponent} from "./widgets/widgets.component";
 import {ComponentsComponent} from "./components/components.component";
 import {GalleriesComponent} from "./galleries/galleries.component";
@@ -110,7 +109,6 @@ import {ScriptsComponent} from "./scripts/scripts.component";
         SecondStepComponent,
         ChartFormComponent,
         SideBarComponent,
-        SideBarItemComponent,
     ],
     imports: [
         CommonModule,
@@ -159,6 +157,7 @@ import {ScriptsComponent} from "./scripts/scripts.component";
         PropertiesComponent,
         PageComponent,
         ScriptsComponent,
+        SideBarItemDirective,
     ],
     providers: [
         { provide: NzMessageService, },

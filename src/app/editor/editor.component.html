@@ -1,45 +1,23 @@
 <app-toolbar [graph]="renderer.graph" [project]="project" (onSave)="handleSave()" [(scale)]="scale"></app-toolbar>
 <div class="body">
-    <app-side-bar>
-        <app-side-bar-item Title="页面">
-            <app-pages [project]="project" [graph]="renderer.graph"></app-pages>
-        </app-side-bar-item>
-        <app-side-bar-item Title="控件">
-            <app-widgets></app-widgets>
-        </app-side-bar-item>
-        <app-side-bar-item Title="组件">
-            <app-components></app-components>
-        </app-side-bar-item>
-        <app-side-bar-item Title="图元">
-            <app-galleries></app-galleries>
-        </app-side-bar-item>
-        <app-side-bar-item Title="图层">
-            <app-layers></app-layers>
-        </app-side-bar-item>
-        <app-side-bar-item Title="数据源">
-            <app-sources></app-sources>
-        </app-side-bar-item>
+    <app-side-bar [width]="300">
+        <app-pages *sideBarItem="'页面'" [project]="project" [graph]="renderer.graph"></app-pages>
+        <app-widgets *sideBarItem="'控件'"></app-widgets>
+        <app-components *sideBarItem="'组件'"></app-components>
+        <app-galleries *sideBarItem="'图元'"></app-galleries>
+        <app-layers *sideBarItem="'图层'"></app-layers>
+        <app-sources *sideBarItem="'数据源'"></app-sources>
     </app-side-bar>
     <div class="content">
         <app-renderer #renderer
-                    [style.width]="project.width*scale+'px'"
-                    [style.height]="project.height*scale+'px'"></app-renderer>
+                      [style.width]="project.width*scale+'px'"
+                      [style.height]="project.height*scale+'px'"></app-renderer>
     </div>
-    <app-side-bar [right]="true">
-        <app-side-bar-item Title="画布">
-            <app-page></app-page>
-        </app-side-bar-item>
-        <app-side-bar-item Title="属性">
-            <app-properties></app-properties>
-        </app-side-bar-item>
-        <app-side-bar-item Title="动画">
-            <app-animations></app-animations>
-        </app-side-bar-item>
-        <app-side-bar-item Title="事件">
-            <app-events></app-events>
-        </app-side-bar-item>
-        <app-side-bar-item Title="脚本">
-            <app-scripts></app-scripts>
-        </app-side-bar-item>
+    <app-side-bar [width]="400" [right]="true">
+        <app-page *sideBarItem="'画布'"></app-page>
+        <app-properties *sideBarItem="'属性'"></app-properties>
+        <app-animations *sideBarItem="'动画'"></app-animations>
+        <app-events *sideBarItem="'事件'"></app-events>
+        <app-scripts *sideBarItem="'脚本'"></app-scripts>
     </app-side-bar>
 </div>
