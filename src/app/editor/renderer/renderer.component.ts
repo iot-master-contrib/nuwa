@@ -148,34 +148,9 @@ export class RendererComponent {
             }
         }
 
+        //线段编辑
         this.graph.on('edge:selected', FunctionExt.debounce(({edge}) => {
-
-            edge.addTools([{
-                name: 'source-arrowhead',
-                args: {
-                    attrs: {
-                        cursor: 'pointer',
-                        fill: '#3c9566',
-                    }
-                }
-            }, {
-                name: 'target-arrowhead',
-                args: {
-                    attrs: {
-                        cursor: 'pointer',
-                        fill: '#3c9566',
-                    }
-                }
-            }, {
-                name: 'vertices',
-                args: {
-                    attrs: {
-                        fill: '#3c9566',
-                        cursor: 'crosshair',
-                    },
-                    stopPropagation: false
-                },
-            }])
+            edge.addTools([{name: 'source-arrowhead'}, {name: 'target-arrowhead'}, {name: 'vertices'}, {name: 'segments'}])
         }))
 
         this.graph.on('edge:unselected', ({cell}) => {
