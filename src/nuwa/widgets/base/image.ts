@@ -8,7 +8,7 @@ export const BaseImage: NuwaComponent = {
     extends: {inherit: 'image'},
     meta: {
         width: 100, height: 80,
-        imageUrl: "/assets/widgets/image.svg",
+        imageUrl: "assets/widgets/image.svg",
     },
     properties: [
         {label: "图片", key: "attrs/image/xlink:href", type: "image"},

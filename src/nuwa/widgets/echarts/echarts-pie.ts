@@ -10,9 +10,9 @@ class EchartsPieComponent {
 }
 
 export const EchartsPie: NuwaComponent = {
-    name: '饼图', id: 'echarts-pie',
+    name: '饼图', id: '$echarts-pie',
     icon: "assets/widgets/echarts-pie.svg",
-    type: "angular", internal: true,
+    type: "angular",
     meta: {width: 100, height: 40},
     content: EchartsPieComponent,
     properties: [],

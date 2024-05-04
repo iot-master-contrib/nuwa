@@ -10,9 +10,9 @@ class EchartsMapComponent {
 }
 
 export const EchartsMap: NuwaComponent = {
-    name: '地图', id: 'echarts-map',
+    name: '地图', id: '$echarts-map',
     icon: "assets/widgets/echarts-map.svg",
-    type: "angular", internal: true,
+    type: "angular",
     meta: {width: 100, height: 40},
     content: EchartsMapComponent,
     properties: [],

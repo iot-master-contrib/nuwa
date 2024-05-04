@@ -2,8 +2,9 @@ import {NuwaComponent} from "../../nuwa";
 import {StrokeProperties, TextProperties} from "../properties";
 
 export const BaseText: NuwaComponent = {
-    name: '文本', id: 'text',
-    icon: "assets/widgets/text.svg", type: "shape",
+    name: '文本', id: '$text',
+    icon: "assets/widgets/text.svg",
+    type: "shape",
     extends: {inherit: "rect"},
     meta: {
         width: 100,
