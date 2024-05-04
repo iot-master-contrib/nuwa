@@ -11,11 +11,10 @@ import {Selection} from "@antv/x6-plugin-selection";
 import {Export} from "@antv/x6-plugin-export";
 import {Dnd} from "@antv/x6-plugin-dnd";
 
-import {HmiComponent, HmiDraw, HmiPage} from "../../../hmi/hmi";
+import {HmiPage} from "../../../hmi/hmi";
 
 import {ComponentService} from "../../component.service";
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {SetChartComponent} from '../set-chart/set-chart.component';
 import {NuwaComponent} from "../../../nuwa/nuwa";
 
 import {register} from '@antv/x6-angular-shape'
@@ -31,7 +30,6 @@ export class RendererComponent {
 
     dnd: Dnd;
 
-    line: HmiComponent | undefined;
     edge: Edge | undefined;
 
     constructor(
@@ -79,17 +77,16 @@ export class RendererComponent {
                         },
                     })
                 },
-
             },
         });
 
         //补充插件
+        this.graph.use(new Export());
         this.graph.use(new Keyboard({enabled: true}));
-        this.graph.use(new Transform({resizing: {enabled: true}, rotating: {enabled: true}}));
+        this.graph.use(new Transform({resizing: true, rotating: true}));
         this.graph.use(new Snapline({enabled: true}))
         this.graph.use(new Clipboard({enabled: true}))
         this.graph.use(new History({enabled: true}));
-
         this.graph.use(new Selection({//选中
             enabled: true,
             multiple: true,
@@ -100,7 +97,6 @@ export class RendererComponent {
             showNodeSelectionBox: true
         }));
 
-        this.graph.use(new Export());
 
         // this.graph.use(new Scroller({
         //     enabled: true,
@@ -110,6 +106,7 @@ export class RendererComponent {
         //     autoResize: false,
         // }))
 
+        //拖放插件，用于创建新图形
         this.dnd = new Dnd({target: this.graph});
 
         this.graph.bindKey('ctrl+s', (e) => {
@@ -126,23 +123,14 @@ export class RendererComponent {
         this.graph.bindKey('backspace', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
         this.graph.bindKey('delete', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
 
+        //绘线
         this.graph.container.onmousemove = (event) => {
-            if (this.line) {
-                this.graph.addEdge({
-                    shape: this.line.id,
-                    source: [event.offsetX, event.offsetY],
-                    target: [(event.offsetX) - 120, (event.offsetY) + 80],
-                    ...this.line.meta
-                });
-                this.line = undefined;
-            }
-
             if (this.drawingLine) {
                 this.graph.addEdge({
                     shape: this.drawingLine.id,
                     source: [event.offsetX, event.offsetY],
                     target: [(event.offsetX) - 120, (event.offsetY) + 80],
-                    ...this.drawingLine.meta
+                    ...this.drawingLine.metadata
                 });
                 this.drawingLine = undefined;
             }
@@ -157,55 +145,13 @@ export class RendererComponent {
             cell.removeTools();
         })
 
-        // 鼠标移入移出节点
-        this.graph.on('node:mouseenter', FunctionExt.debounce(({e}) => {
-            //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            //this.showPorts(ports, true);
-        }), 500);
-        this.graph.on('node:mouseleave', ({e}) => {
-            //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            //this.showPorts(ports, false);
-        });
-        this.graph.on('blank:click', () => {
-            //const ports = document.querySelectorAll(".x6-port-body");
-            //this.showPorts(ports, false);
-        })
-
-        this.graph.on('node:click', ({node, e}) => {
-            //console.log('node')
-            //const ports = e.target.parentElement.querySelectorAll(".x6-port-body");
-            //this.showPorts(ports, false);
-        });
-
-        this.graph.on("cell:selected", (data) => {
-            //console.log(111111111, data)
-        })
-
-        this.graph.on('cell:click', ({cell, e}) => {
-            let cmp = this.cs.Get(cell.shape)
-            // @ts-ignore
-            cmp?.listeners?.click?.call(this, cell, e)
-        });
-
-        this.graph.on('cell:mouseenter', ({cell, e}) => {
-            //console.log("cell:mouseenter", cell.shape)
-            let cmp = this.cs.Get(cell.shape)
-            // @ts-ignore
-            cmp?.listeners?.mouseenter?.call(this, cell, e)
-        });
-
-        this.graph.on('cell:mouseleave', ({cell, e}) => {
-            //console.log("cell:mouseleave")
-            let cmp = this.cs.Get(cell.shape)
-            // @ts-ignore
-            cmp?.listeners?.mouseleave?.call(this, cell, e)
-        });
     }
 
     public Render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
             const cmp = this.cs.Get(cell.shape)
             //TODO 使用filter 过滤掉找不到组件的情况
+
         })
         this.graph.drawBackground({
             color: page.background_color,
@@ -215,97 +161,38 @@ export class RendererComponent {
     }
 
 
-    public Draw($event: HmiDraw) {
-        let node!: Node
-        let {component} = $event;
-
-        //检查是否已经注册
-        this.cs.CheckRegister(component)
-
-        switch (component.type) {
-            case "line":
-                this.line = component;
-                return
-            case "shape":
-            case "svg":
-                // let tools: any = ['node-editor'];
-                // if (component.id === 'text-block') {
-                //     tools = [];
-                // }
-                let data: any = {}
-                component.bindings?.forEach(b => data[b.name] = b.default)
-                node = this.graph.createNode({
-                    shape: component.id,
-                    ...component.meta,
-                    data: data,
-                    //tools
-                    // ports
-                })
-                break;
-            case "chart":
-                this.modal.create({
-                    nzTitle: "配置图表",
-                    nzMaskClosable: false,//点击蒙版不允许关闭
-                    nzContent: SetChartComponent,
-                    nzData: {
-                        component,
-                    },
-                    nzFooter: null,
-                }).afterClose.subscribe((res) => {
-                    if (!component.registered) return
-                    this.graph.addNode({
-                        shape: component.id,
-                        x: 60,
-                        y: 100,
-                        data: {...res}
-                    })
-                })
-                break;
-        }
-        console.log(node)
-        if (node && $event.event)
-            this.dnd.start(node, $event.event);
-    }
-
-    public showPorts(ports: any, show: boolean) {
-        for (let i = 0, len = ports.length; i < len; i = i + 1) {
-            ports[i].style.visibility = show ? 'visible' : 'hidden';
-        }
-    }
-
     drawingLine?: NuwaComponent
 
     onDnd($event: DragEvent, component: NuwaComponent) {
         let node!: Node
 
         //检查是否已经注册
-        this.checkComponent(component)
-
-        switch (component.type) {
-            case "line":
-                this.drawingLine = component;
-                //node = this.graph.createEdge({})
-                return
-            case "shape":
-            case "angular":
-            case "svg":
-                let data: any = {}
-                component.bindings?.forEach(b => data[b.name] = b.default)
-                node = this.graph.createNode({
-                    shape: component.id,
-                    ...component.meta,
-                    data: data,
-                })
-                break;
+        if (!this.checkComponent(component)) {
+            //TODO 报错
+            return;
         }
-        if (node)
-            this.dnd.start(node, $event);
+
+        if (component.type == "line") {
+            this.drawingLine = component;
+            //node = this.graph.createEdge({})
+            return
+        }
+
+        let data: any = {}
+        component.bindings?.forEach(b => data[b.name] = b.default)
+        node = this.graph.createNode({
+            shape: component.id,
+            ...component.metadata,
+            data: data,
+        })
+
+        this.dnd.start(node, $event);
     }
 
 
-    public checkComponent(component: NuwaComponent) {
+    public checkComponent(component: NuwaComponent): boolean {
         if (component.registered || component.internal)
-            return
+            return true
 
         switch (component.type) {
             case "line":
@@ -313,27 +200,36 @@ export class RendererComponent {
                 if (component.extends) {
                     Graph.registerEdge(component.id, component.extends)
                     component.registered = true
+                    return true
                 }
+                //TODO 报错
                 break
             case "shape":
                 //注册衍生组件
                 if (component.extends) {
                     Graph.registerNode(component.id, component.extends)
                     component.registered = true
+                    return true
                 }
+                //TODO 报错
                 break;
             case "angular":
                 if (component.content) {
                     register({
                         shape: component.id,
-                        width: component.meta?.width || 100,
-                        height: component.meta?.height || 100,
+                        width: component.metadata?.width || 100,
+                        height: component.metadata?.height || 100,
                         content: component.content,
                         injector: this.injector,
                     })
                     component.registered = true
+                    return true
                 }
+                //TODO 报错
                 break;
         }
+
+        return false;
     }
+
 }

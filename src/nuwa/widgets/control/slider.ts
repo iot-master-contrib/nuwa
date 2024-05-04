@@ -40,7 +40,7 @@ export const ControlSlider: NuwaComponent = {
     name: '滑块', id: '$slider',
     icon: "assets/widgets/slider.svg",
     type: "angular",
-    meta: {width: 100, height: 100},
+    metadata: {width: 100, height: 100},
     content: ControlSliderComponent,
     properties: [],
     bindings: [],

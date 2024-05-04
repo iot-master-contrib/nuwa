@@ -55,7 +55,7 @@ export const Echarts: NuwaComponent = {
     name: '图表', id: '$echarts',
     icon: "assets/widgets/echarts.svg",
     type: "angular",
-    meta: {width: 400, height: 300},
+    metadata: {width: 400, height: 300},
     content: EchartsComponent,
     properties: [],
     bindings: [],

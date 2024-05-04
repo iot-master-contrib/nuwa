@@ -17,11 +17,6 @@ func init() {
 	api.Register("GET", "component/*id", componentDetail)
 
 	api.Register("GET", "collections", collectionList)
-
-	//api.Register("GET","/export", curd.ApiExport("hmi_component", "hmi_component"))
-	//
-	//api.Register("POST","/import", curd.ApiImport("hmi_component"))
-
 }
 
 type Binding struct {
@@ -41,6 +36,14 @@ type Component struct {
 	Name       string `json:"name,omitempty"`       //名称
 	Collection string `json:"collection,omitempty"` //分类
 	Version    string `json:"version,omitempty"`    //版本
+	Type       string `json:"type,omitempty"`       //类型 line shape html
+
+	//继承基础图形
+	Extends  map[string]any `json:"extends,omitempty"`
+	Metadata map[string]any `json:"metadata,omitempty"`
+
+	//Html内容
+	Html string `json:"html,omitempty"`
 
 	//控件属性
 	Properties []types.FormItem `json:"properties,omitempty"`

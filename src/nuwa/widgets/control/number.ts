@@ -7,7 +7,7 @@ export const ControlNumber: NuwaComponent = {
     icon: "assets/widgets/number.svg",
     type: "shape",
     extends: {inherit: "rect"},
-    meta: {
+    metadata: {
         width: 100,
         height: 30,
         attrs: {

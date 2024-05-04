@@ -48,10 +48,6 @@ export class EditorComponent implements OnInit {
         }
     }
 
-    onDrag($event: HmiDraw) {
-        this.renderer.Draw($event)
-    }
-
     handleSave() {
         this.project.pages[this.index].content = this.renderer.graph.toJSON()
 

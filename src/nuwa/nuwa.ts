@@ -38,13 +38,13 @@ export declare interface NuwaComponent {
 
     icon: string
 
-    type: "line" | "shape" | "svg" | "html" | "chart" | "angular"
+    type: "line" | "shape" | "html" | "angular"
 
     internal?: boolean
 
     extends?: Node.Properties | Edge.Properties //继承 shape 或 edge
 
-    meta?: Node.Metadata | Edge.Metadata
+    metadata?: Node.Metadata | Edge.Metadata
 
     //Angular组件
     content?: TemplateRef<any> | Type<any>

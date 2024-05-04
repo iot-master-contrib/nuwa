@@ -43,7 +43,7 @@ export const BaseLine: NuwaComponent = {
         },
         tools: {items: ['edge-editor']},
     },
-    meta: {},
+    metadata: {},
     properties: [
         ...StrokeProperties('line'),
     ],

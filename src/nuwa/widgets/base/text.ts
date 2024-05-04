@@ -6,7 +6,7 @@ export const BaseText: NuwaComponent = {
     icon: "assets/widgets/text.svg",
     type: "shape",
     extends: {inherit: "rect"},
-    meta: {
+    metadata: {
         width: 100,
         height: 30,
         attrs: {

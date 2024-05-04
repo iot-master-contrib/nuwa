@@ -6,7 +6,7 @@ export const BaseImage: NuwaComponent = {
     icon: "assets/widgets/image.svg",
     type: "shape", internal: true,
     extends: {inherit: 'image'},
-    meta: {
+    metadata: {
         width: 100, height: 80,
         imageUrl: "assets/widgets/image.svg",
     },

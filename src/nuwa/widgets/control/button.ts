@@ -29,7 +29,7 @@ export const ControlButton: NuwaComponent = {
     name: '按钮', id: '$button',
     icon: "assets/widgets/button.svg",
     type: "angular",
-    meta: {width: 100, height: 40},
+    metadata: {width: 100, height: 40},
     content: ControlButtonComponent,
     properties: [],
     bindings: [],

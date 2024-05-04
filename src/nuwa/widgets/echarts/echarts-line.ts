@@ -63,7 +63,7 @@ export const EchartsLine: NuwaComponent = {
     name: '折线图', id: '$echarts-line',
     icon: "assets/widgets/echarts-line.svg",
     type: "angular",
-    meta: {width: 400, height: 300},
+    metadata: {width: 400, height: 300},
     content: EchartsLineComponent,
     properties: [],
     bindings: [],
