@@ -1,12 +1,34 @@
 import {NuwaComponent} from "../../nuwa";
-import {Component} from "@angular/core";
+import {Component, ElementRef, Input} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {NgxEchartsModule} from "ngx-echarts";
+import type {EChartsOption} from "echarts";
 
 @Component({
+    selector: 'app-echarts',
     standalone: true,
-    template: `Echarts`
+    imports: [
+        CommonModule,
+        NgxEchartsModule,
+    ],
+    template: `
+        <echarts class="chart"
+                 [style.width]="elementRef.nativeElement.clientWidth+'px'"
+                 [style.height]="elementRef.nativeElement.clientHeight+'px'"
+                 [options]="option" (chartInit)="chartInit($event)"></echarts>`
+
 })
 class EchartsComponent {
+    chart: any;
 
+    @Input() option: EChartsOption = {}
+
+    chartInit(ec: any) {
+        this.chart = ec
+    }
+
+    constructor(protected elementRef: ElementRef) {
+    }
 }
 
 export const Echarts: NuwaComponent = {

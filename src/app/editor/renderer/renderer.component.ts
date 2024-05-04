@@ -17,6 +17,9 @@ import { ComponentService } from "../../component.service";
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { SetChartComponent } from '../set-chart/set-chart.component';
 import {Scroller} from "@antv/x6-plugin-scroller";
+import {NuwaComponent} from "../../../nuwa/nuwa";
+
+import { register } from '@antv/x6-angular-shape'
 
 
 @Component({
@@ -227,6 +230,7 @@ export class RendererComponent {
         this.graph.fromJSON(page.content)
     }
 
+
     public Draw($event: HmiDraw) {
         let node!: Node
         let { component } = $event;
@@ -282,6 +286,66 @@ export class RendererComponent {
     public showPorts(ports: any, show: boolean) {
         for (let i = 0, len = ports.length; i < len; i = i + 1) {
             ports[i].style.visibility = show ? 'visible' : 'hidden';
+        }
+    }
+
+    onDnd($event: DragEvent, component: NuwaComponent) {
+        let node!: Node
+
+        //检查是否已经注册
+        this.checkComponent(component)
+
+        switch (component.type) {
+            case "line":
+                //this.line = component;
+                return
+            case "shape":
+            case "angular":
+            case "svg":
+                let data: any = {}
+                component.bindings?.forEach(b => data[b.name] = b.default)
+                node = this.graph.createNode({
+                    shape: component.id,
+                    ...component.meta,
+                    data: data,
+                })
+                break;
+        }
+        if (node)
+            this.dnd.start(node, $event);
+    }
+
+
+    public checkComponent(component: NuwaComponent) {
+        if (component.registered || component.internal)
+            return
+
+        switch (component.type) {
+            case "line":
+                //注册线
+                if (component.extends) {
+                    Graph.registerEdge(component.id, component.extends)
+                    component.registered = true
+                }
+                break
+            case "shape":
+                //注册衍生组件
+                if (component.extends) {
+                    Graph.registerNode(component.id, component.extends)
+                    component.registered = true
+                }
+                break;
+            case "angular":
+                if (component.content)
+                    register({
+                        shape: component.id,
+                        width: component.meta?.width || 100,
+                        height: component.meta?.height || 100,
+                        content: component.content,
+                        injector: this.injector,
+                    })
+                component.registered = true
+                break;
         }
     }
 }

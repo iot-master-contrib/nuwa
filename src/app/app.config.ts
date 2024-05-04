@@ -45,6 +45,7 @@ import {
 } from '@ant-design/icons-angular/icons';
 
 import {API_BASE} from "iot-master-smart";
+import {provideEcharts} from "ngx-echarts";
 
 const icons: IconDefinition[] = [
     MenuFoldOutline,
@@ -83,6 +84,7 @@ export const appConfig: ApplicationConfig = {
         importProvidersFrom(FormsModule),
         importProvidersFrom(HttpClientModule),
         provideAnimations(),
+        provideEcharts(),
         {provide: NZ_ICONS, useValue: icons},
         {provide: LOCALE_ID, useValue: "zh_CN"},
         //{provide: API_BASE, useValue: "/$camera/api/"},
