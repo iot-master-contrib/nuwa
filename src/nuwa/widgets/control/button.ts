@@ -10,12 +10,19 @@ import {CommonModule} from "@angular/common";
         CommonModule,
         NzButtonComponent,
     ],
+    styles: `button {
+        width: 100%;
+        height: 100%
+    }`,
     template: `
-        <button type="button" nz-button>{{ text }}</button>`
+        <button type="button" nz-button (click)="onClick($event)">{{ text }}</button>`
 })
 class ControlButtonComponent {
     @Input() text = "按钮"
     //TODO 事件
+    onClick($event: MouseEvent) {
+
+    }
 }
 
 export const ControlButton: NuwaComponent = {
