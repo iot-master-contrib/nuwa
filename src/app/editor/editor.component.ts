@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
-import {HmiComponent, HmiDraw, HmiProject, projectTemplate} from "../../hmi/hmi";
+import {HmiComponent, HmiDraw, HmiPage, HmiProject, projectTemplate} from "../../hmi/hmi";
 import {RendererComponent} from "./renderer/renderer.component";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -16,6 +16,7 @@ export class EditorComponent implements OnInit {
     id: any = ''
 
     project: HmiProject = projectTemplate()
+    page!: HmiPage
 
     index = 0;
 

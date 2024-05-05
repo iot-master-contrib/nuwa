@@ -10,11 +10,11 @@
     </app-side-bar>
     <div class="content">
         <app-renderer #renderer
-                      [style.width]="project.width*scale+'px'"
-                      [style.height]="project.height*scale+'px'"></app-renderer>
+                      [style.width]="project.pages[index].width*scale+'px'"
+                      [style.height]="project.pages[index].height*scale+'px'"></app-renderer>
     </div>
     <app-side-bar [width]="400" [right]="true">
-        <app-page *sideBarItem="'画布'"></app-page>
+        <app-page *sideBarItem="'画布'" [page]="project.pages[index]"></app-page>
         <app-properties *sideBarItem="'属性'" [graph]="renderer.graph"></app-properties>
         <app-animations *sideBarItem="'动画'"></app-animations>
         <app-events *sideBarItem="'事件'"></app-events>

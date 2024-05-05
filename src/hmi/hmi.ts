@@ -92,14 +92,14 @@ export declare interface HmiProject {
     id: string
     name: string
     desc: string
-    width: number
-    height: number
     pages: HmiPage[]
 }
 
 export declare interface HmiPage {
     name: string
     content: any
+    width: number
+    height: number
     background_color?: string
     background_image?: string
 }
@@ -109,12 +109,12 @@ export function projectTemplate(): HmiProject {
         id: '',
         name: '组态工程',
         desc: '',
-        width: window.screen.width, //自动获取屏幕尺寸
-        height: window.screen.height,
         pages: [
             {
                 name: "首页",
-                content: {}
+                content: {},
+                width: window.screen.width, //自动获取屏幕尺寸
+                height: window.screen.height,
             }
         ]
     }

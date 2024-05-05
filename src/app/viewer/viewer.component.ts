@@ -235,8 +235,8 @@ export class ViewerComponent implements OnDestroy {
             this.title.setTitle(this.project.name)
             if (this.full)
                 this.graph.resize(window.innerWidth, window.innerHeight)
-            else
-                this.graph.resize(this.project.width, this.project.height)
+            // else
+            //     this.graph.resize(this.project.width, this.project.height)
             this.Render(this.project.pages[0])
         });
     }

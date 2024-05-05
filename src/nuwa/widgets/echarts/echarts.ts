@@ -23,6 +23,9 @@ class EchartsComponent {
     chart: any;
 
     @Input() option: EChartsOption = {
+        title: {
+          text: "echarts"
+        },
         xAxis: {
             type: 'category',
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -34,6 +37,10 @@ class EchartsComponent {
             {
                 data: [150, 230, 224, 218, 135, 147, 260],
                 type: 'line'
+            },
+            {
+                data: [100, 200, 200, 60, 90, 177, 130],
+                type: 'bar'
             }
         ]
     }
