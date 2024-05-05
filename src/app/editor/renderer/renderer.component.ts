@@ -35,9 +35,7 @@ export class RendererComponent {
     constructor(
         private cs: ComponentService,
         private element: ElementRef,
-        private injector: Injector,
-        private viewContainerRef: ViewContainerRef,
-        private modal: NzModalService
+        private injector: Injector
     ) {
 
         this.graph = new Graph({

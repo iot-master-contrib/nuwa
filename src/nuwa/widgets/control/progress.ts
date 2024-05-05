@@ -37,7 +37,7 @@ export const ControlProgress: NuwaComponent = {
     name: '进度条', id: '$progress',
     icon: "assets/widgets/progress.svg",
     type: "angular",
-    metadata: {width: 100, height: 30},
+    metadata: {width: 200, height: 30},
     content: ControlProgressComponent,
     properties: [],
     bindings: [],

@@ -47,6 +47,7 @@ export class TransformComponent {
                 this.form.patchValue(event.current as any)
         })
 
+        //TODO 此处无效
         g.on("cell:change:angle", (event) => {
             if (event.cell == this.cell)
                 this.form.patchValue(event.current as any)
