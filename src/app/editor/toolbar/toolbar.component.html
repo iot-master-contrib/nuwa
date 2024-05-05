@@ -1,3 +1,10 @@
+
+<a nz-button (click)="about()">
+    <i nz-icon nzType="question-circle" title="关于"></i>
+</a>
+
+<nz-divider nzType="vertical"></nz-divider>
+
 <a nz-button nz-dropdown [nzDropdownMenu]="exportDropDownMenu" title="导出">
     <i nz-icon nzType="profile"></i>
 </a>
@@ -14,6 +21,14 @@
 
 <a nz-button (click)="handleSave()" title="保存">
     <i nz-icon nzType="save"></i>
+</a>
+
+<a nz-button (click)="handleGrid()">
+    <i nz-icon nzType="table" title="显示网格"></i>
+</a>
+
+<a nz-button (click)="settingProject()">
+    <i nz-icon nzType="setting" title="工程设置"></i>
 </a>
 
 <nz-divider nzType="vertical"></nz-divider>
@@ -88,13 +103,6 @@
 </a>
 
 <nz-divider nzType="vertical"></nz-divider>
-<a nz-button (click)="handleGrid()">
-    <i nz-icon nzType="table" title="显示网格"></i>
-</a>
-
-<a nz-button (click)="settingProject()">
-    <i nz-icon nzType="setting" title="工程设置"></i>
-</a>
 
 <nz-select [ngModel]="scale" (ngModelChange)="handleScale($event)" [ngModelOptions]="{standalone: true}">
     <nz-option nzLabel="25%" [nzValue]="0.25"></nz-option>
@@ -105,7 +113,5 @@
     <nz-option nzLabel="500%" [nzValue]="5"></nz-option>
 </nz-select>
 
-<nz-divider nzType="vertical"></nz-divider>
-<a nz-button (click)="about()">
-    <i nz-icon nzType="question-circle" title="关于"></i>
-</a>
+<app-transform [graph]="graph"></app-transform>
+

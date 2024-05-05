@@ -13,7 +13,13 @@ import {FormsModule} from "@angular/forms";
         FormsModule,
         NzSwitchComponent,
     ],
-    styles: `nz-switch {
+    styles: `
+        :host{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        nz-switch {
         width: 100%;
         height: 100%;
     }`,

@@ -1,6 +1,6 @@
 import {NuwaComponent} from "../../nuwa";
 import {NzProgressComponent} from "ng-zorro-antd/progress";
-import {Component, Input} from "@angular/core";
+import {Component, ElementRef, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 
@@ -11,13 +11,25 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
         CommonModule,
         NzProgressComponent,
     ],
-    styles: `nz-progress {
-        width: 100%;
-    }`,
-    template: `<nz-progress [nzPercent]="percent"></nz-progress>`
+    styles: `
+        :host {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        nz-progress {
+            width: 100%;
+            height: 100%;
+        }`,
+    template: `<nz-progress [nzPercent]="percent" [nzShowInfo]="false" [nzStrokeColor]="color"
+                            [nzStrokeWidth]="elementRef.nativeElement.clientHeight || 10"
+                            nzStrokeLinecap="square"></nz-progress>`
 })
 class ControlProgressComponent {
     @Input() percent = 60
+    @Input() color = "#6992ff"
+    constructor(protected elementRef: ElementRef) {
+    }
 }
 
 

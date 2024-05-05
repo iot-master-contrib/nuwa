@@ -1,27 +1,16 @@
-import { Injectable, Injector } from '@angular/core';
-import { HmiCollection, HmiComponent } from "../hmi/hmi";
-import { BaseComponents, ChartComponent } from "../hmi/components";
-import { IndustryComponents } from "../hmi/industry/components";
-import { ElectricComponents } from "../hmi/electric/components";
-import { NzNotificationService } from "ng-zorro-antd/notification";
-import { Subject } from "rxjs";
-import { Cell, Graph, Shape } from "@antv/x6";
-
-import { BaseGroup } from "../hmi/base/group";
-import {
-    createHtmlComponent,
-    createImageComponent,
-    createPathComponent,
-    HmiHtmlComponent,
-    HmiImageComponent,
-    HmiPathComponent
-} from "../hmi/creator";
+import {Injectable, Injector} from '@angular/core';
+import {Subject} from "rxjs";
+import {Graph, Shape} from "@antv/x6";
 
 
-import { HttpClient } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
-import { GeometryComponents } from "../hmi/geometry/components";
+import {HttpClient} from '@angular/common/http';
+import {DomSanitizer} from '@angular/platform-browser';
 import {RequestService} from "iot-master-smart";
+import {NuwaCollection, NuwaComponent} from "../nuwa/nuwa";
+import {NuwaWidgets} from "../nuwa/widgets/widgets";
+import {NzNotificationService} from "ng-zorro-antd/notification";
+import {register} from "@antv/x6-angular-shape";
+
 @Injectable({
     providedIn: 'root'
 })
@@ -35,78 +24,38 @@ export class ComponentService {
         return this.readySub.asObservable()
     }
 
-    public collections: HmiCollection[] = []
-    public components: { [id: string]: HmiComponent } = {}
+    public components: { [id: string]: NuwaComponent } = {}
 
     constructor(
         private rs: RequestService,
-        private ns: NzNotificationService,
         private injector: Injector,
         private httpClient: HttpClient,
         private sanitizer: DomSanitizer,
+        private ns: NzNotificationService,
     ) {
+        this.PutCollections(NuwaWidgets)
 
-        this.PutCollection(BaseComponents)
-        this.PutCollection(GeometryComponents)
-        this.PutCollection(ChartComponent)
-        this.PutCollection(IndustryComponents)
-        this.PutCollection(ElectricComponents)
-
-        this.PutComponent(BaseGroup)
         //this.PutComponent(BaseGroup)
-
-        //this.load()
     }
 
-    load() {
-        this.rs.get("api/component/list", { limit: 99999 }).subscribe(res => {
-            res.data?.forEach((c: any) => this.PutComponent(c))
-        })
-        // this.rs.get("api/image/list", {limit: 99999}).subscribe(res => {
-        //     res.data?.forEach((c: any) => this.PutImage(c))
-        // })
-        // this.rs.get("api/path/list", {limit: 99999}).subscribe(res => {
-        //     res.data?.forEach((c: any) => this.PutPath(c))
-        // })
-        // this.rs.get("api/html/list", {limit: 99999}).subscribe(res => {
-        //     res.data?.forEach((c: any) => this.PutHtml(c))
-        // })
-    }
-
-    public PutImage(component: HmiImageComponent) {
-        const c = createImageComponent(component)
-        this.PutComponent(c)
-    }
-
-    public PutPath(component: HmiPathComponent) {
-        const c = createPathComponent(component)
-        this.PutComponent(c)
-    }
-
-    public PutHtml(component: HmiHtmlComponent) {
-        const c = createHtmlComponent(component)
-        this.PutComponent(c)
-    }
+    // public PutImage(component: NuwaImageComponent) {
+    //     const c = createImageComponent(component)
+    //     this.PutComponent(c)
+    // }
+    //
+    // public PutPath(component: NuwaPathComponent) {
+    //     const c = createPathComponent(component)
+    //     this.PutComponent(c)
+    // }
+    //
+    // public PutHtml(component: NuwaHtmlComponent) {
+    //     const c = createHtmlComponent(component)
+    //     this.PutComponent(c)
+    // }
 
 
-    public PutComponent(component: HmiComponent) {
+    public PutComponent(component: NuwaComponent) {
         this.components[component.id] = component
-
-        //找集合 TODO 索引一下？？？
-        if (component.collection) {
-            let found = false;
-            this.collections.forEach(c => {
-                if (c.name == component.collection) {
-                    c.components.push(component)
-                    found = true
-                }
-            })
-            if (!found) {
-                this.collections.push({ name: component.collection, components: [component] })
-            }
-        } else {
-            //TODO 处理未分类组件
-        }
 
         //编译监听事件
         if (component.listeners) {
@@ -155,55 +104,75 @@ export class ComponentService {
         }
     }
 
-    public PutCollection(collection: HmiCollection) {
-        this.collections.push(collection)
+    public PutCollections(collections: NuwaCollection[]) {
+        collections.forEach(c => this.PutCollection(c))
+    }
+
+    public PutCollection(collection: NuwaCollection) {
         collection.components = collection.components || []
         collection.components.forEach(c => {
-            this.components[c.id] = c
+            this.PutComponent(c)
         })
     }
 
 
-    public CheckRegister(component: HmiComponent) {
+    public CheckRegister(component: NuwaComponent) {
         if (component.registered || component.internal)
             return
+        component.registered = true
 
         switch (component.type) {
             case "line":
                 //注册线
                 if (component.extends) {
                     Graph.registerEdge(component.id, component.extends)
-                    component.registered = true
+                    return true
                 }
+                this.ns.error("编译错误", component.id + " " + component.name + "缺少extends")
                 break
             case "shape":
-            case "svg":
                 //注册衍生组件
                 if (component.extends) {
                     Graph.registerNode(component.id, component.extends)
-                    component.registered = true
+                    return true
                 }
+                this.ns.error("编译错误", component.id + " " + component.name + "缺少extends")
                 break;
-            case "chart":
+            case "html":
+                // @ts-ignore
+                Shape.HTML.register({
+                    shape: component.id,
+                    width: component.metadata?.width || 100,
+                    height: component.metadata?.height || 100,
+                    // @ts-ignore
+                    html: component.html,
+                })
                 break;
-            // case "angular":
-            //     register({
-            //         shape: component.id,
-            //         content: component.content,
-            //         width: 100,
-            //         height: 60,
-            //         // @ts-ignore
-            //         injector: injector,
-            //     })
-            //     component.registered = true
-            //     break;
+            case "angular":
+                if (component.content) {
+                    register({
+                        shape: component.id,
+                        width: component.metadata?.width || 100,
+                        height: component.metadata?.height || 100,
+                        content: component.content,
+                        injector: this.injector,
+                    })
+                    component.registered = true
+                    return true
+                }
+                this.ns.error("编译错误", component.id + " " + component.name + "缺少content")
+                break;
         }
+        return false
     }
 
-    public Get(id: string): HmiComponent {
+    public Get(id: string): NuwaComponent {
         const cmp = this.components[id]
-        cmp && this.CheckRegister(cmp)
-        return cmp
+        if (cmp) {
+            if (this.CheckRegister(cmp)) {
+                return cmp
+            }
+        }
+        return cmp //rect ?
     }
-
 }

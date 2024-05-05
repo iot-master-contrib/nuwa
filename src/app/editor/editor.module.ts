@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EditorRoutingModule } from './editor-routing.module';
 import { EditorComponent } from "./editor.component";
-import { LibraryComponent } from './library/library.component';
 import { RendererComponent } from './renderer/renderer.component';
-import { PropertyComponent } from './property/property.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { NzDividerModule } from "ng-zorro-antd/divider";
@@ -85,12 +83,11 @@ import {AnimationsComponent} from "./animations/animations.component";
 import {PropertiesComponent} from "./properties/properties.component";
 import {PageComponent} from "./page/page.component";
 import {ScriptsComponent} from "./scripts/scripts.component";
+import {TransformComponent} from "./transform/transform.component";
 @NgModule({
     declarations: [
         EditorComponent,
-        LibraryComponent,
         RendererComponent,
-        PropertyComponent,
         PropertyInputComponent,
         ToolbarComponent,
         CollapseComponent,
@@ -158,6 +155,7 @@ import {ScriptsComponent} from "./scripts/scripts.component";
         PageComponent,
         ScriptsComponent,
         SideBarItemDirective,
+        TransformComponent,
     ],
     providers: [
         { provide: NzMessageService, },
