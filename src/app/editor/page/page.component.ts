@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ContentChild, Input} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, ContentChild, Input, OnInit, ViewChild} from '@angular/core';
 import {SmartEditorComponent, SmartField} from "iot-master-smart";
 import {HmiPage} from "../../../hmi/hmi";
 
@@ -11,17 +11,23 @@ import {HmiPage} from "../../../hmi/hmi";
   templateUrl: './page.component.html',
   styleUrl: './page.component.scss'
 })
-export class PageComponent implements AfterContentInit{
+export class PageComponent implements AfterViewInit{
     @Input() page!: HmiPage;
 
-    @ContentChild(SmartEditorComponent) editor!: SmartEditorComponent;
+    @ViewChild("editor") editor!: SmartEditorComponent;
 
     fields: SmartField[] = [
         {key: 'width', label: '宽度', type: 'number'},
         {key: 'height', label: '高度', type: 'number'},
     ];
 
-    ngAfterContentInit() {
-        //this.editor.patchValue(this.page)
+    ngAfterViewInit() {
+        setTimeout(()=>{
+            this.editor.group.valueChanges.subscribe(res=>{
+                //console.log("dddd", res)
+                Object.assign(this.page, res)
+            })
+        }, 100)
     }
+
 }
