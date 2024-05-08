@@ -11,8 +11,8 @@ import (
 )
 
 func init() {
-	api.Register("GET", "fonts", fontList)
-	api.Register("GET", "font/*id", fontDetail)
+	api.Register("GET", "nuwa/fonts", fontList)
+	api.Register("GET", "nuwa/font/*id", fontDetail)
 }
 
 type Font struct {
@@ -37,7 +37,7 @@ func fontDetail(ctx *gin.Context) {
 	var c Font
 
 	//第一步，解析文件夹
-	dir := filepath.Join(viper.GetString("data"), "font", ctx.Param("id"))
+	dir := filepath.Join(viper.GetString("data"), "nuwa", "font", ctx.Param("id"))
 	name := filepath.Join(dir, "manifest.json")
 	err := parseJson(name, &c)
 	if err == nil {

@@ -17,8 +17,8 @@ var imageRegex *regexp.Regexp
 func init() {
 	imageRegex = regexp.MustCompile(`^image\/`)
 
-	api.Register("GET", "galleries", galleryList)
-	api.Register("GET", "gallery/*id", galleryDetail)
+	api.Register("GET", "nuwa/galleries", galleryList)
+	api.Register("GET", "nuwa/gallery/*id", galleryDetail)
 }
 
 type Gallery struct {
@@ -43,7 +43,7 @@ func galleryDetail(ctx *gin.Context) {
 	var c Gallery
 
 	//第一步，解析文件夹
-	dir := filepath.Join(viper.GetString("data"), "gallery", ctx.Param("id"))
+	dir := filepath.Join(viper.GetString("data"), "nuwa", "gallery", ctx.Param("id"))
 	name := filepath.Join(dir, "manifest.json")
 	err := parseJson(name, &c)
 	if err == nil {

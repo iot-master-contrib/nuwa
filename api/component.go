@@ -12,11 +12,11 @@ import (
 )
 
 func init() {
-	api.Register("GET", "components", componentList)
+	api.Register("GET", "nuwa/components", componentList)
 
-	api.Register("GET", "component/*id", componentDetail)
+	api.Register("GET", "nuwa/component/*id", componentDetail)
 
-	api.Register("GET", "collections", collectionList)
+	//api.Register("GET", "nuwa/collections", collectionList)
 }
 
 type Binding struct {
@@ -75,7 +75,7 @@ func componentDetail(ctx *gin.Context) {
 	var c Component
 
 	//第一步，解析文件夹
-	dir := filepath.Join(viper.GetString("data"), "component", ctx.Param("id"))
+	dir := filepath.Join(viper.GetString("data"), "nuwa", "component", ctx.Param("id"))
 	name := filepath.Join(dir, "manifest.json")
 	err := parseJson(name, &c)
 	if err == nil {
@@ -121,8 +121,4 @@ func componentDetail(ctx *gin.Context) {
 	_ = parseJsonFromZip(z, "listeners.json", &c.Listeners)
 
 	curd.OK(ctx, &c)
-}
-
-func collectionList(ctx *gin.Context) {
-
 }

@@ -26,17 +26,21 @@ func init() {
 
 func Startup() error {
 
-	//组件库
-	root := filepath.Join(viper.GetString("data"), "component")
-	web.Engine.StaticFS("/component", &fsWithZip{root: root})
+	//全部放一起了
+	root := filepath.Join(viper.GetString("data"), "nuwa")
+	StaticZipFS("/nuwa", root)
 
-	//字体库
-	root = filepath.Join(viper.GetString("data"), "font")
-	web.Engine.StaticFS("/font", &fsWithZip{root: root})
-
-	//图片库
-	root = filepath.Join(viper.GetString("data"), "gallery")
-	web.Engine.StaticFS("/gallery", &fsWithZip{root: root})
+	////组件库
+	//root := filepath.Join(viper.GetString("data"), "component")
+	//web.Engine.StaticFS("/component", &zipFS{root: root})
+	//
+	////字体库
+	//root = filepath.Join(viper.GetString("data"), "font")
+	//web.Engine.StaticFS("/font", &zipFS{root: root})
+	//
+	////图片库
+	//root = filepath.Join(viper.GetString("data"), "gallery")
+	//web.Engine.StaticFS("/gallery", &zipFS{root: root})
 
 	return nil
 }
