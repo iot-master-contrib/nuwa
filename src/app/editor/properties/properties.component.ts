@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TransformComponent} from "../transform/transform.component";
-import {Cell} from "@antv/x6";
+import {Cell, Timing} from "@antv/x6";
 import {SmartEditorComponent, SmartField} from "iot-master-smart";
 import {RendererComponent} from "../renderer/renderer.component";
 import {ComponentService} from "../../component.service";
@@ -45,6 +45,14 @@ export class PropertiesComponent implements OnDestroy, OnInit {
 
     onCellSelected(event: { cell: Cell }) {
         this.cell = event.cell
+
+        // this.cell.transition("attrs/line/strokeWidth", 20, {
+        //     timing: Timing.linear,
+        // })
+        //
+        // this.cell.transition("attrs/line/strokeDashoffset", 5, {
+        //     timing: Timing.linear,
+        // })
 
         //console.log("onCellSelected", event.cell);
         let id = event.cell.shape

@@ -21,6 +21,13 @@ const fontStyles: SmartSelectOption[] = [
     {value: "italic", label: "斜体"},
 ]
 
+export function radiusProperties(id: string): SmartField[] {
+    return [
+        {label: "X圆角", key: `attrs/${id}/rx`, type: "number", min: 0, max: 65535},
+        {label: "Y圆角", key: `attrs/${id}/ry`, type: "number", min: 0, max: 65535},
+    ]
+}
+
 export function StrokeProperties(id: string): SmartField[] {
     return [
         {label: "填充", key: `attrs/${id}/fill`, type: "color", clear: true},
@@ -33,14 +40,20 @@ export function StrokeProperties(id: string): SmartField[] {
                 {value: "10 10", label: "虚线2"},
             ]
         },
+        {
+            label: "边框动画", key: `attrs/${id}/style/animation`, type: "select", default: '', options: [
+                {value: "", label: "无"},
+                {value: "line-flow-animation 30s infinite linear", label: "测试"},
+            ]
+        },
     ]
 }
 
 export const TextProperties: SmartField[] = [
-    {label: "文本", key: "attrs/text/text", type: "text", default: "normal"},
+    {label: "文本", key: "attrs/text/text", type: "text"},
     {label: "文本颜色", key: "attrs/text/fill", type: "color", clear: true},
-    {label: "字号", key: "attrs/text/fontSize", type: "number", min: 0, max: 65535},
-    {label: "字体", key: "attrs/text/fontFamily", type: "select", options: fontFamilies},
-    {label: "加粗", key: "attrs/text/fontWeight", type: "select", options: fontWeights},
+    {label: "字号", key: "attrs/text/fontSize", type: "number", min: 0, max: 65535, default: 16},
+    {label: "字体", key: "attrs/text/fontFamily", type: "select", options: fontFamilies, default: "SimHei"},
+    {label: "加粗", key: "attrs/text/fontWeight", type: "select", options: fontWeights, default: "normal"},
     {label: "风格", key: "attrs/text/fontStyle", type: "select", options: fontStyles, default: "normal"},
 ]

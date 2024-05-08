@@ -1,4 +1,5 @@
 import {NuwaComponent} from "../../nuwa";
+import {radiusProperties} from "../properties";
 
 export const BaseImage: NuwaComponent = {
     name: '图片',
