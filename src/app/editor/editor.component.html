@@ -3,9 +3,9 @@
     <app-side-bar [width]="300">
         <app-pages *sideBarItem="'页面'" [project]="project" [graph]="renderer.graph"></app-pages>
         <app-widgets *sideBarItem="'控件'" [renderer]="renderer"></app-widgets>
-        <app-components *sideBarItem="'组件'"></app-components>
-        <app-galleries *sideBarItem="'图元'"></app-galleries>
-        <app-layers *sideBarItem="'图层'"></app-layers>
+        <app-components *sideBarItem="'组件'" [renderer]="renderer"></app-components>
+        <app-galleries *sideBarItem="'图元'" [renderer]="renderer"></app-galleries>
+        <!--        <app-layers *sideBarItem="'图层'" [renderer]="renderer"></app-layers>-->
         <app-sources *sideBarItem="'数据源'"></app-sources>
     </app-side-bar>
     <div class="content">

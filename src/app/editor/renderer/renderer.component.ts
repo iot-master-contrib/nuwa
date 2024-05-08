@@ -161,7 +161,7 @@ export class RendererComponent {
 
     drawingLine?: NuwaComponent
 
-    onDnd($event: DragEvent, component: NuwaComponent) {
+    onDnd($event: DragEvent, component: NuwaComponent, args?:any) {
         let node!: Node
 
         //检查是否已经注册
@@ -176,8 +176,12 @@ export class RendererComponent {
             return
         }
 
+        //参数
         let data: any = {}
         component.bindings?.forEach(b => data[b.name] = b.default)
+        Object.assign(data, args)
+
+        //创建节点
         node = this.graph.createNode({
             shape: component.id,
             ...component.metadata,

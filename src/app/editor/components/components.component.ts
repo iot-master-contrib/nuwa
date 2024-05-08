@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {NuwaCollection} from "../../../nuwa/nuwa";
 import {RequestService} from "iot-master-smart";
+import {RendererComponent} from "../renderer/renderer.component";
 
 @Component({
     selector: 'app-components',
@@ -16,13 +17,14 @@ import {RequestService} from "iot-master-smart";
 })
 export class ComponentsComponent {
     collections: NuwaCollection[] = []
+    @Input() renderer!: RendererComponent;
 
     constructor(private rs: RequestService) {
         this.load()
     }
 
     load() {
-        this.rs.get("components").subscribe(res => {
+        this.rs.get("nuwa/components").subscribe(res => {
             let collections: any = {}
             res.data.forEach((item: any) => {
                 let col = item.collection || "未分组"

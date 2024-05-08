@@ -1,29 +1,46 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import { NzCollapseModule} from "ng-zorro-antd/collapse";
+import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {RequestService} from "iot-master-smart";
+import {RendererComponent} from "../renderer/renderer.component";
+import {BaseImage} from "../../../nuwa/widgets/base/image";
 
 @Component({
-  selector: 'app-galleries',
-  standalone: true,
+    selector: 'app-galleries',
+    standalone: true,
     imports: [
         CommonModule,
         NzCollapseModule,
     ],
-  templateUrl: './galleries.component.html',
-  styleUrl: './galleries.component.scss'
+    templateUrl: './galleries.component.html',
+    styleUrl: './galleries.component.scss'
 })
 export class GalleriesComponent {
-    galleries: any = []
+    images: any = []
+    @Input() renderer!: RendererComponent;
 
     constructor(private rs: RequestService) {
         this.load()
     }
 
     load() {
-        this.rs.get("galleries").subscribe(res => {
-            this.galleries = res.data;
+        this.rs.get("nuwa/galleries").subscribe(res => {
+            this.images = res.data;
         })
     }
 
+    onDragStart($event: DragEvent, img: string) {
+        //this.renderer?.onDnd($event, BaseImage, {"imageUrl": "/nuwa/gallery/" + img}) //图片没有更换
+        this.renderer?.onDnd($event, {
+            name: '',
+            id: 'image',
+            icon: "",
+            type: "shape", internal: true,
+            extends: {inherit: 'image'},
+            metadata: {
+                width: 200, height: 200,
+                imageUrl: "/nuwa/gallery/" + img,
+            }
+        })
+    }
 }
