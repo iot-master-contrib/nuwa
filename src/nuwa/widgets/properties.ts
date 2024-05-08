@@ -23,14 +23,14 @@ export function StrokeProperties(id: string): SmartField[] {
     return [
         {label: "填充", key: `attrs/${id}/fill`, type: "color"},
         {label: "边框颜色", key: `attrs/${id}/stroke`, type: "color"},
-        {label: "边框大小", key: `attrs/${id}/stroke-width`, type: "stroke"},
+        {label: "边框大小", key: `attrs/${id}/stroke-width`, type: "number", min: 0, max: 65535},
     ]
 }
 
 export const TextProperties: SmartField[] = [
     {label: "文本", key: "attrs/text/text", type: "text"},
     {label: "文本颜色", key: "attrs/text/fill", type: "color"},
-    {label: "字号", key: "attrs/text/fontSize", type: "stroke"},
+    {label: "字号", key: "attrs/text/fontSize", type: "number", min: 0, max: 65535},
     {label: "字体", key: "attrs/text/fontFamily", type: "select", options: fontFamilies},
     {label: "加粗", key: "attrs/text/fontWeight", type: "select", options: fontWeights},
     {label: "风格", key: "attrs/text/fontStyle", type: "select", options: fontStyles},

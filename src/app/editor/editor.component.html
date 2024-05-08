@@ -15,7 +15,7 @@
     </div>
     <app-side-bar [width]="400" [right]="true">
         <app-page *sideBarItem="'画布'" [page]="project.pages[index]"></app-page>
-        <app-properties *sideBarItem="'属性'" [graph]="renderer.graph"></app-properties>
+        <app-properties *sideBarItem="'属性'" [renderer]="renderer"></app-properties>
         <app-animations *sideBarItem="'动画'"></app-animations>
         <app-events *sideBarItem="'事件'"></app-events>
         <app-scripts *sideBarItem="'脚本'"></app-scripts>
