@@ -18,13 +18,13 @@ import {CanvasComponent} from "../canvas/canvas.component";
 export class WidgetsComponent {
     widgets = NuwaWidgets
 
-    @Input() renderer!: CanvasComponent;
+    @Input() canvas!: CanvasComponent;
 
     onDragStart($event: DragEvent, component: NuwaComponent) {
-        this.renderer?.drawNode($event, component)
+        this.canvas?.drawNode($event, component)
     }
 
     onClick(c: NuwaComponent) {
-        this.renderer?.drawEdge(c)
+        this.canvas?.drawEdge(c)
     }
 }

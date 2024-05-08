@@ -17,7 +17,7 @@ import {CanvasComponent} from "../canvas/canvas.component";
 })
 export class ComponentsComponent {
     collections: NuwaCollection[] = []
-    @Input() renderer!: CanvasComponent;
+    @Input() canvas!: CanvasComponent;
 
     constructor(private rs: RequestService) {
         this.load()

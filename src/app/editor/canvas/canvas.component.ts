@@ -21,9 +21,9 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
 
 
 @Component({
-    selector: 'app-renderer',
-    templateUrl: './renderer.component.html',
-    styleUrls: ['./renderer.component.scss'],
+    selector: 'app-canvas',
+    templateUrl: './canvas.component.html',
+    styleUrls: ['./canvas.component.scss'],
 })
 export class CanvasComponent {
 

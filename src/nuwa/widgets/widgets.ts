@@ -17,6 +17,7 @@ import {ControlSwitch} from "./control/switch";
 import {ControlProgress} from "./control/progress";
 import {ControlSelect} from "./control/select";
 import {ControlSlider} from "./control/slider";
+import {MiscWeb} from "./misc/web";
 
 export const NuwaWidgets: NuwaCollection[] = [
     {
@@ -36,10 +37,15 @@ export const NuwaWidgets: NuwaCollection[] = [
     },
     {
         name: "图表组件",
-        components: [Echarts, EchartsBar, EchartsGauge, EchartsLine, EchartsPie]
+        components: [
+            Echarts, EchartsBar, EchartsGauge, EchartsLine, EchartsPie
+        ]
     },
     {
         name: "其他组件",
-        components: []
+        components: [
+
+            MiscWeb
+        ]
     },
 ]

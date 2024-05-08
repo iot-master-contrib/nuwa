@@ -21,7 +21,7 @@ import {CanvasComponent} from "../canvas/canvas.component";
     styleUrl: './transform.component.scss'
 })
 export class TransformComponent implements OnInit, OnDestroy {
-    @Input() renderer!: CanvasComponent;
+    @Input() canvas!: CanvasComponent;
 
     selected: Cell[] = [];
 
@@ -64,23 +64,23 @@ export class TransformComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.renderer.graph.on("cell:change:size", this.onCellChangeSize, this)
-        this.renderer.graph.on("cell:change:position", this.onCellChangePosition, this)
-        this.renderer.graph.on("cell:change:angle", this.onCellChangeAngle, this)
-        this.renderer.graph.on("cell:selected", this.onCellSelected, this)
+        this.canvas.graph.on("cell:change:size", this.onCellChangeSize, this)
+        this.canvas.graph.on("cell:change:position", this.onCellChangePosition, this)
+        this.canvas.graph.on("cell:change:angle", this.onCellChangeAngle, this)
+        this.canvas.graph.on("cell:selected", this.onCellSelected, this)
 
         //对于已经选择的情况，直接执行事件
-        let cells = this.renderer.graph.getSelectedCells()
+        let cells = this.canvas.graph.getSelectedCells()
         if (cells.length > 0) {
             this.onCellSelected({cell: cells[cells.length - 1]})
         }
     }
 
     ngOnDestroy() {
-        this.renderer.graph.off("cell:change:size", this.onCellChangeSize)
-        this.renderer.graph.off("cell:change:position", this.onCellChangePosition)
-        this.renderer.graph.off("cell:change:angle", this.onCellChangeAngle)
-        this.renderer.graph.off("cell:selected", this.onCellSelected)
+        this.canvas.graph.off("cell:change:size", this.onCellChangeSize)
+        this.canvas.graph.off("cell:change:position", this.onCellChangePosition)
+        this.canvas.graph.off("cell:change:angle", this.onCellChangeAngle)
+        this.canvas.graph.off("cell:selected", this.onCellSelected)
     }
 
 

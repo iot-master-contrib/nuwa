@@ -17,7 +17,7 @@ import {BaseImage} from "../../../nuwa/widgets/base/image";
 })
 export class GalleriesComponent {
     images: any = []
-    @Input() renderer!: CanvasComponent;
+    @Input() canvas!: CanvasComponent;
 
     constructor(private rs: RequestService) {
         this.load()
@@ -31,7 +31,7 @@ export class GalleriesComponent {
 
     onDragStart($event: DragEvent, img: string) {
         //this.renderer?.onDnd($event, BaseImage, {"imageUrl": "/nuwa/gallery/" + img}) //图片没有更换
-        this.renderer?.drawNode($event, {
+        this.canvas?.drawNode($event, {
             name: '',
             id: 'image',
             icon: "",

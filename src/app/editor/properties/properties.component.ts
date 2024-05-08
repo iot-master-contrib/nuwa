@@ -16,7 +16,7 @@ import {ComponentService} from "../../component.service";
     styleUrl: './properties.component.scss'
 })
 export class PropertiesComponent implements OnDestroy, OnInit {
-    @Input() renderer!: CanvasComponent;
+    @Input() canvas!: CanvasComponent;
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 
@@ -26,21 +26,21 @@ export class PropertiesComponent implements OnDestroy, OnInit {
     cell!: Cell
 
     constructor(private cs: ComponentService) {
-        console.log("propertiesComponent", this.renderer);
+        console.log("propertiesComponent", this.canvas);
     }
 
     ngOnInit() {
-        this.renderer.graph.on("cell:selected", this.onCellSelected, this)
+        this.canvas.graph.on("cell:selected", this.onCellSelected, this)
 
         //对于已经选择的情况，直接执行事件
-        let cells = this.renderer.graph.getSelectedCells()
+        let cells = this.canvas.graph.getSelectedCells()
         if (cells.length > 0) {
             this.onCellSelected({cell: cells[cells.length - 1]})
         }
     }
 
     ngOnDestroy(): void {
-        this.renderer.graph.off("cell:selected", this.onCellSelected);
+        this.canvas.graph.off("cell:selected", this.onCellSelected);
     }
 
     onCellSelected(event: { cell: Cell }) {

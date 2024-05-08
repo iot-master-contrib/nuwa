@@ -1,20 +1,20 @@
-<app-toolbar [graph]="renderer.graph" [project]="project" (onSave)="handleSave()" [(scale)]="scale"></app-toolbar>
+<app-toolbar [graph]="canvas.graph" [project]="project" (onSave)="handleSave()" [(scale)]="scale"></app-toolbar>
 <div class="body">
     <app-side-bar [width]="300">
-        <app-pages *sideBarItem="'页面'" [project]="project" [graph]="renderer.graph"></app-pages>
-        <app-widgets *sideBarItem="'控件'" [renderer]="renderer"></app-widgets>
-        <app-components *sideBarItem="'组件'" [renderer]="renderer"></app-components>
-        <app-galleries *sideBarItem="'图元'" [renderer]="renderer"></app-galleries>
+        <app-pages *sideBarItem="'页面'" [project]="project" [graph]="canvas.graph"></app-pages>
+        <app-widgets *sideBarItem="'控件'" [canvas]="canvas"></app-widgets>
+        <app-components *sideBarItem="'组件'" [canvas]="canvas"></app-components>
+        <app-galleries *sideBarItem="'图元'" [canvas]="canvas"></app-galleries>
         <!--        <app-layers *sideBarItem="'图层'" [renderer]="renderer"></app-layers>-->
         <app-sources *sideBarItem="'数据源'"></app-sources>
     </app-side-bar>
     <div class="content">
-        <app-renderer #renderer [page]="project.pages[index]"
+        <app-canvas #canvas [page]="project.pages[index]"
                       [style.width]="project.pages[index].width*scale+'px'"
-                      [style.height]="project.pages[index].height*scale+'px'"></app-renderer>
+                      [style.height]="project.pages[index].height*scale+'px'"></app-canvas>
     </div>
     <app-side-bar [width]="400" [right]="true">
-        <app-props *sideBarItem="'属性'" [renderer]="renderer"></app-props>
+        <app-props *sideBarItem="'属性'" [canvas]="canvas"></app-props>
 <!--        <app-animations *sideBarItem="'动画'"></app-animations>-->
         <app-events *sideBarItem="'事件'"></app-events>
         <app-scripts *sideBarItem="'脚本'"></app-scripts>

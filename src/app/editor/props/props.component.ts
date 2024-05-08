@@ -23,6 +23,6 @@ import {TransformComponent} from "../transform/transform.component";
   styleUrl: './props.component.scss'
 })
 export class PropsComponent {
-    @Input() renderer!: CanvasComponent;
+    @Input() canvas!: CanvasComponent;
 
 }

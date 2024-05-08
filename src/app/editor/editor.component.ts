@@ -22,7 +22,7 @@ export class EditorComponent implements OnInit {
 
     scale = 1;
 
-    @ViewChild("renderer") renderer!: CanvasComponent
+    @ViewChild("canvas") renderer!: CanvasComponent
 
     constructor(
         private title: Title,
