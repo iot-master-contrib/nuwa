@@ -32,13 +32,14 @@ class MiscWebComponent {
 }
 
 export const MiscWeb: NuwaComponent = {
-    name: 'Web', id: '$web',
+    name: 'Web子页面入口', id: '$web',
     icon: "assets/widgets/web.svg",
     type: "angular",
-    metadata: {width: 200, height: 160},
+    metadata: {width: 200, height: 160, tools: ['boundary']},
     content: MiscWebComponent,
     properties: [
         {key:"data/ngArguments/url", label: "URL", type: "text"},
+        {key:"data/name", label: "名称", type: "text", default: "新建web入口"},
     ],
     bindings: [],
     hooks: {},
