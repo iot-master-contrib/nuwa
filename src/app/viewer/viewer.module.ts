@@ -11,6 +11,7 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzFormModule} from "ng-zorro-antd/form";
 import {ViewerComponent} from "./viewer.component";
+import {RenderComponent} from "../render/render.component";
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import {ViewerComponent} from "./viewer.component";
         NzButtonModule,
         NzFormModule,
         ReactiveFormsModule,
+        RenderComponent,
     ]
 })
 export class ViewerModule {

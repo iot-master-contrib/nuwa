@@ -4,6 +4,7 @@ import {Cell, Timing} from "@antv/x6";
 import {SmartEditorComponent, SmartField} from "iot-master-smart";
 import {CanvasComponent} from "../canvas/canvas.component";
 import {ComponentService} from "../../component.service";
+import {NuwaComponent} from "../../../nuwa/nuwa";
 
 @Component({
     selector: 'app-properties',
@@ -23,7 +24,8 @@ export class PropertiesComponent implements OnDestroy, OnInit {
     fields: SmartField[] = [];
     data: any = {}
 
-    cell!: Cell
+    component?: NuwaComponent
+    cell?: Cell
 
     constructor(private cs: ComponentService) {
         console.log("propertiesComponent", this.canvas);
@@ -44,6 +46,12 @@ export class PropertiesComponent implements OnDestroy, OnInit {
     }
 
     onCellSelected(event: { cell: Cell }) {
+        if (event.cell.isEdge()) {
+            this.component = undefined
+            this.cell = undefined
+            return
+        }
+
         this.cell = event.cell
 
         // this.cell.transition("attrs/line/strokeWidth", 20, {
@@ -56,10 +64,10 @@ export class PropertiesComponent implements OnDestroy, OnInit {
 
         //console.log("onCellSelected", event.cell);
         let id = event.cell.shape
-        let component = this.cs.Get(id)
+        this.component = this.cs.Get(id)
 
         //表单
-        this.fields = component.properties || []
+        this.fields = this.component.properties || []
 
         //数据
         let data: any = {}
@@ -80,7 +88,7 @@ export class PropertiesComponent implements OnDestroy, OnInit {
                 //console.log("properties change", res)
                 //Object.assign(this.page, res)
                 Object.keys(res).forEach(key => {
-                    this.cell.setPropByPath(key, res[key])
+                    this.cell?.setPropByPath(key, res[key])
                 })
             })
         }, 100)
