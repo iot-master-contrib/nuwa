@@ -248,13 +248,13 @@ export class ToolbarComponent {
         return current.getChildCount() > 0;
     }
 
-    showGrid = JSON.parse(localStorage.getItem("show_grid") || 'true');
+    showGrid = JSON.parse(localStorage.getItem("nuwa-editor-grid") || 'true');
 
     handleGrid() {
         if (this.showGrid) this.graph.hideGrid()
         else this.graph.showGrid()
         this.showGrid = !this.showGrid
-        localStorage.setItem('show_grid', JSON.stringify(this.showGrid));
+        localStorage.setItem("nuwa-editor-grid", JSON.stringify(this.showGrid));
     }
 
     settingProject() {

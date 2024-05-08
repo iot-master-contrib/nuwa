@@ -6,21 +6,25 @@ import {NuwaComponent} from "../../../nuwa/nuwa";
 import {RendererComponent} from "../renderer/renderer.component";
 
 @Component({
-  selector: 'app-widgets',
-  standalone: true,
+    selector: 'app-widgets',
+    standalone: true,
     imports: [
         CommonModule,
         NzCollapseModule,
     ],
-  templateUrl: './widgets.component.html',
-  styleUrl: './widgets.component.scss'
+    templateUrl: './widgets.component.html',
+    styleUrl: './widgets.component.scss'
 })
 export class WidgetsComponent {
-    widgets =  NuwaWidgets
+    widgets = NuwaWidgets
 
     @Input() renderer!: RendererComponent;
 
     onDragStart($event: DragEvent, component: NuwaComponent) {
-        this.renderer?.onDnd($event, component)
+        this.renderer?.drawNode($event, component)
+    }
+
+    onClick(c: NuwaComponent) {
+        this.renderer?.drawEdge(c)
     }
 }

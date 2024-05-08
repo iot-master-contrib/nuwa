@@ -44,7 +44,8 @@ export class EditorComponent implements OnInit {
                 //this.content = JSON.stringify(resData, undefined, '\t');
                 this.title.setTitle(this.project.name)
                 //this.renderer.graph.fromJSON(this.project.pages[0].content)
-                this.renderer.Render(this.project.pages[0])
+                //this.renderer.Render(this.project.pages[0])
+                this.page = this.project.pages[0]
             });
         }
     }
@@ -65,8 +66,10 @@ export class EditorComponent implements OnInit {
         //保存当前页
         this.project.pages[this.index].content = this.renderer.graph.toJSON()
         this.index = $event
+
         //渲染新页
-        this.renderer.Render(this.project.pages[this.index])
+        //this.renderer.Render(this.project.pages[this.index])
+        this.page = this.project.pages[this.index]
     }
 
 }

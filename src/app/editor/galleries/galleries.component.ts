@@ -31,7 +31,7 @@ export class GalleriesComponent {
 
     onDragStart($event: DragEvent, img: string) {
         //this.renderer?.onDnd($event, BaseImage, {"imageUrl": "/nuwa/gallery/" + img}) //图片没有更换
-        this.renderer?.onDnd($event, {
+        this.renderer?.drawNode($event, {
             name: '',
             id: 'image',
             icon: "",

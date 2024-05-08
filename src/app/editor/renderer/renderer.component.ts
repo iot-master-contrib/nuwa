@@ -1,4 +1,4 @@
-import {Component, ElementRef, Injector, Input, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, Injector, Input} from '@angular/core';
 
 import {Edge, FunctionExt, Graph, Node, Shape} from '@antv/x6';
 
@@ -14,10 +14,10 @@ import {Dnd} from "@antv/x6-plugin-dnd";
 import {HmiPage} from "../../../hmi/hmi";
 
 import {ComponentService} from "../../component.service";
-import {NzModalService} from 'ng-zorro-antd/modal';
 import {NuwaComponent, NuwaPage} from "../../../nuwa/nuwa";
 
 import {register} from '@antv/x6-angular-shape'
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 
 @Component({
@@ -26,7 +26,17 @@ import {register} from '@antv/x6-angular-shape'
     styleUrls: ['./renderer.component.scss'],
 })
 export class RendererComponent {
-    @Input() page!: NuwaPage
+
+    _page!: NuwaPage
+
+    @Input() set page(page: NuwaPage) {
+        this._page = page
+        this.render(page) //渲染
+    }
+
+    get page(): NuwaPage {
+        return this._page
+    }
 
     public graph: Graph;
 
@@ -36,8 +46,9 @@ export class RendererComponent {
 
     constructor(
         private cs: ComponentService,
-        private element: ElementRef,
-        private injector: Injector
+        private ns: NzNotificationService,
+        private injector: Injector,
+        element: ElementRef,
     ) {
 
         this.graph = new Graph({
@@ -48,35 +59,9 @@ export class RendererComponent {
             },
             grid: {
                 size: 10,      // 网格大小 10px
-                visible: JSON.parse(localStorage.getItem("show_grid") || 'true'), // 渲染网格背景
+                visible: JSON.parse(localStorage.getItem("nuwa-editor-grid") || 'true'), // 渲染网格背景
                 //type: "mesh",
                 type: "fixedDot"
-            },
-            connecting: { //连线交互
-                snap: false,//是否自动吸附
-                connector: 'normal',
-                createEdge() {
-                    return new Shape.Edge({
-                        shape: 'line',
-                        attrs: {
-                            line: {
-                                stroke: '#333',
-                                strokeWidth: 1,
-                                targetMarker: null,
-                                strokeDasharray: 0, //虚线
-                                style: {
-                                    animation: 'ant-line 30s infinite linear',
-                                },
-                            },
-                        },
-                        label: {
-                            text: ''
-                        },
-                        router: {
-                            name: 'normal'
-                        },
-                    })
-                },
             },
         });
 
@@ -123,16 +108,33 @@ export class RendererComponent {
         this.graph.bindKey('backspace', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
         this.graph.bindKey('delete', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
 
+        this.graph.bindKey("escape", () => {
+            if (this.drawingEdge) {
+                //this.drawingEdge.remove()
+                this.drawingEdge = undefined
+            }
+        })
+
         //绘线
-        this.graph.container.onmousemove = (event) => {
-            if (this.drawingLine) {
-                this.graph.addEdge({
-                    shape: this.drawingLine.id,
+        this.graph.container.onclick = (event) => {
+            if (this.drawingEdgeComponent) {
+                //console.log("draw line on click")
+                this.drawingEdge = this.graph.addEdge({
+                    shape: this.drawingEdgeComponent.id,
                     source: [event.offsetX, event.offsetY],
-                    target: [(event.offsetX) - 120, (event.offsetY) + 80],
-                    ...this.drawingLine.metadata
+                    target: [event.offsetX + 10, event.offsetY + 10],
+                    ...this.drawingEdgeComponent.metadata
                 });
-                this.drawingLine = undefined;
+                this.drawingEdgeComponent = undefined;
+            } else {
+                this.drawingEdge = undefined
+            }
+        }
+
+        this.graph.container.onmousemove = (event) => {
+            if (this.drawingEdge) {
+                //console.log("draw line on move")
+                this.drawingEdge.setTerminal("target", {x: event.offsetX, y: event.offsetY})
             }
         }
 
@@ -147,7 +149,7 @@ export class RendererComponent {
 
     }
 
-    public Render(page: HmiPage) {
+    render(page: HmiPage) {
         page.content?.cells?.forEach((cell: any) => {
             const cmp = this.cs.Get(cell.shape)
             //TODO 使用filter 过滤掉找不到组件的情况
@@ -161,27 +163,41 @@ export class RendererComponent {
     }
 
 
-    drawingLine?: NuwaComponent
+    drawingEdgeComponent?: NuwaComponent
+    drawingEdge?: Edge
 
-    onDnd($event: DragEvent, component: NuwaComponent, args?:any) {
-        let node!: Node
+    drawEdge(component: NuwaComponent) {
+        this.drawingEdgeComponent = undefined
 
         //检查是否已经注册
-        if (!this.checkComponent(component)) {
+        if (!this.checkRegister(component)) {
             //TODO 报错
             return;
         }
 
         if (component.type == "line") {
-            this.drawingLine = component;
-            //node = this.graph.createEdge({})
+            this.drawingEdgeComponent = component;
+            return
+        }
+    }
+
+    drawNode($event: DragEvent, component: NuwaComponent) {
+        let node!: Node
+
+        //检查是否已经注册
+        if (!this.checkRegister(component)) {
+            //this.ns.error("错误", "未注册"+component.name)
+            return;
+        }
+
+        if (component.type == "line") {
+            this.ns.error("错误", "线条不能拖放")
             return
         }
 
         //参数
         let data: any = {}
         component.bindings?.forEach(b => data[b.name] = b.default)
-        Object.assign(data, args)
 
         //创建节点
         node = this.graph.createNode({
@@ -194,28 +210,37 @@ export class RendererComponent {
     }
 
 
-    public checkComponent(component: NuwaComponent): boolean {
+    checkRegister(component: NuwaComponent): boolean {
         if (component.registered || component.internal)
             return true
+        component.registered = true
 
         switch (component.type) {
             case "line":
                 //注册线
                 if (component.extends) {
                     Graph.registerEdge(component.id, component.extends)
-                    component.registered = true
                     return true
                 }
-                //TODO 报错
+                this.ns.error("编译错误", component.id + " " + component.name + "缺少extends")
                 break
             case "shape":
                 //注册衍生组件
                 if (component.extends) {
                     Graph.registerNode(component.id, component.extends)
-                    component.registered = true
                     return true
                 }
-                //TODO 报错
+                this.ns.error("编译错误", component.id + " " + component.name + "缺少extends")
+                break;
+            case "html":
+                // @ts-ignore
+                Shape.HTML.register({
+                    shape: component.id,
+                    width: component.metadata?.width || 100,
+                    height: component.metadata?.height || 100,
+                    // @ts-ignore
+                    html: component.html,
+                })
                 break;
             case "angular":
                 if (component.content) {
@@ -229,11 +254,10 @@ export class RendererComponent {
                     component.registered = true
                     return true
                 }
-                //TODO 报错
+                this.ns.error("编译错误", component.id + " " + component.name + "缺少content")
                 break;
         }
-
-        return false;
+        return false
     }
 
 }
