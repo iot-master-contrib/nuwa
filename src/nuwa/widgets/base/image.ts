@@ -11,6 +11,6 @@ export const BaseImage: NuwaComponent = {
         imageUrl: "assets/widgets/image.svg",
     },
     properties: [
-        {label: "图片", key: "attrs/image/xlink:href", type: "image"},
+        {label: "图片", key: "attrs/image/xlink:href", type: "file"},
     ]
 }
