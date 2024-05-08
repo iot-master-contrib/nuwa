@@ -9,14 +9,13 @@
         <app-sources *sideBarItem="'数据源'"></app-sources>
     </app-side-bar>
     <div class="content">
-        <app-renderer #renderer
+        <app-renderer #renderer [page]="project.pages[index]"
                       [style.width]="project.pages[index].width*scale+'px'"
                       [style.height]="project.pages[index].height*scale+'px'"></app-renderer>
     </div>
     <app-side-bar [width]="400" [right]="true">
-        <app-page *sideBarItem="'画布'" [page]="project.pages[index]"></app-page>
-        <app-properties *sideBarItem="'属性'" [renderer]="renderer"></app-properties>
-        <app-animations *sideBarItem="'动画'"></app-animations>
+        <app-props *sideBarItem="'属性'" [renderer]="renderer"></app-props>
+<!--        <app-animations *sideBarItem="'动画'"></app-animations>-->
         <app-events *sideBarItem="'事件'"></app-events>
         <app-scripts *sideBarItem="'脚本'"></app-scripts>
     </app-side-bar>

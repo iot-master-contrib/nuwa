@@ -84,6 +84,7 @@ import {PropertiesComponent} from "./properties/properties.component";
 import {PageComponent} from "./page/page.component";
 import {ScriptsComponent} from "./scripts/scripts.component";
 import {TransformComponent} from "./transform/transform.component";
+import {PropsComponent} from "./props/props.component";
 @NgModule({
     declarations: [
         EditorComponent,
@@ -156,6 +157,7 @@ import {TransformComponent} from "./transform/transform.component";
         ScriptsComponent,
         SideBarItemDirective,
         TransformComponent,
+        PropsComponent,
     ],
     providers: [
         { provide: NzMessageService, },

@@ -1,0 +1,11 @@
+<nz-collapse>
+    <nz-collapse-panel nzHeader="画布" nzActive>
+        <app-page [page]="renderer.page"></app-page>
+    </nz-collapse-panel>
+    <nz-collapse-panel nzHeader="变换" nzActive>
+        <app-transform [renderer]="renderer"></app-transform>
+    </nz-collapse-panel>
+    <nz-collapse-panel nzHeader="属性" nzActive>
+        <app-properties [renderer]="renderer"></app-properties>
+    </nz-collapse-panel>
+</nz-collapse>

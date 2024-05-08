@@ -1,4 +1,4 @@
-import {Component, ElementRef, Injector, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, Injector, Input, ViewContainerRef} from '@angular/core';
 
 import {Edge, FunctionExt, Graph, Node, Shape} from '@antv/x6';
 
@@ -15,7 +15,7 @@ import {HmiPage} from "../../../hmi/hmi";
 
 import {ComponentService} from "../../component.service";
 import {NzModalService} from 'ng-zorro-antd/modal';
-import {NuwaComponent} from "../../../nuwa/nuwa";
+import {NuwaComponent, NuwaPage} from "../../../nuwa/nuwa";
 
 import {register} from '@antv/x6-angular-shape'
 
@@ -26,6 +26,8 @@ import {register} from '@antv/x6-angular-shape'
     styleUrls: ['./renderer.component.scss'],
 })
 export class RendererComponent {
+    @Input() page!: NuwaPage
+
     public graph: Graph;
 
     dnd: Dnd;

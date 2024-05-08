@@ -1,14 +1,15 @@
-import {Component, Input} from '@angular/core';
-import {Cell, Graph} from "@antv/x6";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Cell} from "@antv/x6";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ComponentService} from "../../component.service";
 import {CommonModule} from "@angular/common";
 import {NzInputDirective} from "ng-zorro-antd/input";
 import {NzInputNumberComponent} from "ng-zorro-antd/input-number";
+import {RendererComponent} from "../renderer/renderer.component";
 
 @Component({
-  selector: 'app-transform',
-  standalone: true,
+    selector: 'app-transform',
+    standalone: true,
     imports: [
         CommonModule,
         FormsModule,
@@ -16,10 +17,11 @@ import {NzInputNumberComponent} from "ng-zorro-antd/input-number";
         NzInputDirective,
         NzInputNumberComponent
     ],
-  templateUrl: './transform.component.html',
-  styleUrl: './transform.component.scss'
+    templateUrl: './transform.component.html',
+    styleUrl: './transform.component.scss'
 })
-export class TransformComponent {
+export class TransformComponent implements OnInit, OnDestroy {
+    @Input() renderer!: RendererComponent;
 
     selected: Cell[] = [];
 
@@ -27,57 +29,60 @@ export class TransformComponent {
 
     form!: FormGroup;
 
-    private g!: Graph;
 
-    get graph() {
-        return this.g;
+    onCellChangeSize(event: { cell: Cell, current: any }) {
+        if (event.cell == this.cell) {
+            this.form.patchValue(event.current as any)
+        }
     }
 
-    @Input() set graph(g: Graph) {
-        this.g = g;
+    onCellChangePosition(event: { cell: Cell, current: any }) {
+        if (event.cell == this.cell)
+            this.form.patchValue(event.current as any)
+    }
 
-        g.on("cell:change:size", (event) => {
-            if (event.cell == this.cell) {
-                this.form.patchValue(event.current as any)
-            }
-        })
-
-        g.on("cell:change:position", (event) => {
-            if (event.cell == this.cell)
-                this.form.patchValue(event.current as any)
-        })
-
+    onCellChangeAngle(event: { cell: Cell, current: any }) {
         //TODO 此处无效
-        g.on("cell:change:angle", (event) => {
-            if (event.cell == this.cell)
-                this.form.patchValue(event.current as any)
-        })
-
-        g.on("cell:unselected", ({ cell }) => {
-            if (cell == this.cell) {
-                //this.cmp = undefined;
-            }
-        })
-
-        g.on("selection:changed", ({ selected }) => {
-            this.selected = selected;
-            if (g.getSelectedCellCount() === 1) {
-                this.cell = g.getSelectedCells()[0]
-
-                if (this.cell.isNode()) {
-                    const pos = this.cell.getPosition()
-                    const size = this.cell.getSize()
-                    const angle = this.cell.getAngle()
-
-                    this.form.patchValue(pos)
-                    this.form.patchValue(size);
-                    this.form.patchValue({angle});
-                }
-            } else {
-                this.cell = undefined
-            }
-        })
+        if (event.cell == this.cell)
+            this.form.patchValue(event.current as any)
     }
+
+    onCellSelected(event: { cell: Cell }) {
+        this.cell = event.cell;
+
+        if (this.cell.isNode()) {
+            const pos = this.cell.getPosition()
+            const size = this.cell.getSize()
+            const angle = this.cell.getAngle()
+
+            this.form.patchValue(pos)
+            this.form.patchValue(size);
+            this.form.patchValue({angle});
+        } else {
+            this.cell = undefined
+        }
+    }
+
+    ngOnInit() {
+        this.renderer.graph.on("cell:change:size", this.onCellChangeSize, this)
+        this.renderer.graph.on("cell:change:position", this.onCellChangePosition, this)
+        this.renderer.graph.on("cell:change:angle", this.onCellChangeAngle, this)
+        this.renderer.graph.on("cell:selected", this.onCellSelected, this)
+
+        //对于已经选择的情况，直接执行事件
+        let cells = this.renderer.graph.getSelectedCells()
+        if (cells.length > 0) {
+            this.onCellSelected({cell: cells[cells.length - 1]})
+        }
+    }
+
+    ngOnDestroy() {
+        this.renderer.graph.off("cell:change:size", this.onCellChangeSize)
+        this.renderer.graph.off("cell:change:position", this.onCellChangePosition)
+        this.renderer.graph.off("cell:change:angle", this.onCellChangeAngle)
+        this.renderer.graph.off("cell:selected", this.onCellSelected)
+    }
+
 
     constructor(private fb: FormBuilder, private cs: ComponentService) {
         this.form = fb.group({
@@ -95,7 +100,6 @@ export class TransformComponent {
             this.cell.setPosition(this.form.value)
             this.cell.setSize(this.form.value)
             this.cell.angle(this.form.value.angle)
-
         }
     }
 }
