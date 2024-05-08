@@ -60,7 +60,7 @@ type Component struct {
 }
 
 func componentList(ctx *gin.Context) {
-	root := filepath.Join(viper.GetString("data"), "component")
+	root := filepath.Join(viper.GetString("data"), "nuwa", "component")
 
 	cs, err := scanManifest[Component](root)
 	if err != nil {

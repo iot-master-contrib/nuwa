@@ -22,7 +22,7 @@ type Font struct {
 }
 
 func fontList(ctx *gin.Context) {
-	root := filepath.Join(viper.GetString("data"), "font")
+	root := filepath.Join(viper.GetString("data"), "nuwa", "font")
 
 	cs, err := scanManifest[Font](root)
 	if err != nil {
