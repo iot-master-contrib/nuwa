@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TransformComponent} from "../transform/transform.component";
 import {Cell, Timing} from "@antv/x6";
 import {SmartEditorComponent, SmartField} from "iot-master-smart";
-import {RendererComponent} from "../renderer/renderer.component";
+import {CanvasComponent} from "../canvas/canvas.component";
 import {ComponentService} from "../../component.service";
 
 @Component({
@@ -16,7 +16,7 @@ import {ComponentService} from "../../component.service";
     styleUrl: './properties.component.scss'
 })
 export class PropertiesComponent implements OnDestroy, OnInit {
-    @Input() renderer!: RendererComponent;
+    @Input() renderer!: CanvasComponent;
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 

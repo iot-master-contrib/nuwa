@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {RequestService} from "iot-master-smart";
-import {RendererComponent} from "../renderer/renderer.component";
+import {CanvasComponent} from "../canvas/canvas.component";
 import {BaseImage} from "../../../nuwa/widgets/base/image";
 
 @Component({
@@ -17,7 +17,7 @@ import {BaseImage} from "../../../nuwa/widgets/base/image";
 })
 export class GalleriesComponent {
     images: any = []
-    @Input() renderer!: RendererComponent;
+    @Input() renderer!: CanvasComponent;
 
     constructor(private rs: RequestService) {
         this.load()

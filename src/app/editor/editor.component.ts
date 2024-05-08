@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {HmiComponent, HmiDraw, HmiPage, HmiProject, projectTemplate} from "../../hmi/hmi";
-import {RendererComponent} from "./renderer/renderer.component";
+import {CanvasComponent} from "./canvas/canvas.component";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ComponentService} from "../component.service";
@@ -22,7 +22,7 @@ export class EditorComponent implements OnInit {
 
     scale = 1;
 
-    @ViewChild("renderer") renderer!: RendererComponent
+    @ViewChild("renderer") renderer!: CanvasComponent
 
     constructor(
         private title: Title,

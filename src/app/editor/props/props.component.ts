@@ -4,7 +4,7 @@ import {PropertiesComponent} from "../properties/properties.component";
 import {SideBarItemDirective} from "../side-bar/side-bar.component";
 import {NgForOf} from "@angular/common";
 import {NzCollapseComponent, NzCollapsePanelComponent} from "ng-zorro-antd/collapse";
-import {RendererComponent} from "../renderer/renderer.component";
+import {CanvasComponent} from "../canvas/canvas.component";
 import {TransformComponent} from "../transform/transform.component";
 
 @Component({
@@ -23,6 +23,6 @@ import {TransformComponent} from "../transform/transform.component";
   styleUrl: './props.component.scss'
 })
 export class PropsComponent {
-    @Input() renderer!: RendererComponent;
+    @Input() renderer!: CanvasComponent;
 
 }

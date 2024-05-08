@@ -3,7 +3,7 @@ import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {CommonModule} from "@angular/common";
 import {NuwaWidgets} from "../../../nuwa/widgets/widgets";
 import {NuwaComponent} from "../../../nuwa/nuwa";
-import {RendererComponent} from "../renderer/renderer.component";
+import {CanvasComponent} from "../canvas/canvas.component";
 
 @Component({
     selector: 'app-widgets',
@@ -18,7 +18,7 @@ import {RendererComponent} from "../renderer/renderer.component";
 export class WidgetsComponent {
     widgets = NuwaWidgets
 
-    @Input() renderer!: RendererComponent;
+    @Input() renderer!: CanvasComponent;
 
     onDragStart($event: DragEvent, component: NuwaComponent) {
         this.renderer?.drawNode($event, component)

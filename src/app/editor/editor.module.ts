@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EditorRoutingModule } from './editor-routing.module';
 import { EditorComponent } from "./editor.component";
-import { RendererComponent } from './renderer/renderer.component';
+import { CanvasComponent } from './canvas/canvas.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { NzDividerModule } from "ng-zorro-antd/divider";
@@ -88,7 +88,7 @@ import {PropsComponent} from "./props/props.component";
 @NgModule({
     declarations: [
         EditorComponent,
-        RendererComponent,
+        CanvasComponent,
         PropertyInputComponent,
         ToolbarComponent,
         CollapseComponent,

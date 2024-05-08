@@ -5,7 +5,7 @@ import {ComponentService} from "../../component.service";
 import {CommonModule} from "@angular/common";
 import {NzInputDirective} from "ng-zorro-antd/input";
 import {NzInputNumberComponent} from "ng-zorro-antd/input-number";
-import {RendererComponent} from "../renderer/renderer.component";
+import {CanvasComponent} from "../canvas/canvas.component";
 
 @Component({
     selector: 'app-transform',
@@ -21,7 +21,7 @@ import {RendererComponent} from "../renderer/renderer.component";
     styleUrl: './transform.component.scss'
 })
 export class TransformComponent implements OnInit, OnDestroy {
-    @Input() renderer!: RendererComponent;
+    @Input() renderer!: CanvasComponent;
 
     selected: Cell[] = [];
 

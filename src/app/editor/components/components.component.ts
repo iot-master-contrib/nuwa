@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {NuwaCollection} from "../../../nuwa/nuwa";
 import {RequestService} from "iot-master-smart";
-import {RendererComponent} from "../renderer/renderer.component";
+import {CanvasComponent} from "../canvas/canvas.component";
 
 @Component({
     selector: 'app-components',
@@ -17,7 +17,7 @@ import {RendererComponent} from "../renderer/renderer.component";
 })
 export class ComponentsComponent {
     collections: NuwaCollection[] = []
-    @Input() renderer!: RendererComponent;
+    @Input() renderer!: CanvasComponent;
 
     constructor(private rs: RequestService) {
         this.load()

@@ -25,7 +25,7 @@ import {NzNotificationService} from "ng-zorro-antd/notification";
     templateUrl: './renderer.component.html',
     styleUrls: ['./renderer.component.scss'],
 })
-export class RendererComponent {
+export class CanvasComponent {
 
     _page!: NuwaPage
 
