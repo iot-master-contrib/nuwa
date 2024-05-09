@@ -313,6 +313,7 @@ export class ToolbarComponent {
     }
 
     handleImport() {
-
+        //this.graph.toJSON()
+        //this.graph.fromJSON()
     }
 }
