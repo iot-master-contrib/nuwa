@@ -3,7 +3,7 @@ import {StrokeProperties} from "../properties";
 
 export const MiscFlow: NuwaComponent = {
     name: '流动线条', id: ':flow:',
-    icon: "assets/widgets/line.svg", type: "line",
+    icon: "assets/widgets/flow.svg", type: "line",
     extends: {inherit: "edge"},
     metadata: {
         markup: [
