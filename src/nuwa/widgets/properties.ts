@@ -38,6 +38,9 @@ export function StrokeProperties(id: string): SmartField[] {
                 {value: "", label: "实线"},
                 {value: "5 5", label: "虚线"},
                 {value: "10 10", label: "虚线2"},
+                {value: "15 15", label: "虚线3"},
+                {value: "20 20", label: "虚线4"},
+                {value: "30 30", label: "虚线5"},
             ]
         },
         {

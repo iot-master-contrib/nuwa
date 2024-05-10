@@ -46,11 +46,11 @@ export class PropertiesComponent implements OnDestroy, OnInit {
     }
 
     onCellSelected(event: { cell: Cell }) {
-        if (event.cell.isEdge()) {
-            this.component = undefined
-            this.cell = undefined
-            return
-        }
+        // if (event.cell.isEdge()) {
+        //     this.component = undefined
+        //     this.cell = undefined
+        //     return
+        // }
 
         this.cell = event.cell
 

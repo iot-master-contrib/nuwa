@@ -55,10 +55,10 @@ function createWeatherOptions() {
 }
 
 export const MiscWeather: NuwaComponent = {
-    name: 'Web子页面', id: ':weather:',
+    name: '天气', id: ':weather:',
     icon: "assets/widgets/weather.svg",
     type: "angular",
-    metadata: {width: 200, height: 160, tools: ['boundary']},
+    metadata: {width: 200, height: 100, tools: ['boundary']},
     content: MiscWeatherComponent,
     properties: [
         {key: "data/ngArguments/code", label: "授权码", type: "text", default: "code"},
