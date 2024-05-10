@@ -56,7 +56,7 @@ class EchartsBarComponent {
 }
 
 export const EchartsBar: NuwaComponent = {
-    name: '柱状图', id: '$echarts-bar',
+    name: '柱状图', id: ':echarts-bar:',
     icon: "assets/widgets/echarts-bar.svg",
     type: "angular",
     metadata: {width: 400, height: 300},

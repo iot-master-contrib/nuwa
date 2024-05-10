@@ -37,7 +37,7 @@ class ControlSliderComponent {
 }
 
 export const ControlSlider: NuwaComponent = {
-    name: '滑块', id: '$slider',
+    name: '滑块', id: ':slider:',
     icon: "assets/widgets/slider.svg",
     type: "angular",
     metadata: {width: 200, height: 200},

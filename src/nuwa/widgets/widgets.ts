@@ -19,6 +19,7 @@ import {ControlSelect} from "./control/select";
 import {ControlSlider} from "./control/slider";
 import {MiscWeb} from "./misc/web";
 import {MiscOutlet} from "./misc/outlet";
+import {MiscWeather} from "./misc/weather";
 
 export const NuwaWidgets: NuwaCollection[] = [
     {
@@ -46,7 +47,8 @@ export const NuwaWidgets: NuwaCollection[] = [
         name: "其他组件",
         components: [
             MiscOutlet,
-            MiscWeb
+            MiscWeb,
+            MiscWeather,
         ]
     },
 ]

@@ -26,7 +26,7 @@ class ControlButtonComponent {
 }
 
 export const ControlButton: NuwaComponent = {
-    name: '按钮', id: '$button',
+    name: '按钮', id: ':button:',
     icon: "assets/widgets/button.svg",
     type: "angular",
     metadata: {width: 100, height: 30},

@@ -31,7 +31,7 @@ class ControlInputComponent {
 }
 
 export const ControlInput: NuwaComponent = {
-    name: '输入框', id: '$input',
+    name: '输入框', id: ':input:',
     icon: "assets/widgets/input.svg",
     type: "angular",
     metadata: {width: 160, height: 30},

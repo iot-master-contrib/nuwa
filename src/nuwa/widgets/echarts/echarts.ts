@@ -59,7 +59,7 @@ class EchartsComponent {
 }
 
 export const Echarts: NuwaComponent = {
-    name: '图表', id: '$echarts',
+    name: '图表', id: ':echarts:',
     icon: "assets/widgets/echarts.svg",
     type: "angular",
     metadata: {width: 400, height: 300},

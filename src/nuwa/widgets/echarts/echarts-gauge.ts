@@ -58,7 +58,7 @@ class EchartsGaugeComponent {
 }
 
 export const EchartsGauge: NuwaComponent = {
-    name: '仪表盘', id: '$echarts-gauge',
+    name: '仪表盘', id: ':echarts-gauge:',
     icon: "assets/widgets/echarts-gauge.svg",
     type: "angular",
     metadata: {width: 300, height: 300},

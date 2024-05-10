@@ -2,7 +2,7 @@ import {NuwaComponent} from "../../nuwa";
 import {RenderComponent} from "../../../app/render/render.component";
 
 export const MiscOutlet: NuwaComponent = {
-    name: '子页面入口', id: '$outlet',
+    name: '子页面', id: ':outlet:',
     icon: "assets/widgets/outlet.svg",
     type: "angular",
     metadata: {width: 300, height: 200, tools: ['boundary']},
