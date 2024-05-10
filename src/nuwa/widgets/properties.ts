@@ -41,11 +41,13 @@ export function StrokeProperties(id: string, prefix: string = ""): SmartField[] 
         {
             label: prefix + "边框线形", key: `attrs/${id}/strokeDasharray`, type: "select", default: '', options: [
                 {value: "", label: "实线"},
-                {value: "5 5", label: "虚线"},
+                {value: "5 5", label: "虚线1"},
                 {value: "10 10", label: "虚线2"},
                 {value: "15 15", label: "虚线3"},
                 {value: "20 20", label: "虚线4"},
                 {value: "30 30", label: "虚线5"},
+                {value: "50 50", label: "虚线6"},
+                {value: "80 80", label: "虚线7"},
             ]
         },
         // {
@@ -64,4 +66,11 @@ export const TextProperties: SmartField[] = [
     {label: "字体", key: "attrs/text/fontFamily", type: "select", options: fontFamilies, default: "SimHei"},
     {label: "加粗", key: "attrs/text/fontWeight", type: "select", options: fontWeights, default: "normal"},
     {label: "风格", key: "attrs/text/fontStyle", type: "select", options: fontStyles, default: "normal"},
+    // {
+    //     label: "对齐", key: "attrs/text/textAnchor", type: "select", default: "middle", options: [
+    //         {value: "start", label: "左对齐"},
+    //         {value: "middle", label: "居中对齐"},
+    //         {value: "end", label: "右对齐"},
+    //     ]
+    // },
 ]
