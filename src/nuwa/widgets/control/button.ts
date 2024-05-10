@@ -2,6 +2,7 @@ import {NuwaComponent} from "../../nuwa";
 import {NzButtonComponent} from "ng-zorro-antd/button";
 import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {DefaultEvents} from "../properties";
 
 @Component({
     selector: 'nuwa-control-button',
@@ -15,10 +16,14 @@ import {CommonModule} from "@angular/common";
         height: 100%
     }`,
     template: `
-        <button type="button" nz-button (click)="onClick($event)">{{ text }}</button>`
+        <button type="button" nz-button
+                [style.font-size]="fontSize+'px'"
+                (click)="onClick($event)">{{ text }}</button>`
 })
 class ControlButtonComponent {
     @Input() text = "按钮"
+    @Input() fontSize = 16
+
     //TODO 事件
     onClick($event: MouseEvent) {
 
@@ -29,9 +34,14 @@ export const ControlButton: NuwaComponent = {
     name: '按钮', id: ':button:',
     icon: "assets/widgets/button.svg",
     type: "angular",
-    metadata: {width: 100, height: 30},
+    metadata: {width: 100, height: 40},
     content: ControlButtonComponent,
-    properties: [],
+    events: [
+        ...DefaultEvents,
+    ],
+    properties: [
+        {label: "字号", key: "data/ngArguments/fontSize", type: "number", min: 0, max: 255, default: 16},
+    ],
     bindings: [],
     hooks: {},
 }

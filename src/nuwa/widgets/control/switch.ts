@@ -3,6 +3,7 @@ import {NzSwitchComponent} from "ng-zorro-antd/switch";
 import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {DefaultEvents} from "../properties";
 
 
 @Component({
@@ -41,6 +42,10 @@ export const ControlSwitch: NuwaComponent = {
     type: "angular",
     metadata: {width: 100, height: 40},
     content: ControlSwitchComponent,
+    events: [
+        ...DefaultEvents,
+        {name:"change", label: "变化"},
+    ],
     properties: [],
     bindings: [],
     hooks: {},

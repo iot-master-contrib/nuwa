@@ -3,6 +3,7 @@ import {NzProgressComponent} from "ng-zorro-antd/progress";
 import {Component, ElementRef, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {NzButtonComponent} from "ng-zorro-antd/button";
+import {DefaultEvents} from "../properties";
 
 @Component({
     selector: 'nuwa-control-progress',
@@ -39,6 +40,9 @@ export const ControlProgress: NuwaComponent = {
     type: "angular",
     metadata: {width: 200, height: 30},
     content: ControlProgressComponent,
+    events: [
+        ...DefaultEvents,
+    ],
     properties: [],
     bindings: [],
     hooks: {},

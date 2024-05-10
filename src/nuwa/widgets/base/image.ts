@@ -1,5 +1,5 @@
 import {NuwaComponent} from "../../nuwa";
-import {radiusProperties, StrokeProperties} from "../properties";
+import {DefaultEvents, RadiusProperties, StrokeProperties} from "../properties";
 
 export const BaseImage: NuwaComponent = {
     name: '图片',
@@ -7,6 +7,9 @@ export const BaseImage: NuwaComponent = {
     icon: "assets/widgets/image.svg",
     type: "shape", internal: true,
     extends: {inherit: 'image'},
+    events: [
+        ...DefaultEvents,
+    ],
     metadata: {
         width: 100, height: 80,
         imageUrl: "assets/widgets/image.svg",

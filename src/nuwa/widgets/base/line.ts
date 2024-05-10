@@ -1,39 +1,25 @@
 import {NuwaComponent} from "../../nuwa";
-import {StrokeProperties} from "../properties";
+import {DefaultEvents, StrokeProperties} from "../properties";
 
 export const BaseLine: NuwaComponent = {
     name: '线条', id: ':line:',
     icon: "assets/widgets/line.svg", type: "line",
-    extends: {
-        inherit: "edge",
+    extends: {inherit: "edge"}, //TODO 不用继承就好了
+    metadata: {
         markup: [
-            {
-                tagName: 'path',
-                selector: 'line',
-                attrs: {
-                    fill: 'none',
-                    cursor: 'move',
-                    pointerEvents: 'none',
-                },
-            },
-            {
-                tagName: 'path',
-                selector: 'wrap',
-                attrs: {
-                    fill: 'none',
-                    cursor: 'move',
-                    stroke: 'transparent',
-                    strokeLinecap: 'round',
-                },
-            },
+            {tagName: 'path', selector: 'wrap'},
+            {tagName: 'path', selector: 'line'},
         ],
         attrs: {
             wrap: {
+                fill: 'none',
                 connection: true,
-                strokeWidth: 10,
+                stroke: '#ccc',
+                strokeWidth: 0,
                 strokeLinejoin: 'round',
             },
             line: {
+                fill: 'none',
                 connection: true,
                 stroke: '#000',
                 strokeWidth: 2,
@@ -43,7 +29,6 @@ export const BaseLine: NuwaComponent = {
         },
         tools: {items: ['edge-editor']},
     },
-    metadata: {},
     properties: [
         ...StrokeProperties('line'),
     ],

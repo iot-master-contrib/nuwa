@@ -3,6 +3,7 @@ import {NzSliderComponent} from "ng-zorro-antd/slider";
 import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {DefaultEvents} from "../properties";
 
 
 @Component({
@@ -42,6 +43,10 @@ export const ControlSlider: NuwaComponent = {
     type: "angular",
     metadata: {width: 200, height: 200},
     content: ControlSliderComponent,
+    events: [
+        ...DefaultEvents,
+        {name:"change", label: "变化"},
+    ],
     properties: [],
     bindings: [],
     hooks: {},

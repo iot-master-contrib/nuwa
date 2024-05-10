@@ -3,6 +3,7 @@ import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {NzInputDirective} from "ng-zorro-antd/input";
 import {FormsModule} from "@angular/forms";
+import {DefaultEvents} from "../properties";
 
 @Component({
     selector: 'nuwa-control-input',
@@ -36,6 +37,11 @@ export const ControlInput: NuwaComponent = {
     type: "angular",
     metadata: {width: 160, height: 30},
     content: ControlInputComponent,
+    events: [
+        ...DefaultEvents,
+        {name: "blur", label: "失去焦点"},
+        {name:"change", label: "变化"},
+    ],
     properties: [],
     bindings: [],
     hooks: {},

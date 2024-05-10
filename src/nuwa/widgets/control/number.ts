@@ -1,6 +1,6 @@
 
 import {NuwaComponent} from "../../nuwa";
-import {StrokeProperties, TextProperties} from "../properties";
+import {DefaultEvents, StrokeProperties, TextProperties} from "../properties";
 
 export const ControlNumber: NuwaComponent = {
     name: '数值', id: ':number:',
@@ -12,9 +12,12 @@ export const ControlNumber: NuwaComponent = {
         height: 30,
         attrs: {
             rect: {fill: 'none', stroke: 'none'},
-            text: {text: 'number'},
+            text: {text: 'XXX.XX'},
         },
     },
+    events: [
+        ...DefaultEvents,
+    ],
     properties: [
         ...TextProperties,
         ...StrokeProperties('rect'),
