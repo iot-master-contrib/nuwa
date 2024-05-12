@@ -21,6 +21,7 @@ import {MiscWeb} from "./misc/web";
 import {MiscOutlet} from "./misc/outlet";
 import {MiscWeather} from "./misc/weather";
 import {MiscFlow} from "./misc/flow";
+import {MiscAMap} from "./misc/amap";
 
 export const NuwaWidgets: NuwaCollection[] = [
     {
@@ -51,6 +52,7 @@ export const NuwaWidgets: NuwaCollection[] = [
             MiscWeather,
             MiscOutlet,
             MiscWeb,
+            MiscAMap,
         ]
     },
 ]
