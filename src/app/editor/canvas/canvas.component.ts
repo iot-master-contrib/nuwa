@@ -181,7 +181,7 @@ export class CanvasComponent {
         }
     }
 
-    drawNode($event: DragEvent, component: NuwaComponent) {
+    drawNode($event: DragEvent, component: NuwaComponent, inputs: any = {}) {
         let node!: Node
 
         //检查是否已经注册
@@ -196,14 +196,32 @@ export class CanvasComponent {
         }
 
         //参数
-        let data: any = {}
-        component.bindings?.forEach(b => data[b.name] = b.default)
+        let props: any = {}
+        component.properties?.forEach(f => {
+            if (f.default !== undefined)
+                props[f.key] = f.default
+        })
+
+        //绑定的数据
+        component.bindings?.forEach(b => props[b.name] = b.default)
 
         //创建节点
         node = this.graph.createNode({
             shape: component.id,
             ...component.metadata,
-            data: data,
+            //data: props,
+        })
+
+        //初始化数据
+        //node.setProp(props)
+        Object.keys(props).forEach(k=>{
+            node.setPropByPath(k, props[k])
+        })
+
+        //输入
+        //node.setProp(inputs)
+        Object.keys(inputs).forEach(k=>{
+            node.setPropByPath(k, inputs[k])
         })
 
         this.dnd.start(node, $event);
