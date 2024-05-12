@@ -26,10 +26,22 @@ class MiscAMapComponent implements OnInit {
     @Input() key = "eb6a831c04b6dfedda190d6254febb58"
     @Input() secret = "55de9923dc16159e4750b7c743117e0d"
 
+    @Input() _zoom = 12
+    @Input() set zoom(s: number) {
+        this._zoom = s
+        this.map?.setZoom(s)
+    }
+
     _style = "amap://styles/normal"
     @Input() set style(s: string) {
         this._style = s
         this.map?.setMapStyle(s)
+    }
+
+    _city = "无锡"
+    @Input() set city(s: string) {
+        this._city = s
+        this.map?.setCity(s)
     }
 
     map: any //AMap.Map;
@@ -56,9 +68,10 @@ class MiscAMapComponent implements OnInit {
         }).then((AMap) => {
             //this.element.nativeElement
             this.map = new AMap.Map(this.id, {
-                center: [120.301663, 31.574729],  //设置地图中心点坐标
+                //center: [120.301663, 31.574729],  //设置地图中心点坐标
                 resizeEnable: true,
-                mapStyle: this._style
+                mapStyle: this._style,
+                zoom: this._zoom,
             });
 
             // AMap.plugin('AMap.Geocoder', () => {
@@ -66,6 +79,8 @@ class MiscAMapComponent implements OnInit {
             // });
             // this.geocoder = new AMap.Geocoder({ city: '' });
             // this.marker = new AMap.Marker();
+
+            this.map.setCity(this._city)
 
             this.map.setFitView();
         }).catch((e) => {
@@ -84,6 +99,8 @@ export const MiscAMap: NuwaComponent = {
     properties: [
         {key: "data/ngArguments/key", label: "KEY", type: "text", default:"eb6a831c04b6dfedda190d6254febb58"},
         {key: "data/ngArguments/secret", label: "秘钥", type: "text", default:"55de9923dc16159e4750b7c743117e0d"},
+        {key: "data/ngArguments/city", label: "城市", type: "text", default:"无锡"},
+        {key: "data/ngArguments/zoom", label: "缩放", type: "number", default:12, min:2, max: 30},
         {
             key: "data/ngArguments/style", label: "风格", type: "select", options: [
                 {value: "amap://styles/normal", label: "标准"},
