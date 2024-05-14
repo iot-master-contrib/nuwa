@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, Output, ViewContainerRef } from '@angular/core';
-import { HmiPage, HmiProject } from "../../../hmi/hmi";
-import { Graph } from "@antv/x6";
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { PageSettingComponent } from '../page-setting/page-setting.component';
-import { NzMessageService } from "ng-zorro-antd/message";
-import { reset } from 'mousetrap';
+import {Component, EventEmitter, Input, Output, ViewContainerRef} from '@angular/core';
+import {Graph} from "@antv/x6";
+import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
+import {PageSettingComponent} from '../page-setting/page-setting.component';
+import {NzMessageService} from "ng-zorro-antd/message";
+import {NzContextMenuService} from "ng-zorro-antd/dropdown";
+import {NuwaPage, NuwaProject} from "../../../nuwa/project";
 
 @Component({
     selector: 'app-pages',
@@ -12,7 +12,7 @@ import { reset } from 'mousetrap';
     styleUrls: ['./pages.component.scss']
 })
 export class PagesComponent {
-    @Input() project!: HmiProject;
+    @Input() project!: NuwaProject;
     @Input() graph!: Graph;
 
 
@@ -25,6 +25,7 @@ export class PagesComponent {
         private modal: NzModalService,
         private ms: NzMessageService,
         private viewContainerRef: ViewContainerRef,
+        protected menuService: NzContextMenuService
     ) {
     }
 
@@ -35,7 +36,7 @@ export class PagesComponent {
             nzTitle: isNew ? '新增页面' : '编辑页面',
             nzContent: PageSettingComponent,
             nzData: {
-                row: isNew ? { name: '', content: {} } : this.project.pages[i]
+                row: isNew ? {name: '', content: {}} : this.project.pages[i]
             },
             nzViewContainerRef: this.viewContainerRef,
             nzFooter: [
@@ -47,7 +48,7 @@ export class PagesComponent {
                     label: '保存',
                     type: 'primary',
                     onClick: componentInstance => {
-                        return componentInstance?.submit().then((page: HmiPage) => {
+                        return componentInstance?.submit().then((page: NuwaPage) => {
                             if (isNew) {
                                 this.project.pages.push(page);
                             } else {
@@ -84,7 +85,16 @@ export class PagesComponent {
     }
 
     handleCopy(i: number) {
+        let page = JSON.parse(JSON.stringify(this.project.pages[i]));
+        page.name = page.name + ' - 复制';
+        this.project.pages.push(page)
+    }
 
+    handleAdd() {
+        //this.project.pages.push({})
+    }
+
+    openMenu(i: number, $event: MouseEvent) {
 
     }
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { HmiPage } from 'src/hmi/hmi';
+import {NuwaPage} from "../../../nuwa/project";
 @Component({
   selector: 'app-page-setting',
   templateUrl: './page-setting.component.html',
@@ -9,7 +9,7 @@ import { HmiPage } from 'src/hmi/hmi';
 export class PageSettingComponent {
   group!: FormGroup;
 
-  @Input() set row(data: HmiPage) {
+  @Input() set row(data: NuwaPage) {
     if (data) {
       this.group.patchValue(data);
     }
@@ -30,10 +30,10 @@ export class PageSettingComponent {
     })
   }
 
-  submit(): Promise<HmiPage> {
+  submit(): Promise<NuwaPage> {
     return new Promise((resolve, reject) => {
       if (this.group.valid) {
-        const page: HmiPage = this.group.value;
+        const page: NuwaPage = this.group.value;
         resolve(page);
       } else {
         Object.values(this.group.controls).forEach((control) => {

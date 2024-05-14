@@ -85,6 +85,7 @@ import {PageComponent} from "./page/page.component";
 import {ScriptsComponent} from "./scripts/scripts.component";
 import {TransformComponent} from "./transform/transform.component";
 import {PropsComponent} from "./props/props.component";
+import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
 @NgModule({
     declarations: [
         EditorComponent,
@@ -158,6 +159,8 @@ import {PropsComponent} from "./props/props.component";
         SideBarItemDirective,
         TransformComponent,
         PropsComponent,
+        NzListComponent,
+        NzListItemComponent,
     ],
     providers: [
         { provide: NzMessageService, },

@@ -1,9 +1,18 @@
-<div class="page" [ngClass]="{selected:i==index}"
-     *ngFor="let page of project.pages; let i=index;" (click)="open(i)">
-    {{page.name}}
-    <div class="tools" (click)="$event.stopPropagation()">
-        <span nz-icon nzType="copy" title="复制" (click)="handleCopy(i)"></span>
-        <span nz-icon nzType="edit" title="编辑" (click)="handleEdit(i)"></span>
-        <span nz-icon nzType="delete" title="删除" (click)="handleDel(i)"></span>
-    </div>
-</div>
+
+<nz-list nzSize="small">
+    @for (page of project.pages; track $index) {
+        <nz-list-item (click)="open($index)" (contextmenu)="menuService.create($event, menu)">
+            {{page.name || '未命名'}}
+        </nz-list-item>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+                <li nz-menu-item (click)="handleCopy($index)">复制</li>
+                <li nz-menu-item (click)="handleEdit($index)">重命名</li>
+                <li nz-menu-item (click)="handleDel($index)">删除</li>
+            </ul>
+        </nz-dropdown-menu>
+    }
+</nz-list>
+
+
+<button type="button" nz-button (click)="handleEdit()">创建新页面</button>

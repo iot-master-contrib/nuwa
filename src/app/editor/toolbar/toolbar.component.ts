@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, Output, ViewContainerRef } from '@angular/core';
-import { Graph, Node } from "@antv/x6";
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { HmiProject } from "../../../hmi/hmi";
-import { ProjectSettingComponent } from '../project-setting/project-setting.component';
-import { ComponentService } from "../../component.service";
-import { AboutComponent } from "../about/about.component";
+import {Component, EventEmitter, Input, Output, ViewContainerRef} from '@angular/core';
+import {Graph, Node} from "@antv/x6";
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
+import {ProjectSettingComponent} from '../project-setting/project-setting.component';
+import {ComponentService} from "../../component.service";
+import {AboutComponent} from "../about/about.component";
+import {NuwaProject} from "../../../nuwa/project";
 
 @Component({
     selector: 'app-toolbar',
@@ -14,7 +14,8 @@ import { AboutComponent } from "../about/about.component";
     providers: [NzMessageService, NzModalService]
 })
 export class ToolbarComponent {
-    @Input() project!: HmiProject;
+    @Input() project!: NuwaProject;
+
     // 1200X340
     @Input() graph!: Graph;
 
@@ -28,7 +29,9 @@ export class ToolbarComponent {
         private modal: NzModalService,
         private msg: NzMessageService,
         private viewContainerRef: ViewContainerRef,
-    ) { }
+    ) {
+    }
+
     handleSave() {
         this.onSave.emit();
         //console.log("save", this.graph.toJSON())
@@ -63,12 +66,12 @@ export class ToolbarComponent {
 
     handleCut() {
         this.graph.getSelectedCells().forEach(c => c.removeTools())
-        this.graph.cut(this.graph.getSelectedCells(), { deep: true })
+        this.graph.cut(this.graph.getSelectedCells(), {deep: true})
     }
 
     handleCopy() {
         this.graph.getSelectedCells().forEach(c => c.removeTools())
-        this.graph.copy(this.graph.getSelectedCells(), { deep: true })
+        this.graph.copy(this.graph.getSelectedCells(), {deep: true})
     }
 
     handlePaste() {

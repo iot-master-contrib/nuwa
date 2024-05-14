@@ -1,6 +1,4 @@
 import {Component, ElementRef, HostListener, OnDestroy, OnInit} from '@angular/core';
-import {HmiPage, HmiProject} from '../../hmi/hmi';
-import {Cell, Graph} from "@antv/x6";
 import {Title} from "@angular/platform-browser";
 import {RequestService} from "iot-master-smart";
 import {ComponentService} from "../component.service";
@@ -10,7 +8,7 @@ import {MqttService} from "ngx-mqtt";
 import {Subscription} from "rxjs";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {WindowComponent} from "./window/window.component";
-import {NuwaPage, NuwaProject} from "../../nuwa/nuwa";
+import {NuwaPage, NuwaProject} from "../../nuwa/project";
 
 
 //import "fengari-web"

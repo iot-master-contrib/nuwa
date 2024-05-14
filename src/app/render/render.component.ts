@@ -7,7 +7,7 @@ import {ComponentService} from "../component.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {MqttService} from "ngx-mqtt";
-import {NuwaPage} from "../../nuwa/nuwa";
+import {NuwaPage} from "../../nuwa/project";
 
 @Component({
   selector: 'app-render',

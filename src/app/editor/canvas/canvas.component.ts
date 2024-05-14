@@ -14,10 +14,11 @@ import {Dnd} from "@antv/x6-plugin-dnd";
 import {HmiPage} from "../../../hmi/hmi";
 
 import {ComponentService} from "../../component.service";
-import {NuwaComponent, NuwaPage} from "../../../nuwa/nuwa";
+import {NuwaComponent} from "../../../nuwa/nuwa";
 
 import {register} from '@antv/x6-angular-shape'
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {NuwaPage} from "../../../nuwa/project";
 
 
 @Component({

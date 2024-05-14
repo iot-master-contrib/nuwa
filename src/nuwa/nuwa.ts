@@ -2,22 +2,6 @@ import {Cell, Edge, Node} from "@antv/x6";
 import {SmartField} from "iot-master-smart";
 import {TemplateRef, Type} from "@angular/core";
 
-export declare interface NuwaProject {
-    id: string
-    name: string
-    description: string
-    pages: NuwaPage[]
-}
-
-export declare interface NuwaPage {
-    name: string
-    content: any
-    width: number
-    height: number
-    background_color?: string
-    background_image?: string
-}
-
 
 export declare interface NuwaBinding {
     name: string
@@ -29,6 +13,19 @@ export declare interface NuwaBinding {
 export declare interface NuwaEvent {
     name: string
     label: string
+}
+
+export declare interface NuwaParameter {
+    name: string
+    label: string
+    value: string //表达式
+}
+
+export declare interface NuwaListener {
+    event: string
+    action: string //page link set
+    target?: string
+    parameters?: NuwaParameter[]
 }
 
 export declare interface NuwaComponent {

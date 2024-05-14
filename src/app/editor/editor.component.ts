@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
-import {HmiComponent, HmiDraw, HmiPage, HmiProject, projectTemplate} from "../../hmi/hmi";
 import {CanvasComponent} from "./canvas/canvas.component";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ComponentService} from "../component.service";
 import {RequestService} from "iot-master-smart";
+import {NuwaPage, NuwaProject, projectTemplate} from "../../nuwa/project";
 
 @Component({
     selector: 'app-editor',
@@ -15,8 +15,8 @@ import {RequestService} from "iot-master-smart";
 export class EditorComponent implements OnInit {
     id: any = ''
 
-    project: HmiProject = projectTemplate()
-    page!: HmiPage
+    project: NuwaProject = projectTemplate()
+    page!: NuwaPage
 
     index = 0;
 
