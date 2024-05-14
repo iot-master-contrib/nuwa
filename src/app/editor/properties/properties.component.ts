@@ -1,17 +1,17 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {TransformComponent} from "../transform/transform.component";
 import {Cell, Timing} from "@antv/x6";
 import {SmartEditorComponent, SmartField} from "iot-master-smart";
 import {CanvasComponent} from "../canvas/canvas.component";
 import {ComponentService} from "../../component.service";
 import {NuwaComponent} from "../../../nuwa/nuwa";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-properties',
     standalone: true,
     imports: [
-        TransformComponent,
-        SmartEditorComponent
+        SmartEditorComponent,
+        ReactiveFormsModule
     ],
     templateUrl: './properties.component.html',
     styleUrl: './properties.component.scss'
@@ -28,7 +28,6 @@ export class PropertiesComponent implements OnDestroy, OnInit {
     cell?: Cell
 
     constructor(private cs: ComponentService) {
-        console.log("propertiesComponent", this.canvas);
     }
 
     ngOnInit() {
@@ -94,5 +93,13 @@ export class PropertiesComponent implements OnDestroy, OnInit {
         }, 100)
     }
 
+    onChange() {
+        //TODO 未生效，原因不详。page.component.ts中是OK的
 
+        let value = this.editor.value
+        console.log("properties change", value)
+        Object.keys(value).forEach(key => {
+            this.cell?.setPropByPath(key, value[key])
+        })
+    }
 }
