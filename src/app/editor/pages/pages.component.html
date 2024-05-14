@@ -1,8 +1,9 @@
 
-<nz-list nzSize="small">
+<nz-list nzSize="small" nzBordered cdkDropList (cdkDropListDropped)="onDrop($event)">
     @for (page of project.pages; track $index) {
-        <nz-list-item (click)="open($index)" (contextmenu)="menuService.create($event, menu)">
+        <nz-list-item (click)="open($index)" (contextmenu)="menuService.create($event, menu)" cdkDrag>
             {{page.name || '未命名'}}
+            <i nz-icon nzType="holder" style="cursor:move;" cdkDragHandle></i>
         </nz-list-item>
         <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>

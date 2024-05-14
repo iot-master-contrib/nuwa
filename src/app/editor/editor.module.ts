@@ -30,6 +30,7 @@ import {
     UngroupOutline, DownloadOutline, UploadOutline,
     TableOutline, ProfileOutline,
     CaretRightOutline,
+    HolderOutline,
 } from '@ant-design/icons-angular/icons';
 
 import { NzButtonModule } from "ng-zorro-antd/button";
@@ -86,6 +87,7 @@ import {ScriptsComponent} from "./scripts/scripts.component";
 import {TransformComponent} from "./transform/transform.component";
 import {PropsComponent} from "./props/props.component";
 import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
+import {CdkDrag, CdkDragHandle, CdkDropList} from "@angular/cdk/drag-drop";
 @NgModule({
     declarations: [
         EditorComponent,
@@ -122,7 +124,7 @@ import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
             VerticalLeftOutline, VerticalRightOutline,
             UpOutline, DownOutline, GroupOutline, UngroupOutline,
             DownloadOutline, UploadOutline, TableOutline, ProfileOutline,
-            CaretRightOutline,
+            CaretRightOutline, HolderOutline,
         ]),
         NzDividerModule,
         NzButtonModule,
@@ -161,6 +163,9 @@ import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
         PropsComponent,
         NzListComponent,
         NzListItemComponent,
+        CdkDragHandle,
+        CdkDropList,
+        CdkDrag,
     ],
     providers: [
         { provide: NzMessageService, },

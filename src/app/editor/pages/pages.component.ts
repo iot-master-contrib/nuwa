@@ -5,6 +5,7 @@ import {PageSettingComponent} from '../page-setting/page-setting.component';
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzContextMenuService} from "ng-zorro-antd/dropdown";
 import {NuwaPage, NuwaProject} from "../../../nuwa/project";
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
     selector: 'app-pages',
@@ -96,5 +97,9 @@ export class PagesComponent {
 
     openMenu(i: number, $event: MouseEvent) {
 
+    }
+
+    onDrop(event: CdkDragDrop<any, any>) {
+        moveItemInArray(this.project.pages, event.previousIndex, event.currentIndex);
     }
 }
