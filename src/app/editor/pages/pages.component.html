@@ -8,7 +8,7 @@
         <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
                 <li nz-menu-item (click)="handleCopy($index)">复制</li>
-                <li nz-menu-item (click)="handleEdit($index)">重命名</li>
+<!--                <li nz-menu-item (click)="handleEdit($index)">重命名</li>-->
                 <li nz-menu-item (click)="handleDel($index)">删除</li>
             </ul>
         </nz-dropdown-menu>
@@ -16,4 +16,4 @@
 </nz-list>
 
 
-<button type="button" nz-button (click)="handleEdit()">创建新页面</button>
+<button type="button" nz-button (click)="handleAdd()">创建新页面</button>

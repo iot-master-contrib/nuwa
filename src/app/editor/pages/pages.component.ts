@@ -1,10 +1,8 @@
-import {Component, EventEmitter, Input, Output, ViewContainerRef} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Graph} from "@antv/x6";
-import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {PageSettingComponent} from '../page-setting/page-setting.component';
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzContextMenuService} from "ng-zorro-antd/dropdown";
-import {NuwaPage, NuwaProject} from "../../../nuwa/project";
+import {NuwaProject, pageTemplate} from "../../../nuwa/project";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
@@ -14,6 +12,7 @@ import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 })
 export class PagesComponent {
     @Input() project!: NuwaProject;
+
     @Input() graph!: Graph;
 
 
@@ -21,50 +20,7 @@ export class PagesComponent {
 
     index = 0
 
-
-    constructor(
-        private modal: NzModalService,
-        private ms: NzMessageService,
-        private viewContainerRef: ViewContainerRef,
-        protected menuService: NzContextMenuService
-    ) {
-    }
-
-
-    public handleEdit(i?: number) {
-        const isNew = i === undefined;
-        const modal: NzModalRef = this.modal.create({
-            nzTitle: isNew ? '新增页面' : '编辑页面',
-            nzContent: PageSettingComponent,
-            nzData: {
-                row: isNew ? {name: '', content: {}} : this.project.pages[i]
-            },
-            nzViewContainerRef: this.viewContainerRef,
-            nzFooter: [
-                {
-                    label: '取消',
-                    onClick: () => modal.destroy()
-                },
-                {
-                    label: '保存',
-                    type: 'primary',
-                    onClick: componentInstance => {
-                        return componentInstance?.submit().then((page: NuwaPage) => {
-                            if (isNew) {
-                                this.project.pages.push(page);
-                            } else {
-                                this.project.pages[i] = page;
-                            }
-                            this.onPageChange.emit(0);
-                            modal.destroy()
-                        }).catch((err) => {
-                            return false
-                        })
-
-                    }
-                },
-            ]
-        });
+    constructor(private ms: NzMessageService, protected menuService: NzContextMenuService) {
     }
 
     handleDel(index: number) {
@@ -92,11 +48,7 @@ export class PagesComponent {
     }
 
     handleAdd() {
-        //this.project.pages.push({})
-    }
-
-    openMenu(i: number, $event: MouseEvent) {
-
+        this.project.pages.push(pageTemplate())
     }
 
     onDrop(event: CdkDragDrop<any, any>) {
