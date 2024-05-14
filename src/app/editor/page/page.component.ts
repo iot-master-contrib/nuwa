@@ -1,18 +1,20 @@
-import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {SmartEditorComponent, SmartField} from "iot-master-smart";
-import {HmiPage} from "../../../hmi/hmi";
+import {ReactiveFormsModule} from "@angular/forms";
+import {NuwaPage} from "../../../nuwa/project";
 
 @Component({
     selector: 'app-page',
     standalone: true,
     imports: [
-        SmartEditorComponent
+        SmartEditorComponent,
+        ReactiveFormsModule
     ],
     templateUrl: './page.component.html',
     styleUrl: './page.component.scss'
 })
-export class PageComponent implements AfterViewInit {
-    @Input() page!: HmiPage;
+export class PageComponent {
+    @Input() page!: NuwaPage;
 
     @ViewChild("editor") editor!: SmartEditorComponent;
 
@@ -23,13 +25,9 @@ export class PageComponent implements AfterViewInit {
         {key: 'background', label: '背景色', type: 'color'}
     ];
 
-    ngAfterViewInit() {
-        setTimeout(() => {
-            this.editor.group.valueChanges.subscribe(res => {
-                //console.log("dddd", res)
-                Object.assign(this.page, res)
-            })
-        }, 100)
+    onChange() {
+        //console.log("page change", this.editor.value)
+        Object.assign(this.page, this.editor.value)
     }
 
 }
