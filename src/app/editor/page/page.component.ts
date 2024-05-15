@@ -26,8 +26,9 @@ export class PageComponent {
     ];
 
     onChange() {
-        //console.log("page change", this.editor.value)
-        Object.assign(this.page, this.editor.value)
+        let value = this.editor.value
+        console.log("page change", value)
+        Object.assign(this.page, value)
     }
 
 }

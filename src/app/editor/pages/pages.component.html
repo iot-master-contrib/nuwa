@@ -1,7 +1,8 @@
 
 <nz-list nzSize="small" nzBordered cdkDropList (cdkDropListDropped)="onDrop($event)">
     @for (page of project.pages; track $index) {
-        <nz-list-item (click)="open($index)" (contextmenu)="menuService.create($event, menu)" cdkDrag>
+        <nz-list-item class="page" (click)="open($index)" [ngClass]="{selected: $index==index}"
+                      (contextmenu)="menuService.create($event, menu)" cdkDrag>
             {{page.name || '未命名'}}
             <i nz-icon nzType="holder" style="cursor:move;" cdkDragHandle></i>
         </nz-list-item>
