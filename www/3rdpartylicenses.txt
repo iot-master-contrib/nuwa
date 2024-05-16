@@ -1,3 +1,6 @@
+@amap/amap-jsapi-loader
+MIT
+
 @angular/animations
 MIT
 
