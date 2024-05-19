@@ -10,6 +10,8 @@ import {NuwaCollection, NuwaComponent} from "../nuwa/nuwa";
 import {NuwaWidgets} from "../nuwa/widgets/widgets";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {register} from "@antv/x6-angular-shape";
+import {BaseLine} from "../nuwa/widgets/base/line";
+import {MiscFlow} from "../nuwa/widgets/misc/flow";
 
 @Injectable({
     providedIn: 'root'
@@ -34,6 +36,8 @@ export class ComponentService {
         private ns: NzNotificationService,
     ) {
         this.PutCollections(NuwaWidgets)
+        this.PutComponent(BaseLine)
+        this.PutComponent(MiscFlow)
 
         //this.PutComponent(BaseGroup)
     }

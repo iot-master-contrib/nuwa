@@ -42,6 +42,8 @@ import {
     ExportOutline,
     ImportOutline,
     PlaySquareOutline,
+    MinusOutline,
+    DashOutline,
 } from '@ant-design/icons-angular/icons';
 
 import {API_BASE} from "iot-master-smart";
@@ -75,6 +77,8 @@ const icons: IconDefinition[] = [
     ExportOutline,
     ImportOutline,
     PlaySquareOutline,
+    MinusOutline,
+    DashOutline,
 ];
 
 export const appConfig: ApplicationConfig = {

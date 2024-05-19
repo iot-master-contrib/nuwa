@@ -1,7 +1,7 @@
-<app-toolbar [graph]="canvas.graph" [project]="project" (onSave)="handleSave()" [(scale)]="scale"></app-toolbar>
+<app-toolbar [canvas]="canvas"  [graph]="canvas.graph" [project]="project" (onSave)="handleSave()" [(scale)]="scale"></app-toolbar>
 <div class="body">
     <app-side-bar [width]="300">
-        <app-pages *sideBarItem="'页面'" [project]="project" [graph]="canvas.graph" (onPageChange)="handlePageChange($event)"></app-pages>
+        <app-pages *sideBarItem="'页面'" [project]="project"[graph]="canvas.graph" (onPageChange)="handlePageChange($event)"></app-pages>
         <app-widgets *sideBarItem="'控件'" [canvas]="canvas"></app-widgets>
         <app-components *sideBarItem="'组件'" [canvas]="canvas"></app-components>
         <app-galleries *sideBarItem="'图元'" [canvas]="canvas"></app-galleries>

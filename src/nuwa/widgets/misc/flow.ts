@@ -1,5 +1,5 @@
 import {NuwaComponent} from "../../nuwa";
-import {StrokeProperties} from "../properties";
+import {LineProperties, StrokeProperties} from "../properties";
 
 export const MiscFlow: NuwaComponent = {
     name: '流动线条', id: ':flow:',
@@ -32,8 +32,8 @@ export const MiscFlow: NuwaComponent = {
         tools: {items: ['edge-editor']},
     },
     properties: [
-        ...StrokeProperties('wrap', "底"),
-        ...StrokeProperties('line'),
+        ...LineProperties('wrap', "底"),
+        ...LineProperties('line'),
         {
             label: "边框动画", key: `attrs/line/style/animation`, type: "select", default: '', options: [
                 {value: "", label: "无"},

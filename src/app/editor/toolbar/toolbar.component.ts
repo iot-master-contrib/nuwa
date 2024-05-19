@@ -6,6 +6,9 @@ import {ProjectSettingComponent} from '../project-setting/project-setting.compon
 import {ComponentService} from "../../component.service";
 import {AboutComponent} from "../about/about.component";
 import {NuwaProject} from "../../../nuwa/project";
+import {CanvasComponent} from "../canvas/canvas.component";
+import {BaseLine} from "../../../nuwa/widgets/base/line";
+import {MiscFlow} from "../../../nuwa/widgets/misc/flow";
 
 @Component({
     selector: 'app-toolbar',
@@ -15,6 +18,7 @@ import {NuwaProject} from "../../../nuwa/project";
 })
 export class ToolbarComponent {
     @Input() project!: NuwaProject;
+    @Input() canvas!: CanvasComponent;
 
     // 1200X340
     @Input() graph!: Graph;
@@ -318,5 +322,13 @@ export class ToolbarComponent {
     handleImport() {
         //this.graph.toJSON()
         //this.graph.fromJSON()
+    }
+
+    drawLine() {
+        this.canvas?.drawEdge(BaseLine)
+    }
+
+    drawFlow() {
+        this.canvas?.drawEdge(MiscFlow)
     }
 }

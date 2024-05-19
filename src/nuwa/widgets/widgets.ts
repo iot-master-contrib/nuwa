@@ -28,7 +28,8 @@ export const NuwaWidgets: NuwaCollection[] = [
     {
         name: "基础组件",
         components: [
-            BaseLine, BaseText, BaseRect,
+            //BaseLine,
+            BaseText, BaseRect,
             BaseCircle, BaseEllipse, BaseImage,
         ]
     },
@@ -49,7 +50,7 @@ export const NuwaWidgets: NuwaCollection[] = [
     {
         name: "其他组件",
         components: [
-            MiscFlow,
+            //MiscFlow,
             MiscWeather,
             MiscOutlet,
             MiscWeb,

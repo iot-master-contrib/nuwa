@@ -33,6 +33,25 @@ export function RadiusProperties(id: string): SmartField[] {
     ]
 }
 
+export function LineProperties(id: string, prefix: string = ""): SmartField[] {
+    return [
+        {label: prefix + "边框颜色", key: `attrs/${id}/stroke`, type: "color", clear: true},
+        {label: prefix + "边框大小", key: `attrs/${id}/strokeWidth`, type: "number", min: 0, max: 65535},
+        {
+            label: prefix + "边框线形", key: `attrs/${id}/strokeDasharray`, type: "select", default: '', options: [
+                {value: "", label: "实线"},
+                {value: "5 5", label: "虚线1"},
+                {value: "10 10", label: "虚线2"},
+                {value: "15 15", label: "虚线3"},
+                {value: "20 20", label: "虚线4"},
+                {value: "30 30", label: "虚线5"},
+                {value: "50 50", label: "虚线6"},
+                {value: "80 80", label: "虚线7"},
+            ]
+        },
+    ]
+}
+
 export function StrokeProperties(id: string, prefix: string = ""): SmartField[] {
     return [
         {label: prefix + "填充颜色", key: `attrs/${id}/fill`, type: "color", clear: true},

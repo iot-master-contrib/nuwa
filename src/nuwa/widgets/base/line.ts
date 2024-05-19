@@ -1,5 +1,5 @@
 import {NuwaComponent} from "../../nuwa";
-import {DefaultEvents, StrokeProperties} from "../properties";
+import {DefaultEvents, LineProperties, StrokeProperties} from "../properties";
 
 export const BaseLine: NuwaComponent = {
     name: '线条', id: ':line:',
@@ -30,7 +30,7 @@ export const BaseLine: NuwaComponent = {
         tools: {items: ['edge-editor']},
     },
     properties: [
-        ...StrokeProperties('line'),
+        ...LineProperties('line'),
     ],
     bindings: [],
     hooks: {},

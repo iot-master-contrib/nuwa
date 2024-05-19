@@ -33,6 +33,16 @@
 
 <nz-divider nzType="vertical"></nz-divider>
 
+<a nz-button (click)="drawLine()" title="线条">
+    <i nz-icon nzType="minus"></i>
+</a>
+
+<a nz-button (click)="drawFlow()" title="流动线条">
+    <i nz-icon nzType="dash"></i>
+</a>
+
+<nz-divider nzType="vertical"></nz-divider>
+
 <a (click)="handleUndo()" nz-button [disabled]="!graph.canUndo()" title="撤销(ctrl+z)">
     <i nz-icon nzType="undo"></i>
 </a>
