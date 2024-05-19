@@ -6,17 +6,37 @@ import {RequestService} from "iot-master-smart";
 import {ComponentService} from "../component.service";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {MqttService} from "ngx-mqtt";
 import {NuwaPage} from "../../nuwa/project";
 
 @Component({
-  selector: 'app-render',
-  standalone: true,
-  imports: [],
-  templateUrl: './render.component.html',
-  styleUrl: './render.component.scss'
+    selector: 'app-render',
+    standalone: true,
+    imports: [],
+    templateUrl: './render.component.html',
+    styleUrl: './render.component.scss'
 })
 export class RenderComponent {
+
+    //页面名称
+    _name = ''
+    @Input() set name(name: string) {
+        this._name = name
+
+        //清空
+        this.graph.clearCells()
+
+        //显示名称
+        this.graph.addNode({
+            shape: "rect", x: 0, y: 0, width: 30, height: 30,
+            attrs: {
+                rect: {fill: 'none', strokeWidth: 0},
+                text: {
+                    text: '子页面：'+name,
+                    textAnchor: "start"
+                },
+            }
+        })
+    }
 
     _page!: NuwaPage
 
@@ -94,6 +114,9 @@ export class RenderComponent {
             mousewheel: this.mousewheel,
             panning: this.panning,
             autoResize: this.full,
+            background: {
+                color: "#c0c0c0" //默认背景颜色
+            }
         });
 
         this.graph.on('cell:click', ({cell, e}) => {
@@ -139,7 +162,13 @@ export class RenderComponent {
             }
         });
 
-
+        // this.graph.addNode({
+        //     shape: "rect", x: 0, y: 0, width: 60, height: 30,
+        //     attrs: {
+        //         rect: {fill: 'none', strokeWidth: 0},
+        //         text: {text: '页面'},
+        //     }
+        // })
     }
 
     evaluate(expr: string, params: any) {

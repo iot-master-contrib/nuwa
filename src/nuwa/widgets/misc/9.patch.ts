@@ -46,7 +46,7 @@ export const NinePatchImage: NuwaComponent = {
     name: '点九图', id: ':.9:',
     icon: "assets/widgets/rect.svg",
     type: "angular",
-    metadata: {width: 200, height: 200, tools: ['boundary']},
+    metadata: {width: 200, height: 200},
     content: NinePatchImageComponent,
     properties: [
         {key: "data/ngArguments/url", label: "URL", type: "text", default: "assets/widgets/.9.png"},

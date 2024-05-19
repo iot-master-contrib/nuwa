@@ -58,7 +58,7 @@ export const MiscWeather: NuwaComponent = {
     name: '天气', id: ':weather:',
     icon: "assets/widgets/weather.svg",
     type: "angular",
-    metadata: {width: 200, height: 100, tools: ['boundary']},
+    metadata: {width: 200, height: 100},
     content: MiscWeatherComponent,
     properties: [
         {key: "data/ngArguments/code", label: "授权码", type: "text", default: "code"},

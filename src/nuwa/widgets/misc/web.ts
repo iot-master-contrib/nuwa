@@ -32,10 +32,10 @@ class MiscWebComponent {
 }
 
 export const MiscWeb: NuwaComponent = {
-    name: 'Web子页面', id: ':iframe:',
+    name: '网页', id: ':iframe:',
     icon: "assets/widgets/web.svg",
     type: "angular",
-    metadata: {width: 200, height: 160, tools: ['boundary']},
+    metadata: {width: 200, height: 160},
     content: MiscWebComponent,
     properties: [
         {key:"data/ngArguments/url", label: "URL", type: "text"},
