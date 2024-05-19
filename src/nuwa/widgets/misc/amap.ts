@@ -11,6 +11,7 @@ import {NuwaComponent} from "../../nuwa";
             display: block;
             width: 100%;
             height: 100%;
+            background-color: #e1e1e1;
         }
         .container {
             width: 100%;
@@ -94,7 +95,7 @@ export const MiscAMap: NuwaComponent = {
     name: '高德地图', id: ':amap:',
     icon: "assets/widgets/amap.svg",
     type: "angular",
-    metadata: {width: 200, height: 100, tools: ['boundary']},
+    metadata: {width: 200, height: 100},
     content: MiscAMapComponent,
     properties: [
         {key: "data/ngArguments/key", label: "KEY", type: "text", default:"eb6a831c04b6dfedda190d6254febb58"},

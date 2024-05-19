@@ -1,5 +1,5 @@
 import {NuwaComponent} from "../../nuwa";
-import {DefaultEvents, RadiusProperties, StrokeProperties} from "../properties";
+import {DefaultEvents} from "../properties";
 
 export const BaseImage: NuwaComponent = {
     name: '图片',
@@ -16,5 +16,11 @@ export const BaseImage: NuwaComponent = {
     },
     properties: [
         {label: "图片", key: "attrs/image/xlink:href", type: "file"},
+        {
+            label: "缩放", key: "attrs/image/preserveAspectRatio", type: "select", options: [
+                {label: "居中", value: "xMidYMid meet"},
+                {label: "拉伸", value: "none"},
+            ], default: "xMidYMid meet"
+        },
     ]
 }

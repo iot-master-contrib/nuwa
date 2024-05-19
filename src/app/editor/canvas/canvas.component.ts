@@ -110,6 +110,11 @@ export class CanvasComponent {
         this.graph.bindKey('delete', () => this.graph.getSelectedCells().forEach(cell => cell.remove()))
 
         this.graph.bindKey("escape", () => {
+            //取消选择
+            this.graph.unselect(this.graph.getSelectedCells())
+            this.graph.clearTransformWidgets()
+
+            //取消划线
             if (this.drawingEdge) {
                 //this.drawingEdge.remove()
                 this.drawingEdge = undefined
