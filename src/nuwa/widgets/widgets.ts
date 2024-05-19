@@ -23,6 +23,7 @@ import {MiscWeather} from "./misc/weather";
 import {MiscFlow} from "./misc/flow";
 import {MiscAMap} from "./misc/amap";
 import {NinePatchImage} from "./misc/9.patch";
+import {MiscVideo} from "./misc/video";
 
 export const NuwaWidgets: NuwaCollection[] = [
     {
@@ -51,6 +52,7 @@ export const NuwaWidgets: NuwaCollection[] = [
         name: "其他组件",
         components: [
             //MiscFlow,
+            MiscVideo,
             MiscWeather,
             MiscOutlet,
             MiscWeb,
