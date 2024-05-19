@@ -14,21 +14,21 @@ export declare interface NuwaPage {
     background_image?: string
 }
 
-export function pageTemplate(): NuwaPage {
+export function pageTemplate(name: string = "新建页面"): NuwaPage {
     return {
-        name: "首页",
+        name,
         content: {},
         width: window.screen.width, //自动获取屏幕尺寸
         height: window.screen.height,
     }
 }
 
-export function projectTemplate(): NuwaProject {
+export function projectTemplate(name:string = '新建组态工程'): NuwaProject {
     return {
         id: '',
-        name: '组态工程',
+        name,
         pages: [
-            pageTemplate()
+            pageTemplate("首页")
         ]
     }
 }

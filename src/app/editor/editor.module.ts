@@ -88,6 +88,7 @@ import {TransformComponent} from "./transform/transform.component";
 import {PropsComponent} from "./props/props.component";
 import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
 import {CdkDrag, CdkDragHandle, CdkDropList} from "@angular/cdk/drag-drop";
+import {ElementsComponent} from "./elements/elements.component";
 @NgModule({
     declarations: [
         EditorComponent,
@@ -166,6 +167,7 @@ import {CdkDrag, CdkDragHandle, CdkDropList} from "@angular/cdk/drag-drop";
         CdkDragHandle,
         CdkDropList,
         CdkDrag,
+        ElementsComponent,
     ],
     providers: [
         { provide: NzMessageService, },

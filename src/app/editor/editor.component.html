@@ -4,7 +4,8 @@
         <app-pages *sideBarItem="'页面'" [project]="project"[graph]="canvas.graph" (onPageChange)="handlePageChange($event)"></app-pages>
         <app-widgets *sideBarItem="'控件'" [canvas]="canvas"></app-widgets>
         <app-components *sideBarItem="'组件'" [canvas]="canvas"></app-components>
-        <app-galleries *sideBarItem="'图元'" [canvas]="canvas"></app-galleries>
+        <app-galleries *sideBarItem="'相册'" [canvas]="canvas"></app-galleries>
+        <app-elements *sideBarItem="'图元'" [canvas]="canvas"></app-elements>
         <!--        <app-layers *sideBarItem="'图层'" [renderer]="renderer"></app-layers>-->
         <app-sources *sideBarItem="'数据源'"></app-sources>
     </app-side-bar>

@@ -11,9 +11,10 @@ import type {EChartsOption} from "echarts";
         CommonModule,
         NgxEchartsModule,
     ],
-    styles: `:host{width: 100%; height: 100%; display: block}`,
+    styles: `:host{width: 100%; height: 100%; display: block; overflow: hidden;}`,
     template: `
         <echarts class="chart"
+                 [autoResize]="true"
                  [style.width]="elementRef.nativeElement.clientWidth+'px'"
                  [style.height]="elementRef.nativeElement.clientHeight+'px'"
                  [options]="option()" (chartInit)="chartInit($event)"></echarts>`
