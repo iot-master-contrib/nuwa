@@ -1,0 +1,4 @@
+<form [formGroup]="editor.group" (change)="onChange()">
+    <im-smart-editor [fields]="fields" [values]="canvas.page?.background || {}" #editor></im-smart-editor>
+</form>
+
