@@ -1,12 +1,12 @@
 
 import {NuwaComponent} from "../../nuwa";
 import {DefaultEvents, StrokeProperties, TextProperties} from "../properties";
+import {NumberSvg} from "./number_svg";
 
 export const ControlNumber: NuwaComponent = {
     name: '数值', id: ':number:',
-    icon: "assets/widgets/number.svg",
-    type: "shape",
-    extends: {inherit: "rect"},
+    svg: NumberSvg, //icon: "assets/widgets/number.svg",
+    type: "shape",    extends: {inherit: "rect"},
     metadata: {
         width: 100,
         height: 30,

@@ -43,7 +43,6 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { BaseModule } from '../base/base.module';
 import { NzSelectModule } from "ng-zorro-antd/select";
 import { CollapseComponent } from './collapse/collapse.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -81,6 +80,7 @@ import {PropsComponent} from "./props/props.component";
 import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
 import {CdkDrag, CdkDragHandle, CdkDropList} from "@angular/cdk/drag-drop";
 import {ElementsComponent} from "./elements/elements.component";
+import {HtmlPipe} from "./html.pipe";
 @NgModule({
     declarations: [
         EditorComponent,
@@ -121,7 +121,6 @@ import {ElementsComponent} from "./elements/elements.component";
         NzSpaceModule,
         NzTabsModule,
         NzCheckboxModule,
-        BaseModule,
         NzSelectModule,
         NzInputNumberModule,
         CodemirrorModule,

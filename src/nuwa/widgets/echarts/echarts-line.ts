@@ -3,6 +3,8 @@ import {Component, ElementRef, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {NgxEchartsModule} from "ngx-echarts";
 import type {EChartsOption} from "echarts";
+import {CircleSvg} from "../base/circle_svg";
+import {EchartsLineSvg} from "./echarts-line_svg";
 
 @Component({
     selector: 'app-echarts-bar',
@@ -62,7 +64,7 @@ class EchartsLineComponent {
 
 export const EchartsLine: NuwaComponent = {
     name: '折线图', id: ':echarts-line:',
-    icon: "assets/widgets/echarts-line.svg",
+    svg: EchartsLineSvg, //icon: "assets/widgets/echarts-line.svg",
     type: "angular",
     metadata: {width: 400, height: 300},
     content: EchartsLineComponent,

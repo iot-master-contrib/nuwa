@@ -33,7 +33,8 @@ export declare interface NuwaComponent {
 
     name: string
 
-    icon: string
+    icon?: string
+    svg?: string
 
     type: "line" | "shape" | "html" | "angular"
 

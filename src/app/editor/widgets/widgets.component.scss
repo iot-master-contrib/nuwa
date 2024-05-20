@@ -2,6 +2,15 @@
     user-select: none;
 }
 
+:host ::ng-deep{
+    .inner {
+        svg {
+            width: 40px !important;
+            height: 40px !important;
+        }
+    }
+}
+
 .component {
     display: inline-block;
     margin: 1px;
@@ -20,9 +29,16 @@
         align-items: center;
     }
 
-    img {
-        max-width: 40px;
-        max-height: 40px;
+    svg, img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .inner {
+        width: 40px;
+        height: 40px;
+
+
     }
 
     .name {

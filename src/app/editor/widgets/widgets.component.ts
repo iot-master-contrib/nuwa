@@ -4,6 +4,8 @@ import {CommonModule} from "@angular/common";
 import {NuwaWidgets} from "../../../nuwa/widgets/widgets";
 import {NuwaComponent} from "../../../nuwa/nuwa";
 import {CanvasComponent} from "../canvas/canvas.component";
+import {HtmlPipe} from "../html.pipe";
+import {HtmlDirective} from "../html.directive";
 
 @Component({
     selector: 'app-widgets',
@@ -11,6 +13,8 @@ import {CanvasComponent} from "../canvas/canvas.component";
     imports: [
         CommonModule,
         NzCollapseModule,
+        HtmlPipe,
+        HtmlDirective,
     ],
     templateUrl: './widgets.component.html',
     styleUrl: './widgets.component.scss'

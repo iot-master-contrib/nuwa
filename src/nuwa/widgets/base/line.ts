@@ -1,10 +1,11 @@
 import {NuwaComponent} from "../../nuwa";
-import {DefaultEvents, LineProperties, StrokeProperties} from "../properties";
+import {LineProperties} from "../properties";
+import {LineSvg} from "./line_svg";
 
 export const BaseLine: NuwaComponent = {
     name: '线条', id: ':line:',
-    icon: "assets/widgets/line.svg", type: "line",
-    extends: {inherit: "edge"}, //TODO 不用继承就好了
+    svg: LineSvg, //icon: "assets/widgets/line.svg",
+    type: "line", extends: {inherit: "edge"}, //TODO 不用继承就好了
     metadata: {
         markup: [
             {tagName: 'path', selector: 'wrap'},

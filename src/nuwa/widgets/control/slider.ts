@@ -4,6 +4,8 @@ import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {DefaultEvents} from "../properties";
+import {CircleSvg} from "../base/circle_svg";
+import {SliderSvg} from "./slider_svg";
 
 
 @Component({
@@ -39,7 +41,7 @@ class ControlSliderComponent {
 
 export const ControlSlider: NuwaComponent = {
     name: '滑块', id: ':slider:',
-    icon: "assets/widgets/slider.svg",
+    svg: SliderSvg, //icon: "assets/widgets/slider.svg",
     type: "angular",
     metadata: {width: 200, height: 200},
     content: ControlSliderComponent,

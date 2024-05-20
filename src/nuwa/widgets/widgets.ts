@@ -57,7 +57,7 @@ export const NuwaWidgets: NuwaCollection[] = [
             MiscOutlet,
             MiscWeb,
             MiscAMap,
-            NinePatchImage,
+            //NinePatchImage,
         ]
     },
 ]

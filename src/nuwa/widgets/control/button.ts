@@ -3,6 +3,8 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {DefaultEvents} from "../properties";
+import {CircleSvg} from "../base/circle_svg";
+import {ButtonSvg} from "./button_svg";
 
 @Component({
     selector: 'nuwa-control-button',
@@ -32,7 +34,7 @@ class ControlButtonComponent {
 
 export const ControlButton: NuwaComponent = {
     name: '按钮', id: ':button:',
-    icon: "assets/widgets/button.svg",
+    svg: ButtonSvg, //icon: "assets/widgets/button.svg",
     type: "angular",
     metadata: {width: 100, height: 40},
     content: ControlButtonComponent,

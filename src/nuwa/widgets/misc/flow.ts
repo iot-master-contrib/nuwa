@@ -1,9 +1,12 @@
 import {NuwaComponent} from "../../nuwa";
 import {LineProperties, StrokeProperties} from "../properties";
+import {CircleSvg} from "../base/circle_svg";
+import {FlowSvg} from "./flow_svg";
 
 export const MiscFlow: NuwaComponent = {
     name: '流动线条', id: ':flow:',
-    icon: "assets/widgets/flow.svg", type: "line",
+    svg: FlowSvg, //icon: "assets/widgets/flow.svg",
+    type: "line",
     extends: {inherit: "edge"},
     metadata: {
         markup: [

@@ -3,6 +3,7 @@ import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {SmartSelectOption} from "iot-master-smart";
+import {WeatherSvg} from "./weather_svg";
 
 @Component({
     selector: '$nuwa-misc-weather',
@@ -56,7 +57,7 @@ function createWeatherOptions() {
 
 export const MiscWeather: NuwaComponent = {
     name: '天气', id: ':weather:',
-    icon: "assets/widgets/weather.svg",
+    svg: WeatherSvg, //icon: "assets/widgets/weather.svg",
     type: "angular",
     metadata: {width: 200, height: 100},
     content: MiscWeatherComponent,

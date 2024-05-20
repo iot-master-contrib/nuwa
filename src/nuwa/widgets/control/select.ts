@@ -4,6 +4,8 @@ import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {DefaultEvents} from "../properties";
+import {CircleSvg} from "../base/circle_svg";
+import {SelectSvg} from "./select_svg";
 
 
 @Component({
@@ -34,7 +36,7 @@ class ControlSelectComponent {
 
 export const ControlSelect: NuwaComponent = {
     name: '选择', id: ':select:',
-    icon: "assets/widgets/select.svg",
+    svg: SelectSvg, //icon: "assets/widgets/select.svg",
     type: "angular",
     metadata: {width: 100, height: 40},
     content: ControlSelectComponent,

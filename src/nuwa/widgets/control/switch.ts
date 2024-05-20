@@ -4,6 +4,8 @@ import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {DefaultEvents} from "../properties";
+import {CircleSvg} from "../base/circle_svg";
+import {SwitchSvg} from "./switch_svg";
 
 
 @Component({
@@ -38,7 +40,7 @@ class ControlSwitchComponent {
 }
 export const ControlSwitch: NuwaComponent = {
     name: '开关', id: ':switch:',
-    icon: "assets/widgets/switch.svg",
+    svg: SwitchSvg, //icon: "assets/widgets/switch.svg",
     type: "angular",
     metadata: {width: 100, height: 40},
     content: ControlSwitchComponent,
