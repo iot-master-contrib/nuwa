@@ -1,3 +1,5 @@
+
+
 export declare interface NuwaProject {
     id: string
     name: string
@@ -5,13 +7,18 @@ export declare interface NuwaProject {
     pages: NuwaPage[]
 }
 
+export declare interface NuwaBackground {
+    color: string
+    image: string
+    size: string | "contain" | "cover" | "100% 100%"
+}
+
 export declare interface NuwaPage {
     name: string
     content: any
     width: number
     height: number
-    background_color?: string
-    background_image?: string
+    background?: NuwaBackground
 }
 
 export function pageTemplate(name: string = "新建页面"): NuwaPage {

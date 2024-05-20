@@ -11,8 +11,6 @@ import {Selection} from "@antv/x6-plugin-selection";
 import {Export} from "@antv/x6-plugin-export";
 import {Dnd} from "@antv/x6-plugin-dnd";
 
-import {HmiPage} from "../../../hmi/hmi";
-
 import {ComponentService} from "../../component.service";
 import {NuwaComponent} from "../../../nuwa/nuwa";
 
@@ -155,17 +153,22 @@ export class CanvasComponent {
 
     }
 
-    render(page: HmiPage) {
+    render(page: NuwaPage) {
         page.content?.cells?.forEach((cell: any) => {
             const cmp = this.cs.Get(cell.shape)
             //TODO 使用filter 过滤掉找不到组件的情况
 
         })
-        this.graph.drawBackground({
-            color: page.background_color,
-            image: page.background_image,
-        })
+
+        //绘制背景 if (page.background)
+        this.graph.drawBackground(page.background || {})
+
+        //恢复内容
         this.graph.fromJSON(page.content)
+    }
+
+    drawBackground() {
+        this.graph.drawBackground(this.page.background)
     }
 
 
@@ -220,13 +223,13 @@ export class CanvasComponent {
 
         //初始化数据
         //node.setProp(props)
-        Object.keys(props).forEach(k=>{
+        Object.keys(props).forEach(k => {
             node.setPropByPath(k, props[k])
         })
 
         //输入
         //node.setProp(inputs)
-        Object.keys(inputs).forEach(k=>{
+        Object.keys(inputs).forEach(k => {
             node.setPropByPath(k, inputs[k])
         })
 

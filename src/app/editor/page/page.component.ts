@@ -22,7 +22,7 @@ export class PageComponent {
         {key: 'name', label: '名称', type: 'text'},
         {key: 'width', label: '宽度', type: 'number'},
         {key: 'height', label: '高度', type: 'number'},
-        {key: 'background', label: '背景色', type: 'color'}
+        //{key: 'background', label: '背景色', type: 'color'},
     ];
 
     onChange() {

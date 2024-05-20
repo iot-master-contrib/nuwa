@@ -51,7 +51,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { PagesComponent } from './pages/pages.component';
 import { PageSettingComponent } from './page-setting/page-setting.component';
 import { ProjectSettingComponent } from './project-setting/project-setting.component';
-import { BackgroundComponent } from './background/background.component';
 import { NzInputNumberModule } from "ng-zorro-antd/input-number";
 import { ComponentService } from "../component.service";
 import { BindingComponent } from './binding/binding.component';
@@ -99,7 +98,6 @@ import {ElementsComponent} from "./elements/elements.component";
         PagesComponent,
         PageSettingComponent,
         ProjectSettingComponent,
-        BackgroundComponent,
         BindingComponent,
         ListenerComponent,
         AnimateComponent,

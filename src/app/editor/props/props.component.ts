@@ -6,6 +6,7 @@ import {NgForOf} from "@angular/common";
 import {NzCollapseComponent, NzCollapsePanelComponent} from "ng-zorro-antd/collapse";
 import {CanvasComponent} from "../canvas/canvas.component";
 import {TransformComponent} from "../transform/transform.component";
+import {BackgroundComponent} from "../background/background.component";
 
 @Component({
   selector: 'app-props',
@@ -17,7 +18,8 @@ import {TransformComponent} from "../transform/transform.component";
         NgForOf,
         NzCollapseComponent,
         NzCollapsePanelComponent,
-        TransformComponent
+        TransformComponent,
+        BackgroundComponent
     ],
   templateUrl: './props.component.html',
   styleUrl: './props.component.scss'
