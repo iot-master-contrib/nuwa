@@ -77,25 +77,21 @@ export class PropertiesComponent implements OnDestroy, OnInit {
                 data[f.key] = val
         })
         this.data = data
-
-        this.ngAfterViewInit()
     }
 
-    ngAfterViewInit() {
-        setTimeout(() => {
-            this.editor.group.valueChanges.subscribe(res => {
-                console.log("properties change", res)
-                //Object.assign(this.page, res)
-                Object.keys(res).forEach(key => {
-                    this.cell?.setPropByPath(key, res[key])
-                })
-            })
-        }, 100)
-    }
+    // ngAfterViewInit() {
+    //     setTimeout(() => {
+    //         this.editor.group.valueChanges.subscribe(res => {
+    //             console.log("properties change", res)
+    //             //Object.assign(this.page, res)
+    //             Object.keys(res).forEach(key => {
+    //                 this.cell?.setPropByPath(key, res[key])
+    //             })
+    //         })
+    //     }, 100)
+    // }
 
     onChange() {
-        //TODO 未生效，原因不详。page.component.ts中是OK的
-
         let value = this.editor.value
         console.log("properties onChange", value)
         Object.keys(value).forEach(key => {

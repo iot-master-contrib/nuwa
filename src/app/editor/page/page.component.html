@@ -1,5 +1,2 @@
-<form [formGroup]="editor.group" (change)="onChange()">
-    <im-smart-editor [fields]="fields" [values]="page" #editor></im-smart-editor>
-</form>
-
+<im-smart-editor [fields]="fields" [values]="page" (change)="onChange()" #editor></im-smart-editor>
 <!--<p>参数列表</p>-->
