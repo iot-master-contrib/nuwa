@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Cell } from "@antv/x6";
-import { HmiComponent, HmiComponentEvent } from "../../../hmi/hmi";
 import { NzModalService } from "ng-zorro-antd/modal";
 import { BindingSettingComponent } from "../binding-setting/binding-setting.component";
+import {NuwaComponent} from "../../../nuwa/nuwa";
 
 @Component({
     selector: 'app-binding',
@@ -11,12 +11,12 @@ import { BindingSettingComponent } from "../binding-setting/binding-setting.comp
 })
 export class BindingComponent {
     @Input() cell!: Cell
-    @Input() component!: HmiComponent
+    @Input() component!: NuwaComponent
 
     constructor(private ms: NzModalService) {
     }
 
-    edit(e: HmiComponentEvent) {
+    edit(e: any) {
         this.cell.data.bindings ||= {}
         this.ms.create({
             nzTitle: `编辑 ${e.label} 数据绑定`,

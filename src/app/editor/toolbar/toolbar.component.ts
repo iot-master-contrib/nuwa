@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, Output, ViewContainerRef} from '@angular
 import {Graph, Node} from "@antv/x6";
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzModalRef, NzModalService} from 'ng-zorro-antd/modal';
-import {ProjectSettingComponent} from '../project-setting/project-setting.component';
 import {ComponentService} from "../../component.service";
 import {AboutComponent} from "../about/about.component";
 import {NuwaProject} from "../../../nuwa/project";
@@ -262,37 +261,6 @@ export class ToolbarComponent {
         else this.graph.showGrid()
         this.showGrid = !this.showGrid
         localStorage.setItem("nuwa-editor-grid", JSON.stringify(this.showGrid));
-    }
-
-    settingProject() {
-        const modal: NzModalRef = this.modal.create({
-            nzTitle: '编辑工程信息',
-            nzContent: ProjectSettingComponent,
-            nzData: {
-                project: this.project
-            },
-            nzViewContainerRef: this.viewContainerRef,
-            nzFooter: [
-                {
-                    label: '取消',
-                    onClick: () => modal.destroy()
-                },
-                {
-                    label: '保存',
-                    type: 'primary',
-                    onClick: componentInstance => {
-                        const value = componentInstance!.group.value
-                        Object.assign(this.project, value)
-                        console.log("project setting", value)
-                        //this.graph.resize(value.width, value.height)
-                        //this.onSaveProjectSettings.emit(value);
-                        modal.destroy()
-                    }
-                },
-            ]
-        });
-
-
     }
 
     savefiles(data: any, name: string) {

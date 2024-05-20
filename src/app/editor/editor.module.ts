@@ -46,11 +46,8 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { BaseModule } from '../base/base.module';
 import { NzSelectModule } from "ng-zorro-antd/select";
 import { CollapseComponent } from './collapse/collapse.component';
-import { PropertyInputComponent } from "./property-input/property-input.component";
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { PagesComponent } from './pages/pages.component';
-import { PageSettingComponent } from './page-setting/page-setting.component';
-import { ProjectSettingComponent } from './project-setting/project-setting.component';
 import { NzInputNumberModule } from "ng-zorro-antd/input-number";
 import { ComponentService } from "../component.service";
 import { BindingComponent } from './binding/binding.component';
@@ -63,14 +60,10 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzSwitchModule } from "ng-zorro-antd/switch";
 import { AboutComponent } from './about/about.component';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { SetChartComponent } from './set-chart/set-chart.component';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { FirstStepComponent } from './set-chart/first-step/first-step.component';
-import { SecondStepComponent } from './set-chart/second-step/second-step.component';
-import { ChartFormComponent } from './chart-form/chart-form.component';
 import {NzSliderModule} from "ng-zorro-antd/slider";
 import {SideBarComponent, SideBarItemDirective} from "./side-bar/side-bar.component";
 import {WidgetsComponent} from "./widgets/widgets.component";
@@ -92,22 +85,15 @@ import {ElementsComponent} from "./elements/elements.component";
     declarations: [
         EditorComponent,
         CanvasComponent,
-        PropertyInputComponent,
         ToolbarComponent,
         CollapseComponent,
         PagesComponent,
-        PageSettingComponent,
-        ProjectSettingComponent,
         BindingComponent,
         ListenerComponent,
         AnimateComponent,
         ListenerSettingComponent,
         BindingSettingComponent,
         AboutComponent,
-        SetChartComponent,
-        FirstStepComponent,
-        SecondStepComponent,
-        ChartFormComponent,
         SideBarComponent,
     ],
     imports: [

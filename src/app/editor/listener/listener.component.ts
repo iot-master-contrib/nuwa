@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Cell } from "@antv/x6";
-import { HmiComponent, HmiComponentEvent } from "../../../hmi/hmi";
 import { NzModalService } from "ng-zorro-antd/modal";
 import { ListenerSettingComponent } from "../listener-setting/listener-setting.component";
+import {NuwaComponent} from "../../../nuwa/nuwa";
 
 @Component({
     selector: 'app-listener',
@@ -11,14 +11,14 @@ import { ListenerSettingComponent } from "../listener-setting/listener-setting.c
 })
 export class ListenerComponent {
     @Input() cell!: Cell
-    @Input() component!: HmiComponent
+    @Input() component!: NuwaComponent
 
-    click: HmiComponentEvent = { label: "点击", name: "click" }
+    click: any = { label: "点击", name: "click" }
 
     constructor(private ms: NzModalService) {
     }
 
-    edit(e: HmiComponentEvent) {
+    edit(e: any) {
         this.cell.data.listeners ||= {}
         this.ms.create({
             nzTitle: `编辑${e.label}事件脚本`,
