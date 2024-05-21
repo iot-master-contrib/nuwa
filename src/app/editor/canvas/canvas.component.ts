@@ -1,6 +1,6 @@
 import {Component, ElementRef, Injector, Input} from '@angular/core';
 
-import {Edge, FunctionExt, Graph, Node, Shape} from '@antv/x6';
+import {Cell, Edge, FunctionExt, Graph, Node, Shape} from '@antv/x6';
 
 import {Transform} from "@antv/x6-plugin-transform";
 import {Snapline} from "@antv/x6-plugin-snapline";
@@ -151,7 +151,16 @@ export class CanvasComponent {
             cell.removeTools();
         })
 
+        this.graph.on('cell:selected', ({cell})=>{
+            this.currentCell = cell
+        })
+
+        this.graph.on('cell:selected', ({cell})=>{
+            this.currentCell = cell
+        })
     }
+
+    currentCell?: any;
 
     render(page: NuwaPage) {
         page.content?.cells?.forEach((cell: any) => {

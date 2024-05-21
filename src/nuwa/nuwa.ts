@@ -23,7 +23,7 @@ export declare interface NuwaParameter {
 
 export declare interface NuwaListener {
     event: string
-    action: string //page link set
+    action: "page" | "link" | "set" | "show" | "hide" | "animate"// string //page link set
     target?: string
     parameters?: NuwaParameter[]
 }

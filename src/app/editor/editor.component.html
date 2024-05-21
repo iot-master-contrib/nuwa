@@ -17,7 +17,7 @@
     <app-side-bar [width]="400" [right]="true">
         <app-props *sideBarItem="'属性'" [canvas]="canvas"></app-props>
 <!--        <app-animations *sideBarItem="'动画'"></app-animations>-->
-        <app-events *sideBarItem="'事件'"></app-events>
+        <app-listeners *sideBarItem="'事件'" [canvas]="canvas"></app-listeners>
         <app-scripts *sideBarItem="'脚本'"></app-scripts>
     </app-side-bar>
 </div>

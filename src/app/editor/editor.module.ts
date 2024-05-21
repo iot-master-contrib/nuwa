@@ -70,7 +70,7 @@ import {ComponentsComponent} from "./components/components.component";
 import {GalleriesComponent} from "./galleries/galleries.component";
 import {LayersComponent} from "./layers/layers.component";
 import {SourcesComponent} from "./sources/sources.component";
-import {EventsComponent} from "./events/events.component";
+import {ListenersComponent} from "./listeners/listeners.component";
 import {AnimationsComponent} from "./animations/animations.component";
 import {PropertiesComponent} from "./properties/properties.component";
 import {PageComponent} from "./page/page.component";
@@ -137,7 +137,7 @@ import {HtmlPipe} from "./html.pipe";
         GalleriesComponent,
         LayersComponent,
         SourcesComponent,
-        EventsComponent,
+        ListenersComponent,
         AnimationsComponent,
         PropertiesComponent,
         PageComponent,
